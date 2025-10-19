@@ -1,4 +1,6 @@
 import { Plus, Minus, GlassWater } from "lucide-react";
+import { CardAlimentoDiario } from "../cards/CardAlimentoDiario";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
 
 export function OverviewSection() {
   return (
@@ -66,13 +68,13 @@ export function OverviewSection() {
           <div className="flex justify-between items-center mb-2">
             <h2 className="text-xl font-semibold">Alimentos ingeridos</h2>
             <div className="flex gap-2">
-              <button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200">
+              <button className="p-2 rounded-lg bg-[var(--bg-button-add)]/10 hover:bg-[var(--bg-button-add)]/30 cursor-pointer">
                 <Plus></Plus>
               </button>
-              <button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200">
+              <button className="p-2">
                 <GlassWater></GlassWater>
               </button>
-              <button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200">
+              <button className="p-2 rounded-lg bg-[var(--bg-button-add)]/10 hover:bg-[var(--bg-button-add)]/30 cursor-pointer">
                 <Minus></Minus>
               </button>
             </div>
@@ -80,72 +82,13 @@ export function OverviewSection() {
           <p className="text-sm text-gray-500 mb-4">
             Aquí agregas los alimentos que ingieres en tu día.
           </p>
-
-          {/* Desayuno */}
-          <div className="mb-4">
-            <div className="flex justify-between items-center border-b pb-2 mb-2">
-              <h3 className="font-medium">Desayuno</h3>
-              <button className="text-gray-400">⋮</button>
-            </div>
-
-            <div className="flex justify-between items-center mb-2">
-              <div className="flex items-center gap-2">
-                <span className="text-yellow-500">▲</span>
-                <span>Fideos</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <input
-                  type="text"
-                  value="200"
-                  className="w-20 border rounded p-1 text-right"
-                />
-                <span className="w-24 text-gray-600">gramos</span>
-              </div>
-            </div>
-
-            <div className="flex justify-between items-center mb-2">
-              <div className="flex items-center gap-2">
-                <span className="text-green-600">🍏</span>
-                <span>Manzana</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <input
-                  type="text"
-                  value="2"
-                  className="w-20 border rounded p-1 text-right"
-                />
-                <span className="w-24 text-gray-600">Unidad</span>
-              </div>
-            </div>
-
-            <button className="w-full border border-dashed rounded-lg p-2 text-gray-500 mt-2 flex items-center justify-center">
-              <span className="mr-1">+</span> Agregar alimento
-            </button>
-          </div>
-
-          {/* Almuerzo */}
-          <div className="mb-4">
-            <div className="flex justify-between items-center border-b pb-2 mb-2">
-              <h3 className="font-medium">Almuerzo</h3>
-              <button className="text-gray-400">⋮</button>
-            </div>
-
-            <button className="w-full border border-dashed rounded-lg p-2 text-gray-500 mt-2 flex items-center justify-center">
-              <span className="mr-1">+</span> Agregar alimento
-            </button>
-          </div>
-
-          {/* Cena */}
-          <div>
-            <div className="flex justify-between items-center border-b pb-2 mb-2">
-              <h3 className="font-medium">Cena</h3>
-              <button className="text-gray-400">⋮</button>
-            </div>
-
-            <button className="w-full border border-dashed rounded-lg p-2 text-gray-500 mt-2 flex items-center justify-center">
-              <span className="mr-1">+</span> Agregar alimento
-            </button>
-          </div>
+          {/* Alimentos */}
+          <ScrollArea className="h-[448px] w-full rounded-md overflow-y-scroll flex flex-col gap-8">
+            <CardAlimentoDiario name="Desayuno"></CardAlimentoDiario>
+            <CardAlimentoDiario name="Almuerzo"></CardAlimentoDiario>
+            <CardAlimentoDiario name="Cena"></CardAlimentoDiario>
+            <CardAlimentoDiario name="Snack"></CardAlimentoDiario>
+          </ScrollArea>
         </div>
 
         {/* Sección derecha: Balance de consumo y Logros */}

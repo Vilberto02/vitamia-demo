@@ -1,3 +1,5 @@
+import type { LucideIcon } from "lucide-react";
+
 export type LoginFields = {
   email: string;
   password: string;
@@ -18,3 +20,9 @@ export type RegisterCredentialFields = LoginFields & {
 };
 
 export type FormData = RegisterInfoFields & RegisterCredentialFields;
+
+export interface SideBarItemType {
+  id: string;
+  name: string;
+  Icon: LucideIcon;
+}

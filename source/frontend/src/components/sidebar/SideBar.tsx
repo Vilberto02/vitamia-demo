@@ -1,8 +1,9 @@
+import type { SideBarItemType } from "@/types";
 import { SidebarItem } from "./SideBarItem";
 import { useNavigate } from "react-router-dom";
 
 type SidebarProps = {
-  items: Record<string, string>[];
+  items: SideBarItemType[];
   activeItem: string;
   setActiveItem: (id: string) => void;
   isOpen: boolean;
@@ -31,6 +32,7 @@ export function SideBar({
             <SidebarItem
               key={item.id}
               name={item.name}
+              Icon={item.Icon}
               isActive={activeItem === item.id}
               onClick={() => setActiveItem(item.id)}
             ></SidebarItem>

@@ -1,9 +1,13 @@
+import {type LucideIcon} from "lucide-react"
+
 export function SidebarItem({
   name,
+  Icon,
   isActive,
   onClick,
 }: {
   name: string;
+  Icon: LucideIcon;
   isActive: boolean;
   onClick: () => void;
 }) {
@@ -17,7 +21,10 @@ export function SidebarItem({
           : "border-transparent hover:bg-[var(--bg-turquesa)]/5"
       }`}
     >
-      <p className="ml-12">{name}</p>
+      <div className="ml-12 flex items-center gap-2">
+        <Icon strokeWidth={2.5}></Icon>
+        <p>{name}</p>
+      </div>
     </button>
   );
 }

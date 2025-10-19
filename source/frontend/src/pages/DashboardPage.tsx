@@ -5,12 +5,15 @@ import { PlanSection } from "../components/sections/PlanSection";
 import { SideBar } from "../components/sidebar/SideBar";
 import { Navbar } from "../components/Navbar";
 import { ProfilePage } from "../components/sections/ProfileSection";
+import { ChartNoAxesColumn, UserRound, Grid2X2, Salad} from "lucide-react";
+import type { SideBarItemType } from "@/types";
 
-const sidebarItems: Record<string, string>[] = [
-  { id: "general", name: "General" },
-  { id: "recetas", name: "Recetas" },
-  { id: "planes", name: "Planes" },
-  { id: "perfil", name: "Perfil" },
+
+const sidebarItems: SideBarItemType[] = [
+  { id: "general", name: "General", Icon: ChartNoAxesColumn },
+  { id: "recetas", name: "Recetas", Icon: Salad },
+  { id: "planes", name: "Planes", Icon: Grid2X2 },
+  { id: "perfil", name: "Perfil", Icon: UserRound },
 ];
 
 const sections: Record<string, React.ReactNode> = {
@@ -45,7 +48,7 @@ export const DashboardPage = () => {
           setActiveItem={setActiveItem}
           toggleSidebar={toggleSidebar}
         ></Navbar>
-        <main className="flex-1 p-10 bg-[#FAFFF6]/60 rounded-xl">
+        <main className="flex-1 p-10 bg-[#FAFFF6]/60 rounded-xl overflow-hidden">
           {sections[activeItem]}
         </main>
       </div>

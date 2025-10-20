@@ -26,3 +26,10 @@ export interface SideBarItemType {
   name: string;
   Icon: LucideIcon;
 }
+
+
+export interface LogroType {
+  id: number;
+  title: string;
+  description: string;
+}

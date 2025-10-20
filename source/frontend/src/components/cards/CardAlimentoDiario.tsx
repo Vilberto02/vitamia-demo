@@ -15,7 +15,7 @@ export function CardAlimentoDiario({ name }: CardAlimentoDiarioType) {
         <h3 className="font-medium select-none">{name}</h3>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="outline-none border-none text-[var(--bg-gris-oscuro)]/60">
+            <button className="outline-none border-none text-[var(--bg-gris-oscuro)]/60 cursor-pointer">
               <EllipsisVertical></EllipsisVertical>
             </button>
           </DropdownMenuTrigger>

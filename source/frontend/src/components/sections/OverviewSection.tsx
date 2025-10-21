@@ -10,7 +10,7 @@ export function OverviewSection() {
       </h1>
 
       {/* Tarjetas de información general */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div
           className="p-4 rounded-lg shadow flex flex-col gap-4 justify-center"
           style={{
@@ -62,12 +62,12 @@ export function OverviewSection() {
       </div>
 
       {/* Contenedor principal para las secciones inferiores */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-grow">
+      <div className="flex gap-6">
         {/* Sección de alimentos ingeridos */}
         <ContainerAlimento></ContainerAlimento>
 
         {/* Sección derecha: Balance de consumo y Logros */}
-        <div className="flex flex-col gap-6">
+        <div className="w-full flex flex-col gap-6">
           {/* Balance de consumo */}
           <ContainerConsumo></ContainerConsumo>
 

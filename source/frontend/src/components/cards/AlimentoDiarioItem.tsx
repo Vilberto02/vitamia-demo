@@ -34,19 +34,19 @@ const listaUnidadesMedida: ListaUnidadesTypes[] = [
 
 export function AlimentoDiarioItem({ name, Icon }: AlimentoDiarioItemType) {
   return (
-    <div className="flex justify-between items-center mb-2">
+    <div className="flex justify-between items-center mb-2 flex-wrap gap-4 py-2">
       <div className="flex items-center gap-2">
         <Icon className="text-[var(--bg-turquesa)]/80"></Icon>
         <span>{name}</span>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 pl-1">
         <Input
           type="text"
           placeholder="200"
-          className="w-20 border rounded p-1 text-center"
+          className="w-20 border rounded p-1 text-center grow"
         ></Input>
         <Select defaultValue={"gramos"}>
-          <SelectTrigger className="w-[180px]" value={"gramos"}>
+          <SelectTrigger className="min-w-[180px] grow" value={"gramos"}>
             <SelectValue placeholder="Unidad..." />
           </SelectTrigger>
           <SelectContent>

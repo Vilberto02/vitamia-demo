@@ -21,11 +21,11 @@ ChartJS.register(
 
 const BarChart = () => {
   const data = {
-    labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo"],
+    labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
     datasets: [
       {
         label: "Ventas ($)",
-        data: [0, 800, 1400, 1800, 2000],
+        data: [0, 800, 1400, 1800, 2000, 1200],
         backgroundColor: "rgba(75, 192, 192, 0.6)",
         borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,
@@ -35,6 +35,7 @@ const BarChart = () => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false, /*Eliminar el radio de aspecto de la gráfica */
     plugins: {
       title: {
         display: true,

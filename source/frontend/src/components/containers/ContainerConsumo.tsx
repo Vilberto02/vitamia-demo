@@ -6,7 +6,7 @@ export function ContainerConsumo() {
 
   return (
     <>
-      <Card className="h-72">
+      <Card className="grow">
         <CardHeader>
           <CardTitle>Balance de consumo</CardTitle>
           <CardDescription>
@@ -14,7 +14,7 @@ export function ContainerConsumo() {
             comúnmente ingieres.
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="w-full">
           <BarChart />
         </CardContent>
       </Card>

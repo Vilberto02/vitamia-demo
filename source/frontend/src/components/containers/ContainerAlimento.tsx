@@ -6,7 +6,7 @@ import { CardAlimentoDiario } from "../cards/CardAlimentoDiario";
 export function ContainerAlimento() {
   return (
     <>
-      <Card>
+      <Card className="grow w-full">
         <CardHeader>
           <CardTitle>Alimentos ingeridos</CardTitle>
           <CardDescription>

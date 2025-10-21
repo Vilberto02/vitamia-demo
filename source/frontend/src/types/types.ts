@@ -33,3 +33,9 @@ export interface LogroType {
   title: string;
   description: string;
 }
+
+export type RecetaType = {
+  id: number,
+  title: string,
+  description: string,
+}

@@ -1,5 +1,7 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { type LoginFields } from "../types/index";
+import { Link } from "react-router-dom";
+
 
 export const LoginPage = () => {
   const {
@@ -102,6 +104,15 @@ export const LoginPage = () => {
           >
             Continuar
           </button>
+          <p className="text-center text-sm">
+            ¿No tienes una cuenta?{" "}
+            <Link
+              to="/register"
+              className="text-[var(--bg-turquesa)] underline"
+            >
+              Crea una cuenta aquí.
+            </Link>
+          </p>
         </form>
       </div>
     </div>

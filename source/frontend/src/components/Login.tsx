@@ -1,3 +1,5 @@
+// 1. Importa Link de react-router-dom
+import { Link } from "react-router-dom";
 import { Input } from "./Input";
 
 export function Login() {
@@ -6,9 +8,11 @@ export function Login() {
       <h1 className="font-bold text-4xl text-[var(--bg-carbon-oscuro)]">
         Bienvenido
       </h1>
+
       <p className="text-base text-[var(--bg-gris-oscuro)]">
-        Registra su nombre de usuario y contraseña para acceder a la plataforma
+        Ingresa tu correo electrónico y contraseña para acceder a la plataforma
       </p>
+
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
           <label htmlFor="email">Correo electrónico</label>
@@ -26,11 +30,12 @@ export function Login() {
           Continuar
         </button>
       </div>
+
       <p className="text-center">
-        En caso de no tener una cuenta,{" "}
-        <a href="/registro" className="text-[var(--bg-turquesa)] underline">
-          crea una cuenta aquí.
-        </a>
+        ¿No tienes una cuenta?{" "}
+        <Link to="/register" className="text-[var(--bg-turquesa)] underline">
+          Crea una cuenta aquí.
+        </Link>
       </p>
     </div>
   );

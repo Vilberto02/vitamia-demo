@@ -39,3 +39,11 @@ export type RecetaType = {
   title: string,
   description: string,
 }
+export type Recipe = {
+  id: string;
+  title: string;
+  description: string;
+  benefits: string;
+  ingredients: string[];
+  preparation: string[];
+};

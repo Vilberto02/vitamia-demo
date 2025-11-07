@@ -1,4 +1,4 @@
-import { ContainerDiaConsumo } from "../containers/ContainerDiaConsumo";
+import { ContainerDiaConsumo } from "./ContainerDiaConsumo";
 import { ContainerPersonalizarComida } from "../containers/ContainerPersonalizarComida";
 
 export function RecipeSection() {

@@ -79,9 +79,11 @@ const sampleRecipes: Recipe[] = [
 ];
 
 export function ContainerDiaConsumo() {
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
 
+  
   const handleOpenModal = (recipe: Recipe) => {
     setSelectedRecipe(recipe);
     setIsModalOpen(true);
@@ -93,7 +95,9 @@ export function ContainerDiaConsumo() {
   };
 
   return (
+   
     <div className="relative flex-1 h-full overflow-y-auto pr-4">
+      
       <div className="flex gap-4 mb-4 border-b">
         <button className="py-2 px-4 border-b-2 border-green-600 font-semibold">
           Desayuno
@@ -103,18 +107,23 @@ export function ContainerDiaConsumo() {
         <button className="py-2 px-4 text-gray-500">Snacks</button>
       </div>
 
+     
       <div className="space-y-4">
         {" "}
+        
         {sampleRecipes.map((recipe) => (
+          
           <div
             key={recipe.id}
             className="flex items-center gap-4 p-4 border rounded-lg cursor-pointer hover:bg-gray-50"
-            onClick={() => handleOpenModal(recipe)}
+            onClick={() => handleOpenModal(recipe)} 
           >
+           
             <div className="w-24 h-24 bg-green-500 rounded-md flex-shrink-0">
               {/*  */}
             </div>
 
+           
             <div>
               <h3 className="text-lg font-semibold">{recipe.title}</h3>
               <p className="text-sm text-gray-600">{recipe.description}</p>
@@ -122,7 +131,7 @@ export function ContainerDiaConsumo() {
           </div>
         ))}
       </div>
-
+    
       {isModalOpen && selectedRecipe && (
         <RecipeModal recipe={selectedRecipe} onClose={handleCloseModal} />
       )}

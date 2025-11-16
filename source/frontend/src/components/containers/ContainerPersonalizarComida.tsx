@@ -19,6 +19,10 @@ export function ContainerPersonalizarComida() {
             <AlimentoDiarioItem
               name="Fideos"
               Icon={Shrimp}
+              cantidad={150} // <-- Propiedad faltante
+              unidad="g" // <-- Propiedad faltante
+              isEditing={false} // <-- Propiedad faltante
+              onDelete={() => {}} // <-- Propiedad faltante
             ></AlimentoDiarioItem>
           </ScrollArea>
         </CardContent>

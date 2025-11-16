@@ -1,66 +1,58 @@
-import type { LucideIcon } from "lucide-react";
+import { type LucideIcon, X } from "lucide-react";
+import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select";
 
-type AlimentoDiarioItemType = {
+type ItemProps = {
+  // Props que ya tenías
   name: string;
   Icon: LucideIcon;
-}
 
-type ListaUnidadesTypes = {
-  id: string;
-  name: string;
-}
+  // Nuevas props para mostrar datos del estado
+  cantidad: number;
+  unidad: string;
+  isEditing: boolean; // ¿Estamos en modo edición?
+  onDelete: () => void; // Función para eliminar este item
+};
 
-const listaUnidadesMedida: ListaUnidadesTypes[] = [
-  {
-    id: "gramos",
-    name: "Gramos",
-  },
-  {
-    id: "unidad",
-    name: "Unidad",
-  },
-  {
-    id: "lata",
-    name: "Lata",
-  },
-  {
-    id: "vaso",
-    name: "Vaso",
-  },
-];
-
-
-export function AlimentoDiarioItem({ name, Icon }: AlimentoDiarioItemType) {
+export function AlimentoDiarioItem({
+  name,
+  Icon,
+  cantidad,
+  unidad,
+  isEditing,
+  onDelete,
+}: ItemProps) {
   return (
-    <div className="flex justify-between items-center mb-2 flex-wrap gap-4 py-2">
-      <div className="flex items-center gap-2">
-        <Icon className="text-[var(--bg-turquesa)]/80"></Icon>
-        <span>{name}</span>
+    // Animación simple para cuando se agrega/elimina
+    <div className="flex items-center gap-2 p-2 border rounded-lg animate-in fade-in-0 slide-in-from-top-2 duration-300">
+      {/* Icono y Nombre */}
+      <div className="flex items-center gap-2 flex-1">
+        <div className="p-2 bg-gray-100 rounded-full">
+          <Icon className="h-5 w-5 text-gray-700" />
+        </div>
+        <span className="font-medium">{name}</span>
       </div>
-      <div className="flex items-center gap-2 pl-1">
-        <Input
-          type="text"
-          placeholder="200"
-          className="w-20 border rounded p-1 text-center grow"
-        ></Input>
-        <Select defaultValue={"gramos"}>
-          <SelectTrigger className="min-w-[180px] grow" value={"gramos"}>
-            <SelectValue placeholder="Unidad..." />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Unidades de medida</SelectLabel>
-              {listaUnidadesMedida.map((item) => (
-                <SelectItem key={item.id} value={item.id}>
-                  {item.name}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
+
+      {/* Inputs de Cantidad y Unidad (como en tus imágenes) */}
+      <Input
+        type="number"
+        defaultValue={cantidad}
+        className="w-20 text-right"
+        readOnly={!isEditing} // Solo se puede editar en "modo edición"
+      />
+      <Input defaultValue={unidad} className="w-24" readOnly={!isEditing} />
+
+      {/* Botón de Eliminar (Solo aparece en modo edición) */}
+      {isEditing && (
+        <Button
+          variant="destructive"
+          size="icon"
+          onClick={onDelete}
+          className="ml-2"
+        >
+          <X className="h-4 w-4" />
+        </Button>
+      )}
     </div>
   );
 }

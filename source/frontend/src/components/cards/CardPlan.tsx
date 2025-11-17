@@ -1,21 +1,21 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card"; // Ajusta la ruta a 'ui'
 
+// 1. Tipos de datos (deben coincidir)
 type Tag = "Bajar peso" | "Mediterránea" | "Masa muscular";
-
-interface Plan {
+type Plan = {
   id: number;
   titulo: string;
   descripcion: string;
   tags: readonly Tag[];
-}
+};
 
 interface CardPlanProps {
   plan: Plan;
-  onClick?: (planId: number) => void;
+  onClick: (plan: Plan) => void; // 2. El onClick ahora pasa el objeto 'plan' completo
 }
 
+// 3. Función para los colores de las etiquetas
 const getTagColor = (tag: Tag) => {
-  // ... (la función de color no cambia)
   switch (tag) {
     case "Bajar peso":
       return "bg-green-100 text-green-800";
@@ -30,28 +30,19 @@ const getTagColor = (tag: Tag) => {
 
 export function CardPlan({ plan, onClick }: CardPlanProps) {
   return (
+    // 4. Se llama a onClick con el 'plan' cuando se hace clic
     <Card
       className="overflow-hidden cursor-pointer hover:bg-gray-50 transition-colors"
-      onClick={() => onClick && onClick(plan.id)}
+      onClick={() => onClick(plan)}
     >
-      {/* --- ¡CAMBIO PRINCIPAL AQUÍ! ---
-        1. Quitamos "p-0" y lo cambiamos por "p-4" (1rem de padding).
-        2. Añadimos "gap-4" para crear el espacio entre el cuadro y el texto.
-      */}
       <CardContent className="p-4 flex items-center gap-4">
-        {/* 1. Caja de imagen (cuadrado verde) */}
-        {/* Quitamos "mr-4" porque "gap-4" en el CardContent ya hace ese trabajo */}
-        <div className="w-24 h-24 bg-green-500 flex-shrink-0 rounded-md">
-          {/* Aquí podrías poner un <img> si tuvieras una */}
-        </div>
+        {/* Cuadro de color */}
+        <div className="w-24 h-24 bg-green-500 flex-shrink-0 rounded-md"></div>
 
-        {/* 2. Contenido de texto */}
-        {/* Quitamos "p-4" de este div, porque el CardContent ya nos da el padding */}
+        {/* Contenido de texto */}
         <div className="flex flex-col justify-center">
           <h3 className="text-lg font-semibold mb-1">{plan.titulo}</h3>
           <p className="text-sm text-gray-600 mb-3">{plan.descripcion}</p>
-
-          {/* 3. Etiquetas (Tags) */}
           <div className="flex gap-2">
             {plan.tags.map((tag) => (
               <span

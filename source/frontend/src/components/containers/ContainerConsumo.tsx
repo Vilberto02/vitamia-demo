@@ -1,9 +1,13 @@
 import BarChart from "../charts/BarChart";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 
 export function ContainerConsumo() {
-
   return (
     <>
       <Card className="grow">

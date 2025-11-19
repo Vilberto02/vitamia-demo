@@ -1,15 +1,49 @@
 import { ContainerAlimento } from "../containers/ContainerAlimento";
 import { ContainerConsumo } from "../containers/ContainerConsumo";
 import { ContainerLogro } from "../containers/ContainerLogro";
+// --- ¡NUEVO! Imports para el estado y los iconos ---
+import { useState } from "react";
+import { CheckCircle, XCircle } from "lucide-react";
 
 export function OverviewSection() {
+  // --- ¡NUEVO! Estado para nuestro propio "Toast" ---
+  const [toast, setToast] = useState({
+    visible: false,
+    message: "",
+    type: "success", // 'success' o 'error'
+  });
+
+  // --- ¡NUEVA! Función para MOSTRAR el toast ---
+  const showToast = (message: string, type: "success" | "error") => {
+    // 1. Lo mostramos
+    setToast({ visible: true, message, type });
+
+    // 2. Lo ocultamos después de 3 segundos
+    setTimeout(() => {
+      setToast({ visible: false, message: "", type });
+    }, 3000);
+  };
+
+  // --- ¡NUEVA! Función para el botón de AÑADIR ---
+  const handleAddWater = () => {
+    showToast("Se aumentó tu consumo diario de agua.", "success");
+    // (Opcional: aquí puedes sumar 1 al contador de agua)
+  };
+
+  // --- ¡NUEVA! Función para el botón de QUITAR ---
+  const handleRemoveWater = () => {
+    showToast("Se redujo tu consumo diario de agua.", "error");
+    // (Opcional: aquí puedes restar 1 al contador de agua)
+  };
+
   return (
-    <section className="flex flex-col gap-6 h-full">
+    <section className="flex flex-col gap-6 h-full relative">
+      {" "}
+      {/* <-- Añadido 'relative' */}
       <h1 className="font-bold text-2xl text-[var(--modeThird)] select-none">
         General
       </h1>
-
-      {/* Tarjetas de información general */}
+      {/* Tarjetas de información general (Sin cambios) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div
           className="p-4 rounded-lg shadow flex flex-col gap-4 justify-center"
@@ -60,21 +94,41 @@ export function OverviewSection() {
           <p className="text-5xl font-bold">25</p>
         </div>
       </div>
-
       {/* Contenedor principal para las secciones inferiores */}
       <div className="flex gap-6">
         {/* Sección de alimentos ingeridos */}
-        <ContainerAlimento></ContainerAlimento>
-
+        {/* --- ¡ACTUALIZADO! Pasamos las funciones como props --- */}
+        <ContainerAlimento
+          onAddWater={handleAddWater}
+          onRemoveWater={handleRemoveWater}
+        />
         {/* Sección derecha: Balance de consumo y Logros */}
         <div className="w-full flex flex-col gap-6">
-          {/* Balance de consumo */}
           <ContainerConsumo></ContainerConsumo>
+          {/* Balance de consumo */}
 
           {/* Logros */}
           <ContainerLogro></ContainerLogro>
         </div>
       </div>
+      {/* --- ¡NUEVO! El código del Toast que se mostrará --- */}
+      {toast.visible && (
+        <div
+          className={`fixed top-5 left-1/2 -translate-x-1/2 p-4 rounded-lg shadow-lg flex items-center gap-3 z-50 animate-in fade-in-0 slide-in-from-top-10
+            ${
+              toast.type === "success"
+                ? "bg-white border-green-500 border text-black" // Estilo éxito
+                : "bg-red-600 text-white" // Estilo error
+            }`}
+        >
+          {toast.type === "success" ? (
+            <CheckCircle className="text-green-500" />
+          ) : (
+            <XCircle />
+          )}
+          <span>{toast.message}</span>
+        </div>
+      )}
     </section>
   );
 }

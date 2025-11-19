@@ -1,6 +1,7 @@
 import type { SideBarItemType } from "@/types";
 import { SidebarItem } from "./SideBarItem";
 import { useNavigate } from "react-router-dom";
+import Vitamia from "@/assets/vitamia-logo.svg"
 
 type SidebarProps = {
   items: SideBarItemType[];
@@ -24,9 +25,12 @@ export function SideBar({
         }`}
     >
       <div className="flex items-center flex-col gap-4 w-full px-4">
-        <div className="font-extrabold text-2xl text-[var(--modeSecondary)] cursor-pointer">
-          Vitamia
-        </div>
+        <img
+          src={Vitamia}
+          alt="Logo de Vitamia"
+          className="w-36 py-3 cursor-pointer"
+          onClick={() => setActiveItem("general")}
+        />
         <nav className="flex-grow space-y-2 w-full">
           {items.map((item) => (
             <SidebarItem

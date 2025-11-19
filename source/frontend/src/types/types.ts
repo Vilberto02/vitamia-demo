@@ -47,3 +47,14 @@ export type Recipe = {
   ingredients: string[];
   preparation: string[];
 };
+
+export type RegisterFields = {
+  name: string;
+  lastname: string;
+  dateBirth: string;
+  weight: string;
+  height: string;
+  goal: string;
+  email: string;
+  password: string;
+}

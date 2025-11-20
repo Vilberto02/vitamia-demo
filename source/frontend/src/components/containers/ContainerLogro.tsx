@@ -15,14 +15,16 @@ export function ContainerLogro(){
           </CardDescription>
         </CardHeader>
         <CardContent className="h-full w-full">
-          <ScrollArea className="h-full flex flex-col gap-4 px-2">
-            {logros.map((logro) => (
-              <CardLogro
-                key={logro.id}
-                title={logro.title}
-                description={logro.description}
-              ></CardLogro>
-            ))}
+          <ScrollArea className="h-28">
+            <div className="flex flex-col gap-2 px-2">
+              {logros.map((logro) => (
+                <CardLogro
+                  key={logro.id}
+                  title={logro.title}
+                  description={logro.description}
+                ></CardLogro>
+              ))}
+            </div>
           </ScrollArea>
         </CardContent>
       </Card>

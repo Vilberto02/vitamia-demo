@@ -9,52 +9,43 @@ import {
 import { ScrollArea } from "../ui/scroll-area";
 import { CardAlimentoDiario } from "../cards/CardAlimentoDiario";
 import { GlassWater, Minus, Plus } from "lucide-react";
+import toast, {Toaster} from "react-hot-toast"
 
-// --- ¡NUEVO! Definimos las props que recibirá ---
-type ContainerAlimentoProps = {
-  onAddWater: () => void;
-  onRemoveWater: () => void;
-};
+export function ContainerAlimento() {
+  const addWater = () => {
+    toast.success("Tu consumo de agua aumentó.");
+  }
 
-// --- ¡ACTUALIZADO! Recibimos las props aquí ---
-export function ContainerAlimento({
-  onAddWater,
-  onRemoveWater,
-}: ContainerAlimentoProps) {
+  const removeWater = () => {
+    toast.success("Tu consumo de agua disminuyó.");
+  }
   return (
     <>
+      <Toaster position="top-center" reverseOrder={false} />
       <Card className="grow w-full">
         <CardHeader>
           <CardTitle>Alimentos ingeridos</CardTitle>
           <CardDescription>
-            {" "}
             Aquí agregas los alimentos que ingieres en tu día.
           </CardDescription>
           <CardAction>
+            {/*Agregar/Reducir vasos de agua */}
             <div className="flex gap-2">
-              {/* --- ¡ACTUALIZADO! Añadimos onClick --- */}
               <button
                 className="p-2 rounded-lg bg-[var(--bg-button-add)]/10 hover:bg-[var(--bg-button-add)]/30 cursor-pointer"
-                onClick={onAddWater}
+                onClick={addWater}
               >
                 <Plus></Plus>
               </button>
-
               <button className="p-2" disabled>
-                {" "}
-                {/* Lo dejamos deshabilitado */}
                 <GlassWater></GlassWater>
               </button>
-
-              {/* --- ¡ACTUALIZADO! Añadimos onClick --- */}
               <button
                 className="p-2 rounded-lg bg-[var(--bg-button-add)]/10 hover:bg-[var(--bg-button-add)]/30 cursor-pointer"
-                onClick={onRemoveWater}
+                onClick={removeWater}
               >
                 <Minus></Minus>
               </button>
-
-              {/* Se eliminó el '*' que causaba un error de sintaxis */}
             </div>
           </CardAction>
         </CardHeader>

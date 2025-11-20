@@ -13,9 +13,9 @@ import {
   Apple,
   Shrimp,
   Plus,
-  List,
-  type LucideIcon, // Importante
-  Sandwich, // Un icono genérico para nuevos alimentos
+  type LucideIcon,
+  Sandwich,
+  CheckCheck,
 } from "lucide-react";
 import { AlimentoDiarioItem } from "./AlimentoDiarioItem";
 import { Button } from "../ui/button";
@@ -29,74 +29,107 @@ import {
 } from "../ui/dialog";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import toast from "react-hot-toast";
 
-// --- Definimos un tipo para nuestros alimentos ---
+
 type Alimento = {
-  id: number; // Necesario para el .map() y para eliminar
+  id: number;
   name: string;
-  Icon: LucideIcon; // Usamos el tipo de Icono
+  Icon: LucideIcon;
   cantidad: number;
-  unidad: string;
+  unidad: unidadMedida;
 };
 
-// --- Props del componente ---
+export type unidadMedida = {
+  id: string;
+  name: string;
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const unidadesMedida: unidadMedida[] = [
+  {
+    id: "unidad",
+    name: "Unidad"
+  },
+  {
+    id: "gramos",
+    name: "Gramos",
+  },
+  {
+    id: "filete-pequenio",
+    name: "Filete pequeño",
+  },
+  {
+    id: "filete-mediano",
+    name: "Filete mediano",
+  },
+  {
+    id: "filete-grande",
+    name: "Filete grande",
+  },
+  {
+    id: "palma",
+    name: "Palma",
+  },
+  {
+    id: "taza",
+    name: "Taza",
+  },
+  {
+    id: "lata",
+    name: "Lata",
+  },
+]; 
+
 type CardAlimentoDiarioType = {
   name: string;
 };
 
-// Datos de ejemplo para empezar
+// eslint-disable-next-line react-refresh/only-export-components
+export const getUnidadById = (id: string) => unidadesMedida.find((u) => u.id === id)!;
+
 const alimentosIniciales: Record<string, Alimento[]> = {
   Desayuno: [
-    { id: 1, name: "Manzana", Icon: Apple, cantidad: 200, unidad: "Gramos" },
-    { id: 2, name: "Atún", Icon: Shrimp, cantidad: 100, unidad: "Gramos" },
+    { id: 1, name: "Manzana", Icon: Apple, cantidad: 4, unidad: getUnidadById("unidad") },
+    { id: 2, name: "Atún", Icon: Shrimp, cantidad: 1, unidad: getUnidadById("lata") },
   ],
   Almuerzo: [
-    { id: 3, name: "Manzana", Icon: Apple, cantidad: 150, unidad: "Gramos" },
+    { id: 3, name: "Manzana", Icon: Apple, cantidad: 5, unidad: getUnidadById("unidad") },
   ],
   Cena: [],
   Snack: [],
 };
 
 export function CardAlimentoDiario({ name }: CardAlimentoDiarioType) {
-  // --- ESTADOS ---
-
-  // Estado para la lista de alimentos
   const [alimentos, setAlimentos] = useState<Alimento[]>(
     alimentosIniciales[name] || []
   );
-
-  // Estado para el modo de edición
   const [isEditing, setIsEditing] = useState(false);
-
-  // Estado para el modal
   const [open, setOpen] = useState(false);
-
-  // Estados para los campos del formulario del modal
   const [nuevoNombre, setNuevoNombre] = useState("");
   const [nuevaCantidad, setNuevaCantidad] = useState("");
-  const [nuevaUnidad, setNuevaUnidad] = useState("Gramos");
+  const [nuevaUnidad, setNuevaUnidad] = useState<unidadMedida>(getUnidadById("Gramos"));
 
-  // --- HANDLERS (Funciones) ---
-
-  // Lógica para "Vaciar alimentos"
+  // Vaciar alimentos
   const handleVaciarAlimentos = () => {
-    setAlimentos([]); // Vaciamos el array
-    setIsEditing(false); // Salimos del modo edición si estábamos
+    setAlimentos([]);
+    setIsEditing(false);
   };
 
-  // Lógica para "Editar alimentos"
+  // Editar alimentos
   const handleToggleEditar = () => {
-    setIsEditing(!isEditing); // Invierte el estado de edición
+    setIsEditing(!isEditing);
   };
 
-  // Lógica para eliminar un item (se pasa al hijo)
+  // Eliminar un item (se pasa al hijo)
   const handleEliminarAlimento = (idAEliminar: number) => {
     setAlimentos(alimentos.filter((alimento) => alimento.id !== idAEliminar));
   };
 
-  // Lógica para agregar un alimento (desde el modal)
+  // Agregar un alimento (desde el modal)
   const handleAgregarAlimento = () => {
-    if (!nuevoNombre || !nuevaCantidad) return; // Validación simple
+    if (!nuevoNombre || !nuevaCantidad) return;
 
     const nuevoAlimento: Alimento = {
       id: Date.now(), // ID único simple usando la fecha
@@ -111,13 +144,19 @@ export function CardAlimentoDiario({ name }: CardAlimentoDiarioType) {
     // Limpiar formulario y cerrar modal
     setNuevoNombre("");
     setNuevaCantidad("");
-    setNuevaUnidad("Gramos");
+    setNuevaUnidad({id: "", name: ""});
     setOpen(false);
   };
 
+  const verificarAlimentos = () => {
+    if (alimentos.length === 0) {
+      toast.error("No hay alimentos registrados.");
+      return;
+    }
+  };
+
   return (
-    <div className="mb-4">
-      {/* --- CABECERA CON TÍTULO Y OPCIONES --- */}
+    <div className="mb-12">
       <div className="flex justify-between items-center border-b-2 border-[var(--bg-gris-oscuro)]/20 pb-2 mb-2">
         <h3 className="font-medium select-none">{name}</h3>
         <DropdownMenu>
@@ -126,26 +165,32 @@ export function CardAlimentoDiario({ name }: CardAlimentoDiarioType) {
               <EllipsisVertical />
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56" align="start">
-            <DropdownMenuLabel className="ml-2 mb-1 text-stone-500 text-sm">
+          <DropdownMenuContent className="w-56 text-stone-600" align="start">
+            <DropdownMenuLabel className="ml-2 mb-1 text-stone-400 text-sm">
               Opciones
             </DropdownMenuLabel>
 
             {/* OJO: Usamos 'onSelect' en lugar de 'onClick' para DropdownMenuItem */}
             <DropdownMenuItem
-              className="flex justify-between items-center text-red-600 focus:text-white focus:bg-red-500"
-              onSelect={handleVaciarAlimentos}
+              className="flex justify-between items-center text-stone-600 focus:text-red-500 focus:bg-stone-50"
+              onSelect={() => {
+                verificarAlimentos();
+                handleVaciarAlimentos();
+              }}
             >
-              Vaciar alimentos <Trash2 className="h-4 w-4" />
+              Vaciar alimentos{" "}
+              <Trash2 className="h-4 w-4 focus:text-red-500 " />
             </DropdownMenuItem>
 
             <DropdownMenuItem
-              className="flex justify-between items-center"
-              onSelect={handleToggleEditar}
+              className="flex justify-between items-center "
+              onSelect={() => {
+                verificarAlimentos();
+                handleToggleEditar();
+              }}
             >
-              {/* Cambia el texto si estamos editando */}
-              {isEditing ? "Dejar de editar" : "Editar alimentos"}
-              <SquarePen className="h-4 w-4" />
+              {isEditing ? "Guardar y salir" : "Editar alimentos"}
+              <SquarePen className="h-4 w-4 focus:text-black" />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -159,9 +204,10 @@ export function CardAlimentoDiario({ name }: CardAlimentoDiarioType) {
             name={alimento.name}
             Icon={alimento.Icon}
             cantidad={alimento.cantidad}
-            unidad={alimento.unidad}
+            unidad={getUnidadById(alimento.unidad.id)}
             isEditing={isEditing}
             onDelete={() => handleEliminarAlimento(alimento.id)}
+            setActualizarUnidad={setNuevaUnidad}
           />
         ))}
 
@@ -173,7 +219,7 @@ export function CardAlimentoDiario({ name }: CardAlimentoDiarioType) {
         )}
       </div>
 
-      {/* --- BOTÓN Y MODAL (con lógica de estado) --- */}
+      {/* --- Modal de agregar alimento --- */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button
@@ -191,13 +237,14 @@ export function CardAlimentoDiario({ name }: CardAlimentoDiarioType) {
               Escribe los datos del alimento o ingrediente.
             </p>
           </DialogHeader>
-          {/* Formulario conectado al estado */}
-          <div className="grid gap-4 py-4">
+          {/* Agregar alimento */}
+          <form className="grid gap-4 py-4">
             <div className="flex flex-col gap-2">
               <Label htmlFor="nombre">Nombre del alimento</Label>
               <Input
                 id="nombre"
                 value={nuevoNombre}
+                placeholder="Fideos"
                 onChange={(e) => setNuevoNombre(e.target.value)}
               />
             </div>
@@ -206,26 +253,36 @@ export function CardAlimentoDiario({ name }: CardAlimentoDiarioType) {
               <Input
                 id="cantidad"
                 type="number"
+                placeholder="100"
                 value={nuevaCantidad}
                 onChange={(e) => setNuevaCantidad(e.target.value)}
               />
             </div>
             <div className="flex flex-col gap-2">
               <Label htmlFor="unidad">Unidad del alimento</Label>
-              <Input
-                id="unidad"
-                value={nuevaUnidad}
-                onChange={(e) => setNuevaUnidad(e.target.value)}
-              />
+              <Select
+                onValueChange={(value) => setNuevaUnidad(getUnidadById(value))}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Gramos" id="unidad" />
+                </SelectTrigger>
+                <SelectContent>
+                  {unidadesMedida.map((unidad) => (
+                    <SelectItem key={unidad.id} value={unidad.id}>
+                      {unidad.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
-          </div>
+          </form>
           <DialogFooter>
             <Button
               type="submit"
-              onClick={handleAgregarAlimento} // Llama a la función de agregar
-              className="w-full bg-[#006A7A] hover:bg-[#005A6A] text-white"
+              onClick={handleAgregarAlimento}
+              className="w-full bg-[#006A7A] hover:bg-[#005A6A] text-white cursor-pointer"
             >
-              <List className="h-4 w-4 mr-2" />
+              <CheckCheck className="h-4 w-4 mr-2" />
               Listo
             </Button>
           </DialogFooter>

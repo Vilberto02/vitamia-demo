@@ -43,7 +43,19 @@ export type Recipe = {
   id: string;
   title: string;
   description: string;
-  benefits: string;
-  ingredients: string[];
-  preparation: string[];
+  preparationTime: string;
+  benefits?: string;
+  ingredients?: string[];
+  preparation?: string[];
 };
+
+export type RegisterFields = {
+  name: string;
+  lastname: string;
+  dateBirth: string;
+  weight: string;
+  height: string;
+  goal: string;
+  email: string;
+  password: string;
+}

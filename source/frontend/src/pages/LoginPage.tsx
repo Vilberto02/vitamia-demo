@@ -1,6 +1,10 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { type LoginFields } from "../types/index";
 import { Link } from "react-router-dom";
+import NameVitamia from "@/assets/name-bg-vitamia.svg"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 
 export const LoginPage = () => {
@@ -24,11 +28,11 @@ export const LoginPage = () => {
     reset();
   };
   return (
-    <div className="w-screen h-screen flex justify-center items-center px-12 sm:px-16">
-      <div className=" flex rounded-xl shadow-2xl">
+    <div className="relative w-screen h-screen flex justify-center items-center px-12 sm:px-16 overflow-hidden">
+      <div className="flex rounded-xl shadow-2xl">
         <form
           action=""
-          className="flex-1 flex flex-col items-center justify-center gap-8 sm:gap-12 lg:gap-16 my-6 p-8 sm:p-12 md:px-12 md:py-14"
+          className="flex-1 flex flex-col items-center justify-center sm:gap-12 lg:gap-8 my-2 p-8 sm:p-12 md:px-12 md:py-14"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-col gap-6 w-full max-w-[24rem]">
@@ -41,19 +45,21 @@ export const LoginPage = () => {
                 plataforma
               </p>
             </div>
-            <div className="flex flex-col gap-4 w-full">
-              <div className="flex flex-col gap-2">
-                <label
+
+            {/* Contenedor de los campos de entrada */}
+            <div className="flex flex-col gap-6 w-full">
+              <div className="space-y-2">
+                <Label
                   htmlFor="email"
                   className="text-[var(--bg-carbon-oscuro)]"
                 >
                   Correo electrónico
-                </label>
-                <input
+                </Label>
+                <Input
                   type="email"
                   id="email"
-                  className="rounded-sm py-2 px-3 border border-[var(--bg-gris-oscuro)]/50 focus:outline-[var(--bg-gris-oscuro)]/50 w-full"
-                  placeholder="Correo electrónico"
+                  className="rounded-sm py-2 px-3 w-full"
+                  placeholder="tu@gmail.com"
                   {...register("email", {
                     required: {
                       value: true,
@@ -71,18 +77,19 @@ export const LoginPage = () => {
                   </span>
                 )}
               </div>
-              <div className="flex flex-col gap-2">
-                <label
+              <div className="space-y-2">
+                <Label
                   htmlFor="password"
                   className="text-[var(--bg-carbon-oscuro)]"
                 >
                   Contraseña
-                </label>
-                <input
+                </Label>
+                {/* border border-[var(--bg-gris-oscuro)]/50 focus:outline-[var(--bg-gris-oscuro)]/50 */}
+                <Input
                   type="password"
                   id="password"
-                  className="rounded-sm py-2 px-3 border border-[var(--bg-gris-oscuro)]/50 focus:outline-[var(--bg-gris-oscuro)]/50 w-full"
-                  placeholder="Contraseña"
+                  className="rounded-sm py-2 px-3  w-full"
+                  placeholder="********"
                   {...register("password", {
                     required: {
                       value: true,
@@ -98,12 +105,12 @@ export const LoginPage = () => {
               </div>
             </div>
           </div>
-          <button
+          <Button
             type="submit"
-            className="w-full bg-[var(--bg-naranja)] text-white rounded-sm px-7 py-3 cursor-pointer max-w-[24rem]"
+            className="w-full bg-[var(--bg-naranja)] text-white rounded-sm cursor-pointer max-w-[24rem] py-5"
           >
             Continuar
-          </button>
+          </Button>
           <p className="text-center text-sm">
             ¿No tienes una cuenta?{" "}
             <Link
@@ -115,6 +122,11 @@ export const LoginPage = () => {
           </p>
         </form>
       </div>
+      <img
+        src={NameVitamia}
+        alt="Nombre de Vitamia"
+        className="absolute -bottom-15 left-1/2 -translate-x-1/2 z-0 pointer-events-none"
+      />
     </div>
   );
 };

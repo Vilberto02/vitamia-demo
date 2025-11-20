@@ -1,140 +1,172 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { Card, CardContent } from "../ui/card";
+import { ScrollArea } from "../ui/scroll-area";
+import { CardRecipe } from "../cards/CardRecipe";
+import { sampleRecipes } from "@/mocks/mocks";
 import { useState } from "react";
-import { RecipeModal } from "../RecipeModal";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
 import type { Recipe } from "@/types";
-
-// (Más adelante, esto tiene que venir de una API)
-// datos de pryeba
-const sampleRecipes: Recipe[] = [
-  {
-    id: "1",
-    title: "Tostadas de Aguacate con Huevo",
-    description:
-      "Una combinación perfecta de grasas saludables, proteínas y fibra...",
-    benefits: "Aporta energía gracias a las grasas saludables del aguacate.",
-    ingredients: [
-      "1 pan integral",
-      "1/2 aguacate",
-      "1 huevo",
-      "Sal y pimienta",
-    ],
-    preparation: [
-      "Tostar el pan.",
-      "Preparar el huevo al gusto.",
-      "Machacar el aguacate y untar.",
-      "Colocar el huevo sobre el aguacate.",
-    ],
-  },
-  {
-    id: "2",
-    title: "Avena con Frutas y Miel",
-    description:
-      "Un desayuno cálido y reconfortante, lleno de fibra y antioxidantes...",
-    benefits:
-      "Aporta energía gracias a la fibra y los carbohidratos complejos de la avena.",
-    ingredients: [
-      "1/2 taza de avena",
-      "1 taza de leche o agua",
-      "1 manzana",
-      "1/4 taza de frutos rojos",
-      "1 cda de miel",
-    ],
-    preparation: [
-      "Coloca la avena en una olla con la leche o agua.",
-      "Cocina a fuego medio durante 5 a 7 minutos.",
-      "Sirve en un bowl y añade las frutas frescas encima.",
-    ],
-  },
-  {
-    id: "3",
-    title: "Panqueques de Avena y Plátano",
-    description: "Panqueques suaves y esponjosos sin harina refinada...",
-    benefits: "Alto en fibra y potasio.",
-    ingredients: [
-      "1 plátano",
-      "1/2 taza de avena",
-      "1 huevo",
-      "1/4 taza de leche",
-    ],
-    preparation: [
-      "Licuar todos los ingredientes.",
-      "Cocinar en una sartén antiadherente.",
-    ],
-  },
-  {
-    id: "4",
-    title: "Yogur Griego con Granola y Frutos Rojos",
-    description:
-      "Una opción rápida y deliciosa que combina proteínas, fibra y antioxidantes...",
-    benefits: "Alto en proteína y probióticos.",
-    ingredients: [
-      "1 taza de yogur griego",
-      "1/4 taza de granola",
-      "1/4 taza de frutos rojos",
-    ],
-    preparation: [
-      "Servir el yogur en un bowl.",
-      "Añadir la granola y los frutos rojos.",
-    ],
-  },
-];
+import { Button } from "../ui/button";
+import {MoveUpRight} from "lucide-react"
 
 export function ContainerDiaConsumo() {
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+  const [open, setOpen] = useState(false);
 
-  
-  const handleOpenModal = (recipe: Recipe) => {
+  const handleSelectRecipe = (recipe: Recipe) => {
     setSelectedRecipe(recipe);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedRecipe(null);
+    setOpen(true);
   };
 
   return (
-   
-    <div className="relative flex-1 h-full overflow-y-auto pr-4">
-      
-      <div className="flex gap-4 mb-4 border-b">
-        <button className="py-2 px-4 border-b-2 border-green-600 font-semibold">
-          Desayuno
-        </button>
-        <button className="py-2 px-4 text-gray-500">Almuerzo</button>
-        <button className="py-2 px-4 text-gray-500">Cena</button>
-        <button className="py-2 px-4 text-gray-500">Snacks</button>
-      </div>
+    <div className="flex w-full h-full flex-col gap-6">
+      <Tabs defaultValue="desayuno" className="">
+        <TabsList>
+          <TabsTrigger value="desayuno" className="select-none">
+            Desayuno
+          </TabsTrigger>
+          <TabsTrigger value="almuerzo" className="select-none">
+            Almuerzo
+          </TabsTrigger>
+          <TabsTrigger value="cena" className="select-none">
+            Cena
+          </TabsTrigger>
+          <TabsTrigger value="snacks" className="select-none">
+            Snacks
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="desayuno" className="">
+          <Card className="">
+            <CardContent className="">
+              <ScrollArea className="h-[648px]">
+                <div className="flex flex-col gap-3 pr-3">
+                  {sampleRecipes.map((recipe) => (
+                    <CardRecipe
+                      key={recipe.id}
+                      title={recipe.title}
+                      description={recipe.description}
+                      onClick={() => handleSelectRecipe(recipe)}
+                    ></CardRecipe>
+                  ))}
+                </div>
+              </ScrollArea>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="almuerzo">
+          <Card className="">
+            <CardContent className="">
+              <ScrollArea className="h-[648px]">
+                <div className="flex flex-col gap-3 pr-3">
+                  {[...sampleRecipes]
+                    .sort((a, b) => parseInt(b.id) - parseInt(a.id)) // Orden por título
+                    .map((recipe) => (
+                      <CardRecipe
+                        key={recipe.id}
+                        title={recipe.title}
+                        description={recipe.description}
+                        onClick={() => handleSelectRecipe(recipe)}
+                      />
+                    ))}
+                </div>
+              </ScrollArea>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="cena">
+          <Card className="">
+            <CardContent className="">
+              <ScrollArea className="h-[648px]">
+                <div className="flex flex-col gap-3 pr-3">
+                  {[...sampleRecipes]
+                    .sort((a, b) => a.title.localeCompare(b.title)) // Ordenar por título
+                    .map((recipe) => (
+                      <CardRecipe
+                        key={recipe.id}
+                        title={recipe.title}
+                        description={recipe.description}
+                        onClick={() => handleSelectRecipe(recipe)}
+                      />
+                    ))}
+                </div>
+              </ScrollArea>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="snacks">
+          <Card className="">
+            <CardContent className="">
+              <ScrollArea className="h-[648px]">
+                <div className="flex flex-col gap-3 pr-3">
+                  {sampleRecipes.map((recipe) => (
+                    <CardRecipe
+                      key={recipe.id}
+                      title={recipe.title}
+                      description={recipe.description}
+                      onClick={() => handleSelectRecipe(recipe)}
+                    ></CardRecipe>
+                  ))}
+                </div>
+              </ScrollArea>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetContent className="p-9">
+          {selectedRecipe && (
+            <>
+              <SheetHeader>
+                <SheetTitle className="text-center">
+                  <div className="flex flex-col gap-4 justify-center items-center">
+                    <div className="w-28 aspect-square rounded-lg shrink-0 bg-verde-isla"></div>
+                    <p className="font-medium">{selectedRecipe.title}</p>
+                    <p className="font-normal text-gris-oscuro">
+                      {selectedRecipe.preparationTime}
+                    </p>
+                  </div>
+                </SheetTitle>
+              </SheetHeader>
 
-     
-      <div className="space-y-4">
-        {" "}
-        
-        {sampleRecipes.map((recipe) => (
-          
-          <div
-            key={recipe.id}
-            className="flex items-center gap-4 p-4 border rounded-lg cursor-pointer hover:bg-gray-50"
-            onClick={() => handleOpenModal(recipe)} 
-          >
-           
-            <div className="w-24 h-24 bg-green-500 rounded-md flex-shrink-0">
-              {/*  */}
-            </div>
+              <div className="mt-4 space-y-2">
+                <p className="font-medium">Descripción</p>
+                <p className="text-gris-oscuro text-sm">
+                  {selectedRecipe.description}
+                </p>
+              </div>
 
-           
-            <div>
-              <h3 className="text-lg font-semibold">{recipe.title}</h3>
-              <p className="text-sm text-gray-600">{recipe.description}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    
-      {isModalOpen && selectedRecipe && (
-        <RecipeModal recipe={selectedRecipe} onClose={handleCloseModal} />
-      )}
+              <div className="mt-4 space-y-2">
+                <p className="font-medium">Beneficios</p>
+                <p className="text-gris-oscuro text-sm">
+                  {selectedRecipe.benefits}
+                </p>
+              </div>
+
+              <div className="mt-4 space-y-2">
+                <p className="font-medium">Ingredientes</p>
+                <ul className="text-gris-oscuro text-sm list-disc pl-5">
+                  {selectedRecipe.ingredients?.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-4 space-y-2">
+                <p className="font-medium">Preparación</p>
+                <ol className="text-gris-oscuro text-sm list-decimal pl-5">
+                  {selectedRecipe.preparation?.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ol>
+              </div>
+
+              <Button className="mt-auto bg-turquesa hover:bg-turquesa/90 cursor-pointer flex justify-between py-3 px-4 items-center">
+                Agregar receta <MoveUpRight></MoveUpRight>
+              </Button>
+            </>
+          )}
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }

@@ -32,7 +32,7 @@ export const DashboardPage = () => {
   };
 
   return (
-    <div className="flex gap-3 w-screen h-screen">
+    <div className="flex gap-3 w-screen h-screen overflow-hidden">
       <SideBar
         items={sidebarItems}
         activeItem={activeItem}
@@ -48,7 +48,7 @@ export const DashboardPage = () => {
           setActiveItem={setActiveItem}
           toggleSidebar={toggleSidebar}
         ></Navbar>
-        <main className="flex-1 p-10 bg-[#FAFFF6]/60 rounded-xl overflow-hidden">
+        <main className="flex-1 p-10 bg-[#FAFFF6]/60 rounded-xl overflow-x-hidden overflow-y-auto">
           {sections[activeItem]}
         </main>
       </div>

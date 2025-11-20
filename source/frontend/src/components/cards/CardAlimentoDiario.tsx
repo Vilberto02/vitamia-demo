@@ -73,6 +73,10 @@ export const unidadesMedida: unidadMedida[] = [
     name: "Palma",
   },
   {
+    id: "taza",
+    name: "Taza",
+  },
+  {
     id: "lata",
     name: "Lata",
   },

@@ -1,5 +1,5 @@
 
-import { ContainerDiaConsumo } from "./ContainerDiaConsumo";
+import { ContainerDiaConsumo } from "../containers/ContainerDiaConsumo";
 import { CardAlimentoDiario } from "../cards/CardAlimentoDiario";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";

@@ -1,3 +1,4 @@
+import type { Plan } from "@/types/index";
 import type { LogroType, RecetaType, Recipe } from "@/types";
 
 export const labels: string[] = ["Completado", "En progreso", "No iniciado"];
@@ -124,5 +125,44 @@ export const sampleRecipes: Recipe[] = [
       "Servir el yogur en un bowl.",
       "Añadir la granola y los frutos rojos.",
     ],
+  },
+];
+
+export const listaDePlanes: Plan[] = [
+  {
+    id: 1,
+    title: "Dieta DASH (Dietary Approaches to Stop Hypertension)",
+    description:
+      "Desarrollada para prevenir y controlar la hipertensión, esta dieta se enfoca en reducir la sal y aumentar el consumo de potasio, magnesio y calcio.",
+    tags: ["Bajar de peso"],
+    benefits: ["Mejora la salud cardiovascular y reduce el colesterol."],
+    recipes: ["receta 01", "receta 02"],
+  },
+  {
+    id: 2,
+    title: "Dieta Mediterránea",
+    description:
+      "Basada en los hábitos alimenticios tradicionales de países como Grecia e Italia. Se enfoca en alimentos frescos, aceite de oliva, pescados y legumbres.",
+    tags: ["Mediterránea"],
+    benefits: ["Reduce el riesgo de enfermedades cardíacas."],
+    recipes: ["recetas 01", "recetas 02"],
+  },
+  {
+    id: 3,
+    title: "Dietas para Aumentar Masa Muscular",
+    description:
+      "Esta dieta se enfoca en consumir más calorías de las que el cuerpo quema, principalmente a través de proteínas de alta calidad, carbohidratos y grasas saludables.",
+    tags: ["Masa muscular"],
+    benefits: ["Optimiza el crecimiento muscular."],
+    recipes: ["receta 01", "receta 02"],
+  },
+  {
+    id: 4,
+    title: "Dietas Detox",
+    description:
+      "Esta dieta se basa en consumir jugos naturales y frescos, principalmente de frutas y verduras, para eliminar toxinas y mejorar la digestión.",
+    tags: ["Bajar de peso", "Masa muscular"],
+    benefits: ["Beneficio 01 202"],
+    recipes: ["receta 01", "receta 02"]
   },
 ];

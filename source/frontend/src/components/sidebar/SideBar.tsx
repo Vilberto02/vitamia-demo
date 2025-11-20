@@ -47,7 +47,7 @@ export function SideBar({
         onClick={() => {
           console.log("Cerrando sesión...");
           alert("Sesión cerrada.");
-          navigate("/login");
+          navigate("/");
         }}
         className="cursor-pointer hover:text-red-700 w-full"
       >

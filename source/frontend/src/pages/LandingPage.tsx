@@ -10,12 +10,17 @@ export function LandingPage() {
     <div className="">
       <nav className="fixed top-0 w-full z-50 border-b border-border/40 bg-white">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <img src={Logo} alt="Logo Vitamia" className="h-8 cursor-pointer" />
+          <img
+            src={Logo}
+            alt="Logo Vitamia"
+            className="h-6 cursor-pointer"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          />
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
             <Button
               variant={"link"}
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="text-stone-500 hover:text-carbon-oscuro transition-colors"
+              className="text-stone-500 hover:text-carbon-oscuro transition-colors cursor-pointer"
             >
               Inicio
             </Button>
@@ -25,11 +30,14 @@ export function LandingPage() {
                 const section = document.getElementById("features");
                 section?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="text-stone-500 hover:text-carbon-oscuro transition-colors"
+              className="text-stone-500 hover:text-carbon-oscuro transition-colors cursor-pointer"
             >
               Características
             </Button>
-            <Button variant={"link"} className="text-stone-500 hover:text-carbon-oscuro transition-colors">
+            <Button
+              variant={"link"}
+              className="text-stone-500 hover:text-carbon-oscuro transition-colors"
+            >
               Nosotros
             </Button>
           </div>
@@ -77,7 +85,7 @@ export function LandingPage() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                to="/register"
+                to="/home"
                 className="h-12 px-8 rounded-full bg-turquesa text-white font-medium hover:bg-turquesa/90 transition-all flex items-center justify-center gap-2 group"
               >
                 Comenzar ahora
@@ -187,7 +195,7 @@ export function LandingPage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                to="/signup"
+                to="/register"
                 className="px-8 py-4 rounded-full bg-naranja text-white font-medium hover:bg-naranja/90 transition-all shadow-lg shadow-carbon-oscuro/20 flex items-center justify-center"
               >
                 Crear cuenta gratis
@@ -214,14 +222,14 @@ export function LandingPage() {
                 <h4 className="font-bold mb-4">Producto</h4>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li>
-                    <a href="/" className="hover:text-foreground">
+                    <Link to="/" className="hover:text-foreground">
                       Características
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="/" className="hover:text-foreground">
+                    <Link to="/" className="hover:text-foreground">
                       Recetas
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -229,14 +237,14 @@ export function LandingPage() {
                 <h4 className="font-bold mb-4">Compañía</h4>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li>
-                    <a href="/" className="hover:text-foreground">
+                    <Link to="/" className="hover:text-foreground">
                       Sobre nosotros
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="/" className="hover:text-foreground">
+                    <Link to="/" className="hover:text-foreground">
                       Contacto
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>

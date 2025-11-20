@@ -3,7 +3,7 @@ import BgGrapes from "@/assets/grapes.svg";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { Navigate } from "react-router";
+import { Link, Navigate } from "react-router";
 import { useState } from "react";
 import type { RegisterFields } from "@/types";
 
@@ -216,9 +216,9 @@ export function Register() {
 
       <p className="text-center text-sm">
         En caso de tener una cuenta,{" "}
-        <a href="/login" className="text-[var(--bg-turquesa)] underline">
+        <Link to="/login" className="text-[var(--bg-turquesa)] underline">
           inicie sesión aquí.
-        </a>
+        </Link>
       </p>
     </div>
   );

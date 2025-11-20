@@ -1,10 +1,11 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { type LoginFields } from "../types/index";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import NameVitamia from "@/assets/name-bg-vitamia.svg"
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useState } from "react";
 
 
 export const LoginPage = () => {
@@ -16,31 +17,36 @@ export const LoginPage = () => {
   } = useForm<LoginFields>({
     mode: "onChange",
   });
+  const [redirect, setRedirect] = useState(false)
 
   const onSubmit: SubmitHandler<LoginFields> = async (data) => {
     try {
       console.log("Datos enviados", data);
       alert(`Datos enviados...\n -> ${data}`);
+      setRedirect(true);
     } catch (error) {
       console.log("Error al enviar los datos.", error);
     }
 
     reset();
   };
+
+  if (redirect) return <Navigate to={"/home"}></Navigate>
+
   return (
-    <div className="relative w-screen h-screen flex justify-center items-center px-12 sm:px-16 overflow-hidden">
-      <div className="flex rounded-xl shadow-2xl">
+    <div className="relative w-screen h-screen flex justify-center items-center px-12 sm:px-16 overflow-hidden bg-background-page">
+      <div className="flex rounded-xl shadow-2xl bg-white">
         <form
           action=""
-          className="flex-1 flex flex-col items-center justify-center sm:gap-12 lg:gap-8 my-2 p-8 sm:p-12 md:px-12 md:py-14"
+          className="flex-1 flex flex-col items-center justify-center sm:gap-12 lg:gap-8 my-2 p-12 md:px-12 md:py-14"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-col gap-6 w-full max-w-[24rem]">
             <div className="flex flex-col justify-center items-center gap-4">
-              <h1 className="font-bold text-4xl text-[var(--bg-carbon-oscuro)]">
+              <h1 className="font-bold text-4xl text-carbon-oscuro">
                 Bienvenido
               </h1>
-              <p className="text-[var(--bg-gris-oscuro)] text-center text-sm md:text-md">
+              <p className="text-gris-oscuro text-center text-sm md:text-md">
                 Registra su correo eletrónico y contraseña para acceder a la
                 plataforma
               </p>
@@ -51,7 +57,7 @@ export const LoginPage = () => {
               <div className="space-y-2">
                 <Label
                   htmlFor="email"
-                  className="text-[var(--bg-carbon-oscuro)]"
+                  className="text-carbon-oscuro"
                 >
                   Correo electrónico
                 </Label>
@@ -80,7 +86,7 @@ export const LoginPage = () => {
               <div className="space-y-2">
                 <Label
                   htmlFor="password"
-                  className="text-[var(--bg-carbon-oscuro)]"
+                  className="text-carbon-oscuro"
                 >
                   Contraseña
                 </Label>
@@ -107,11 +113,11 @@ export const LoginPage = () => {
           </div>
           <Button
             type="submit"
-            className="w-full bg-[var(--bg-naranja)] text-white rounded-sm cursor-pointer max-w-[24rem] py-5"
+            className="w-full bg-naranja text-white rounded-sm cursor-pointer max-w-[24rem] py-5 xl:mt-0 mt-4"
           >
             Continuar
           </Button>
-          <p className="text-center text-sm">
+          <p className="text-center text-sm xl:mt-0 mt-4">
             ¿No tienes una cuenta?{" "}
             <Link
               to="/register"

@@ -59,3 +59,12 @@ export type RegisterFields = {
   email: string;
   password: string;
 }
+
+export type Plan = {
+  id: number;
+  title: string;
+  description: string;
+  tags: string[];
+  benefits?: string[];
+  recipes?: string[];
+};

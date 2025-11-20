@@ -10,9 +10,7 @@ import {
 
 export function ContainerInfo() {
   return (
-    <Card className="grow">
-      {" "}
-      {/* 'grow' puede que no sea lo que quieres, 'flex-1' o un ancho fijo (w-80) en la página principal es mejor */}
+    <Card className="flex flex-col">
       <CardHeader>
         <CardTitle>Información</CardTitle>
         <CardDescription>

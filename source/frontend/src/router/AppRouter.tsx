@@ -3,6 +3,7 @@ import { DashboardPage } from "../pages/DashboardPage";
 import { LoginPage } from "../pages/LoginPage";
 import { RegisterPage } from "../pages/RegisterPage";
 import { NotFoundPage } from "../pages/NotFoundPage";
+import { LandingPage } from "@/pages/LandingPage";
 
 const routes = createBrowserRouter([
   {
@@ -14,8 +15,12 @@ const routes = createBrowserRouter([
     element: <RegisterPage></RegisterPage>,
   },
   {
-    path: "/", // DASHBOARD
+    path: "/home", // DASHBOARD
     element: <DashboardPage></DashboardPage>,
+  },
+  {
+    path: "/",
+    element: <LandingPage></LandingPage>,
   },
   {
     path: "*",

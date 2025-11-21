@@ -5,8 +5,8 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-// No necesitas ScrollArea si el contenido es corto, pero lo dejo por si acaso.
-// import { ScrollArea } from "../ui/scroll-area";
+import { ScrollArea } from "../ui/scroll-area";
+import { listaInformacion } from "@/mocks/mocks";
 
 export function ContainerInfo() {
   return (
@@ -18,44 +18,23 @@ export function ContainerInfo() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {/* Aquí está el contenido que querías agregar */}
-        <div className="space-y-4">
-          {" "}
-          {/* Agregamos espacio entre los ítems de información */}
-          {/* Ítem de Hidratación */}
-          <div className="flex items-center gap-3">
-            {/* Círculo azul de ejemplo. Puedes reemplazarlo por un Icono */}
-            <div className="w-10 h-10 rounded-full bg-blue-200 flex-shrink-0"></div>
-            <div>
-              <h4 className="font-semibold">Hidratación adecuada</h4>
-              <p className="text-sm text-gray-600">
-                Mejora la digestión y la salud de la piel.
-              </p>
-            </div>
+        <ScrollArea className="h-96">
+          <div className="flex flex-col gap-3 pr-3">
+            {listaInformacion.map((info) => (
+              <div key={info.id} className="flex items-center gap-3">
+                <div className="w-14 h-14 aspect-square rounded-full bg-turquesa flex-shrink-0"></div>
+                <div>
+                  <h4 className="font-semibold text-carbon-oscuro mb-1">
+                    {info.title}
+                  </h4>
+                  <p className="text-sm text-gris-oscuro line-clamp-2">
+                    {info.description}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
-          {/* Ítem de Descanso y sueño */}
-          <div className="flex items-center gap-3">
-            {/* Círculo morado de ejemplo */}
-            <div className="w-10 h-10 rounded-full bg-purple-200 flex-shrink-0"></div>
-            <div>
-              <h4 className="font-semibold">Descanso y sueño</h4>
-              <p className="text-sm text-gray-600">
-                Ayuda a la recuperación del cuerpo y el bienestar mental.
-              </p>
-            </div>
-          </div>
-          {/* Ítem de Control del estrés */}
-          <div className="flex items-center gap-3">
-            {/* Círculo rojo de ejemplo */}
-            <div className="w-10 h-10 rounded-full bg-red-200 flex-shrink-0"></div>
-            <div>
-              <h4 className="font-semibold">Control del estrés</h4>
-              <p className="text-sm text-gray-600">
-                Previene enfermedades crónicas y ayuda al bienestar emocional.
-              </p>
-            </div>
-          </div>
-        </div>
+        </ScrollArea>
       </CardContent>
     </Card>
   );

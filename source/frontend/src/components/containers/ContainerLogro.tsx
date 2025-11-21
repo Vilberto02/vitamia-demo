@@ -4,7 +4,6 @@ import { ScrollArea } from "../ui/scroll-area";
 import { CardLogro } from "../cards/CardLogro";
 
 export function ContainerLogro(){
-
   return (
     <>
       <Card>

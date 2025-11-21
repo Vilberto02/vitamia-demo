@@ -1,4 +1,4 @@
-import type { Plan } from "@/types/index";
+import type { Info, Plan } from "@/types/index";
 import type { LogroType, RecetaType, Recipe } from "@/types";
 
 export const labels: string[] = ["Completado", "En progreso", "No iniciado"];
@@ -164,5 +164,31 @@ export const listaDePlanes: Plan[] = [
     tags: ["Bajar de peso", "Masa muscular"],
     benefits: ["Beneficio 01 202"],
     recipes: ["receta 01", "receta 02"]
+  },
+];
+
+
+
+export const listaInformacion: Info[] = [
+  {
+    id: "1",
+    title: "Hidratación adecuada.",
+    description: "Mejora la digestión y la salud de la piel.",
+  },
+  {
+    id: "2",
+    title: "Descanso y sueño.",
+    description: "Ayuda a la recuperación del cuerpo y el bienestar mental.",
+  },
+  {
+    id: "3",
+    title: "Control del estrés.",
+    description:
+      "Previene enfermedades crónicas y ayuda al bienestar emocional.",
+  },
+  {
+    id: "4",
+    title: "Liberación de estrés.",
+    description: "Realiza ejercicio para liberar la carga mental y emocional.",
   },
 ];

@@ -68,3 +68,14 @@ export type Plan = {
   benefits?: string[];
   recipes?: string[];
 };
+
+export type Info = {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export type MotivationalMessage = {
+  id: string;
+  message: string;
+}

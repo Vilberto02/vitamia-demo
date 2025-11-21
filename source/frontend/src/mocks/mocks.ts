@@ -1,4 +1,4 @@
-import type { Info, Plan } from "@/types/index";
+import type { Info, Plan, PlanProfile } from "@/types/index";
 import type { LogroType, RecetaType, Recipe } from "@/types";
 
 export const labels: string[] = ["Completado", "En progreso", "No iniciado"];
@@ -190,5 +190,39 @@ export const listaInformacion: Info[] = [
     id: "4",
     title: "Liberación de estrés.",
     description: "Realiza ejercicio para liberar la carga mental y emocional.",
+  },
+];
+
+
+export const misPlanes: PlanProfile[] = [
+  {
+    id: 1,
+    title: "Dieta DASH (Dietary Approaches to Stop Hypertension)",
+  },
+  {
+    id: 2,
+    title: "Dieta Mediterránea",
+  },
+  {
+    id: 3,
+    title: "Dietas para Aumentar Masa Muscular",
+  },
+];
+
+export const misLogros: LogroType[] = [
+  {
+    id: 1,
+    title: "Constante",
+    description: "Racha de una semana.",
+  },
+  {
+    id: 2,
+    title: "VidaFit",
+    description: "Racha de 6 meses.",
+  },
+  {
+    id: 3,
+    title: "Frutero",
+    description: "Comer frutas 5 días seguidos.",
   },
 ];

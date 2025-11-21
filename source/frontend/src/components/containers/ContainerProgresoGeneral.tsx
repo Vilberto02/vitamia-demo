@@ -1,3 +1,4 @@
+import BarChart from "../charts/BarChart";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 
 export function ContainerProgresoGeneral() {
@@ -10,7 +11,9 @@ export function ContainerProgresoGeneral() {
           alimentación saludable.
         </CardDescription>
       </CardHeader>
-      <CardContent></CardContent>
+      <CardContent className="h-48">
+        <BarChart></BarChart>
+      </CardContent>
     </Card>
   );
 }

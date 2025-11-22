@@ -1,4 +1,4 @@
-import type { Info, Plan, PlanProfile } from "@/types/index";
+import type { Info, Plan, PlanProfile, RegisterFields } from "@/types/index";
 import type { LogroType, RecetaType, Recipe } from "@/types";
 
 export const labels: string[] = ["Completado", "En progreso", "No iniciado"];
@@ -226,3 +226,14 @@ export const misLogros: LogroType[] = [
     description: "Comer frutas 5 días seguidos.",
   },
 ];
+
+export const misDatos: RegisterFields = {
+  name: "Juan",
+  lastname: "Perez Morales",
+  dateBirth: "2001-12-04",
+  weight: "70.5",
+  height: "175",
+  goal: "Bajar de peso",
+  email: "juan.perez@unmsm.edu.pe",
+  password: "1234",
+}

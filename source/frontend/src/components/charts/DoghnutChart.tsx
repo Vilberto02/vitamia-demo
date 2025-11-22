@@ -38,10 +38,6 @@ export function DoughnutChart({ labels, values, colors }: DoughnutChartProps) {
 
   return (
     <div className="relative w-full px-8">
-      <h3 className="font-medium text-center text-sm mb-4">
-        Alimentos ingeridos por categoria.
-      </h3>
-
       <div className="flex justify-between items-center">
         <ScrollArea>
           <div className="space-y-2">

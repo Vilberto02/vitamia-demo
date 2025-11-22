@@ -1,3 +1,4 @@
+import { LineChart } from "../charts/LineChart";
 import {
   Card,
   CardContent,
@@ -13,7 +14,12 @@ export function ContainerProgresoPeso() {
         <CardTitle>Progreso del peso</CardTitle>
         <CardDescription>Progreso de las variaciones de peso.</CardDescription>
       </CardHeader>
-      <CardContent></CardContent>
+      <CardContent>
+        <LineChart
+          labels={["Ene", "Feb", "Mar", "Abr", "May"]}
+          dataValues={[85, 83, 81.5, 79, 78]}
+        />
+      </CardContent>
     </Card>
   );
 }

@@ -1,4 +1,4 @@
-import type { Plan } from "@/types/index";
+import type { Info, Plan, PlanProfile, RegisterFields } from "@/types/index";
 import type { LogroType, RecetaType, Recipe } from "@/types";
 
 export const labels: string[] = ["Completado", "En progreso", "No iniciado"];
@@ -166,3 +166,74 @@ export const listaDePlanes: Plan[] = [
     recipes: ["receta 01", "receta 02"]
   },
 ];
+
+
+
+export const listaInformacion: Info[] = [
+  {
+    id: "1",
+    title: "Hidratación adecuada.",
+    description: "Mejora la digestión y la salud de la piel.",
+  },
+  {
+    id: "2",
+    title: "Descanso y sueño.",
+    description: "Ayuda a la recuperación del cuerpo y el bienestar mental.",
+  },
+  {
+    id: "3",
+    title: "Control del estrés.",
+    description:
+      "Previene enfermedades crónicas y ayuda al bienestar emocional.",
+  },
+  {
+    id: "4",
+    title: "Liberación de estrés.",
+    description: "Realiza ejercicio para liberar la carga mental y emocional.",
+  },
+];
+
+
+export const misPlanes: PlanProfile[] = [
+  {
+    id: 1,
+    title: "Dieta DASH (Dietary Approaches to Stop Hypertension)",
+  },
+  {
+    id: 2,
+    title: "Dieta Mediterránea",
+  },
+  {
+    id: 3,
+    title: "Dietas para Aumentar Masa Muscular",
+  },
+];
+
+export const misLogros: LogroType[] = [
+  {
+    id: 1,
+    title: "Constante",
+    description: "Racha de una semana.",
+  },
+  {
+    id: 2,
+    title: "VidaFit",
+    description: "Racha de 6 meses.",
+  },
+  {
+    id: 3,
+    title: "Frutero",
+    description: "Comer frutas 5 días seguidos.",
+  },
+];
+
+export const misDatos: RegisterFields = {
+  name: "Juan",
+  lastname: "Perez Morales",
+  dateBirth: "2001-12-04",
+  weight: "70.5",
+  height: "175",
+  goal: "Bajar de peso",
+  email: "juan.perez@unmsm.edu.pe",
+  password: "1234",
+}

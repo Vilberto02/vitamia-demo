@@ -68,3 +68,22 @@ export type Plan = {
   benefits?: string[];
   recipes?: string[];
 };
+
+export type Info = {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export type MotivationalMessage = {
+  id: string;
+  message: string;
+}
+
+export type PlanProfile = Pick<Plan, "id" | "title" >;
+
+export interface DoughnutChartProps {
+  labels: string[];
+  values: number[];
+  colors: string[];
+}

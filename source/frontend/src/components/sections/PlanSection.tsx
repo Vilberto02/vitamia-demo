@@ -18,7 +18,7 @@ export function PlanSection() {
         <div className="flex-1">
           <ContainerPlanes></ContainerPlanes>
         </div>
-        <div className="flex flex-col gap-6 w-full max-w-1/4">
+        <div className="flex flex-col gap-6 w-full h-full max-w-1/4">
           <ContainerInfo></ContainerInfo>
           <ContainerMotivacion></ContainerMotivacion>
         </div>

@@ -33,7 +33,7 @@ export function ContainerPlanes() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <ScrollArea className="h-[644px]">
+          <ScrollArea className="h-[636px]">
             <div className="flex flex-col gap-3 pr-3">
               {listaDePlanes.map((plan) => (
                 <CardPlan

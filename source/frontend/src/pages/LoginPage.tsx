@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-
+import Swal from "sweetalert2";
 
 export const LoginPage = () => {
   const {
@@ -22,10 +22,19 @@ export const LoginPage = () => {
   const onSubmit: SubmitHandler<LoginFields> = async (data) => {
     try {
       console.log("Datos enviados", data);
-      alert(`Datos enviados...\n -> ${data}`);
+      Swal.fire({
+        icon: "success",
+        title: "Inicio de sesión exitoso.",
+        text: "Ya puedes acceder a la plataforma.",
+      });
       setRedirect(true);
     } catch (error) {
       console.log("Error al enviar los datos.", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error al iniciar sesión.",
+        text: "Por favor, inténtalo de nuevo.",
+      });
     }
 
     reset();

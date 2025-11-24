@@ -7,6 +7,7 @@ import { Link, Navigate } from "react-router";
 import { useState } from "react";
 import type { RegisterFields } from "@/types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Swal from "sweetalert2";
 
 export function Register() {
   const [redirect, setRedirect] = useState<boolean>(false);
@@ -24,8 +25,22 @@ export function Register() {
   });
 
   const onSubmit: SubmitHandler<RegisterFields> = async (data) => {
-    console.log(data);
-    setRedirect(true);
+    try {
+      console.log("Datos enviados", data);
+      Swal.fire({
+        icon: "success",
+        title: "Registro exitoso.",
+        text: "Ya puedes iniciar sesión en la plataforma.",
+      });
+      setRedirect(true);
+    } catch (error) {
+      console.log("Error al enviar los datos.", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error al registrar tus datos.",
+        text: "Por favor, inténtalo de nuevo.",
+      });
+    }
     reset();
   };
 

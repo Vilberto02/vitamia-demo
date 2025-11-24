@@ -4,9 +4,19 @@ import { CardAlimentoDiario } from "../cards/CardAlimentoDiario";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { Zap } from "lucide-react";
+import { useState } from "react";
+import { GenerarRecetaSheet } from "../sheets/GenerateRecipeSheet";
 
 
 export function RecipeSection() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [hasAlimentos] = useState(true); // Cambiar a false para probar el botón deshabilitado
+
+  const handleConsultar = () => {
+    if (hasAlimentos) {
+      setIsOpen(true);
+    }
+  };
 
   return (
     <>
@@ -30,16 +40,22 @@ export function RecipeSection() {
             </CardContent>
             <CardFooter className="mt-auto">
               <Button 
-                className="w-full bg-turquesa text-white rounded-lg py-5 text-base hover:bg-turquesa/90 cursor-pointer"
+                className={`w-full text-white rounded-lg py-5 text-base cursor-pointer transition-all select-none ${
+                  hasAlimentos 
+                    ? "bg-turquesa hover:bg-turquesa/90" 
+                    : "bg-turquesa/60 cursor-not-allowed"
+                }`}
                 aria-label="Generar receta con alimentos disponibles"
+                onClick={handleConsultar}
+                disabled={!hasAlimentos}
               >
-                Consultar <Zap fill="#FFF"></Zap>
+                Consultar <Zap fill={"#FFF"}></Zap>
               </Button>
             </CardFooter>
           </Card>
         </div>
       </section>
+      <GenerarRecetaSheet isOpen={isOpen} setOpen={setIsOpen}></GenerarRecetaSheet>
     </>
   );
 }
-

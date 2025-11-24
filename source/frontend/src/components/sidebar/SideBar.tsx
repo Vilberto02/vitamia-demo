@@ -2,6 +2,7 @@ import type { SideBarItemType } from "@/types";
 import { SidebarItem } from "./SideBarItem";
 import { useNavigate } from "react-router-dom";
 import Vitamia from "@/assets/vitamia-logo.svg"
+import Swal from "sweetalert2";
 
 type SidebarProps = {
   items: SideBarItemType[];
@@ -55,7 +56,11 @@ export function SideBar({
         type="button"
         onClick={() => {
           console.log("Cerrando sesión...");
-          alert("Sesión cerrada.");
+          Swal.fire({
+            icon: "success",
+            title: "Sesión cerrada.",
+            text: "Hasta pronto.",
+          });
           navigate("/");
         }}
         aria-label="Cerrar sesión"

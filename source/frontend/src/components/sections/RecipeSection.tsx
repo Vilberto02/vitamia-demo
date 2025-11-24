@@ -1,12 +1,17 @@
-
 import { ContainerDiaConsumo } from "../containers/ContainerDiaConsumo";
 import { CardAlimentoDiario } from "../cards/CardAlimentoDiario";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 import { Button } from "../ui/button";
 import { Zap } from "lucide-react";
 import { useState } from "react";
 import { GenerarRecetaSheet } from "../sheets/GenerateRecipeSheet";
-
 
 export function RecipeSection() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,8 +25,14 @@ export function RecipeSection() {
 
   return (
     <>
-      <section className="flex flex-col gap-6 h-full" aria-labelledby="recipes-title">
-        <h1 id="recipes-title" className="font-bold text-2xl text-[var(--modeThird)] select-none">
+      <section
+        className="flex flex-col gap-6 h-full"
+        aria-labelledby="recipes-title"
+      >
+        <h1
+          id="recipes-title"
+          className="font-bold text-2xl text-[var(--modeThird)] select-none"
+        >
           Recetas
         </h1>
         <div className="flex flex-col md:flex-row  gap-6 w-full h-full">
@@ -35,14 +46,14 @@ export function RecipeSection() {
                 tengas.
               </CardDescription>
             </CardHeader>
-            <CardContent className="flex-1">
+            <CardContent className="flex-1 mb-3">
               <CardAlimentoDiario name="Alimentos disponibles"></CardAlimentoDiario>
             </CardContent>
             <CardFooter className="mt-auto">
-              <Button 
+              <Button
                 className={`w-full text-white rounded-lg py-5 text-base cursor-pointer transition-all select-none ${
-                  hasAlimentos 
-                    ? "bg-turquesa hover:bg-turquesa/90" 
+                  hasAlimentos
+                    ? "bg-turquesa hover:bg-turquesa/90"
                     : "bg-turquesa/60 cursor-not-allowed"
                 }`}
                 aria-label="Generar receta con alimentos disponibles"
@@ -55,7 +66,10 @@ export function RecipeSection() {
           </Card>
         </div>
       </section>
-      <GenerarRecetaSheet isOpen={isOpen} setOpen={setIsOpen}></GenerarRecetaSheet>
+      <GenerarRecetaSheet
+        isOpen={isOpen}
+        setOpen={setIsOpen}
+      ></GenerarRecetaSheet>
     </>
   );
 }

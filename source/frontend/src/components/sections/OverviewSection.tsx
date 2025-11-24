@@ -3,10 +3,15 @@ import { ContainerConsumo } from "../containers/ContainerConsumo";
 import { ContainerLogro } from "../containers/ContainerLogro";
 
 export function OverviewSection() {
-
   return (
-    <section className="flex flex-col gap-6 h-full relative" aria-labelledby="overview-title">
-      <h1 id="overview-title" className="font-bold text-2xl text-[var(--modeThird)] select-none">
+    <section
+      className="flex flex-col gap-6 h-full relative"
+      aria-labelledby="overview-title"
+    >
+      <h1
+        id="overview-title"
+        className="font-bold text-2xl text-carbon-oscuro select-none"
+      >
         General
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

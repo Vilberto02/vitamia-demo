@@ -9,16 +9,16 @@ import {
 import { ScrollArea } from "../ui/scroll-area";
 import { CardAlimentoDiario } from "../cards/CardAlimentoDiario";
 import { GlassWater, Minus, Plus } from "lucide-react";
-import toast, {Toaster} from "react-hot-toast"
+import toast, { Toaster } from "react-hot-toast";
 
 export function ContainerAlimento() {
   const addWater = () => {
     toast.success("Tu consumo de agua aumentó.");
-  }
+  };
 
   const removeWater = () => {
     toast.success("Tu consumo de agua disminuyó.");
-  }
+  };
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
@@ -50,11 +50,13 @@ export function ContainerAlimento() {
           </CardAction>
         </CardHeader>
         <CardContent>
-          <ScrollArea className="h-[448px] w-full rounded-md flex flex-col gap-8 px-2">
-            <CardAlimentoDiario name="Desayuno"></CardAlimentoDiario>
-            <CardAlimentoDiario name="Almuerzo"></CardAlimentoDiario>
-            <CardAlimentoDiario name="Cena"></CardAlimentoDiario>
-            <CardAlimentoDiario name="Snack"></CardAlimentoDiario>
+          <ScrollArea className="h-[448px] rounded-md">
+            <div className="flex flex-col gap-8 pr-3">
+              <CardAlimentoDiario name="Desayuno"></CardAlimentoDiario>
+              <CardAlimentoDiario name="Almuerzo"></CardAlimentoDiario>
+              <CardAlimentoDiario name="Cena"></CardAlimentoDiario>
+              <CardAlimentoDiario name="Snack"></CardAlimentoDiario>
+            </div>
           </ScrollArea>
         </CardContent>
       </Card>

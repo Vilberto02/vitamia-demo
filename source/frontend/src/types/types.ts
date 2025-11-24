@@ -27,7 +27,6 @@ export interface SideBarItemType {
   Icon: LucideIcon;
 }
 
-
 export interface LogroType {
   id: number;
   title: string;
@@ -35,10 +34,10 @@ export interface LogroType {
 }
 
 export type RecetaType = {
-  id: number,
-  title: string,
-  description: string,
-}
+  id: number;
+  title: string;
+  description: string;
+};
 export type Recipe = {
   id: string;
   title: string;
@@ -58,7 +57,7 @@ export type RegisterFields = {
   goal: string;
   email: string;
   password: string;
-}
+};
 
 export type Plan = {
   id: number;
@@ -67,23 +66,34 @@ export type Plan = {
   tags: string[];
   benefits?: string[];
   recipes?: string[];
+  isUserPlan?: boolean;
 };
 
 export type Info = {
   id: string;
   title: string;
   description: string;
-}
+};
 
 export type MotivationalMessage = {
   id: string;
   message: string;
-}
-
-export type PlanProfile = Pick<Plan, "id" | "title" >;
+};
 
 export interface DoughnutChartProps {
   labels: string[];
   values: number[];
   colors: string[];
 }
+
+export type Alimento = {
+  id: number;
+  name: string;
+  cantidad: number;
+  unidad: unidadMedida;
+};
+
+export type unidadMedida = {
+  id: string;
+  name: string;
+};

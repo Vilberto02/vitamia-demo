@@ -6,15 +6,18 @@ const RecetaControlador = {
       const recetas = await RecetaModelo.obtenerTodas();
       res.json(recetas);
     } catch (err) {
+      console.error('Error al obtener recetas:', err);
       res.status(500).json({ error: 'Error al obtener recetas' });
     }
   },
+
   async obtenerPorTipo(req, res) {
     try {
       const { tipo } = req.params;
       const recetas = await RecetaModelo.obtenerPorTipo(tipo);
       res.json(recetas);
     } catch (err) {
+      console.error('Error al obtener recetas por tipo:', err);
       res.status(500).json({ error: 'Error al obtener recetas por tipo' });
     }
   }

@@ -1,0 +1,149 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Receta {
+  id                  Int                 @id @default(autoincrement())
+  titulo              String              @db.VarChar(100)
+  id_tipo_comida      Int
+  tiempo_preparacion  String              @db.VarChar(50)
+  descripcion         String?             @db.Text
+  beneficios          String?             @db.Text
+  ingredientes        String?             @db.Text
+  procedimiento       String?             @db.Text
+  imagen              String?             @db.VarChar(255)
+  
+  tipo_comida         TipoComida          @relation(fields: [id_tipo_comida], references: [id])
+  recetas_consumidas  RecetaConsumida[]
+  plan_recetas        PlanReceta[]
+
+  @@map("recetas")
+}
+
+model Usuario {
+  id                 Int                 @id @default(autoincrement())
+  nombre             String              @db.VarChar(100)
+  apellido           String              @db.VarChar(100)
+  correo             String              @unique @db.VarChar(100)
+  contrasena         String              @db.VarChar(255)
+  fecha_nacimiento   DateTime            @db.Date
+  meta               String?             @db.VarChar(255)
+  peso               Float
+  altura             Float
+  imc                Float
+  imagen             String?             @db.VarChar(255)
+  consumos           Consumo[]
+  recetas_consumidas RecetaConsumida[]
+  planes             PlanUsuario[]
+
+  @@map("usuarios")
+}
+
+model Alimento {
+  id              Int         @id @default(autoincrement())
+  nombre          String      @db.VarChar(100)
+  unidad          String      @db.VarChar(50)
+  id_tipo_comida  Int
+  consumos        Consumo[]
+  
+  tipo_comida     TipoComida  @relation(fields: [id_tipo_comida], references: [id])
+
+  @@map("alimentos")
+}
+
+model Consumo {
+  id               Int         @id @default(autoincrement())
+  id_alimento      Int
+  id_usuario       Int
+  id_tipo_comida   Int
+  cantidad         Int
+  fecha            DateTime    @db.Date
+  
+  alimento         Alimento    @relation(fields: [id_alimento], references: [id])
+  usuario          Usuario     @relation(fields: [id_usuario], references: [id])
+  tipo_comida      TipoComida  @relation(fields: [id_tipo_comida], references: [id])
+
+  @@map("consumo")
+}
+
+model TipoComida {
+  id                 Int                 @id @default(autoincrement())
+  nombre             String              @unique @db.VarChar(50)
+  recetas            Receta[]
+  alimentos          Alimento[]
+  consumos           Consumo[]
+  recetas_consumidas RecetaConsumida[]
+  plan_recetas       PlanReceta[]
+
+  @@map("tipo_comida")
+}
+
+model RecetaConsumida {
+  id               Int         @id @default(autoincrement())
+  id_receta        Int
+  id_usuario       Int
+  id_tipo_comida   Int
+  fecha            DateTime    @db.Date
+  
+  receta           Receta      @relation(fields: [id_receta], references: [id])
+  usuario          Usuario     @relation(fields: [id_usuario], references: [id])
+  tipo_comida      TipoComida  @relation(fields: [id_tipo_comida], references: [id])
+
+  @@map("receta_consumida")
+}
+
+model Informacion {
+  id          Int     @id @default(autoincrement())
+  titulo      String  @db.VarChar(150)
+  descripcion String  @db.Text
+  beneficio   String  @db.Text
+  imagen      String? @db.VarChar(255)
+
+  @@map("informacion_nutricional")
+}
+
+model Plan {
+  id            Int           @id @default(autoincrement())
+  nombre        String        @db.VarChar(100)
+  informacion   String        @db.VarChar(255)
+  descripcion   String        @db.Text
+  beneficios    String        @db.Text
+  plan_recetas  PlanReceta[]
+  plan_usuarios PlanUsuario[]
+
+  @@map("planes")
+}
+
+model PlanReceta {
+  id             Int        @id @default(autoincrement())
+  id_plan        Int
+  id_receta      Int
+  id_tipo_comida Int
+  
+  plan           Plan       @relation(fields: [id_plan], references: [id])
+  receta         Receta     @relation(fields: [id_receta], references: [id])
+  tipo_comida    TipoComida @relation(fields: [id_tipo_comida], references: [id])
+
+  @@unique([id_plan, id_tipo_comida])
+  @@map("plan_receta")
+}
+
+model PlanUsuario {
+  id         Int      @id @default(autoincrement())
+  id_plan    Int
+  id_usuario Int
+  fecha      DateTime @db.Date
+  
+  plan       Plan     @relation(fields: [id_plan], references: [id])
+  usuario    Usuario  @relation(fields: [id_usuario], references: [id])
+
+  @@map("plan_usuario")
+}

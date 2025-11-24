@@ -1,13 +1,24 @@
-const db = require('../db');
+const prisma = require('../prismaClient');
 
 const RecetaModelo = {
   async obtenerTodas() {
-    const [rows] = await db.query('SELECT * FROM recetas');
-    return rows;
+    return await prisma.receta.findMany({
+      include: {
+        tipo_comida: true
+      }
+    });
   },
-  async obtenerPorTipo(tipo) {
-    const [rows] = await db.query('SELECT * FROM recetas WHERE tipo = ?', [tipo]);
-    return rows;
+  async obtenerPorTipo(tipoNombre) {
+    return await prisma.receta.findMany({
+      where: {
+        tipo_comida: {
+          nombre: tipoNombre
+        }
+      },
+      include: {
+        tipo_comida: true
+      }
+    });
   }
 };
 

@@ -1,13 +1,13 @@
-const db = require('../db');
+const prisma = require('../prismaClient');
 
 const UsuarioModelo = {
   async obtenerUsuarios() {
-    const [rows] = await db.query('SELECT * FROM usuarios');
-    return rows;
+    return await prisma.usuario.findMany();
   },
   async obtenerPorNombre(nombre) {
-    const [rows] = await db.query('SELECT * FROM usuarios WHERE nombre = ?', [nombre]);
-    return rows;
+    return await prisma.usuario.findMany({
+      where: { nombre }
+    });
   }
 };
 

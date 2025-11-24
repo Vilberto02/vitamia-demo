@@ -1,33 +1,6 @@
-import type { MotivationalMessage } from "@/types";
 import { Card, CardContent } from "../ui/card";
 import { useEffect, useState } from "react";
-
-const mensajesMotivacion: MotivationalMessage[] = [
-  {
-    id: "1",
-    message: "No busques ser perfecto, busca ser constante",
-  },
-  {
-    id: "2",
-    message: "El progreso lento sigue siendo progreso",
-  },
-  {
-    id: "3",
-    message: "Descansa si lo necesitas, pero no te rindas",
-  },
-  {
-    id: "4",
-    message: "Tu esfuerzo de hoy es tu éxito de mañana",
-  },
-  {
-    id: "5",
-    message: "La motivación te inicia, el hábito te mantiene",
-  },
-  {
-    id: "6",
-    message: "La disciplina es recordar lo que quieres",
-  }
-]
+import { mensajesMotivacion } from "@/mocks/mocks";
 
 
 export function ContainerMotivacion() {
@@ -47,7 +20,7 @@ export function ContainerMotivacion() {
 
   return (
     <Card
-      className="h-full "
+      className="h-full w-full "
       style={{
         background:
           "linear-gradient(175deg,#FFF 70%, #CFE0C3 100%)",

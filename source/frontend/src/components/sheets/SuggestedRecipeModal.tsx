@@ -1,35 +1,14 @@
 // src/components/sections/SuggestedRecipeModal.tsx
 import React from "react";
 import { X, Check } from "lucide-react";
+import { suggestedRecipe } from "@/mocks/mocks";
 
 interface SuggestedRecipeModalProps {
   onClose: () => void;
   onAccept: () => void;
 }
 
-const suggestedRecipe = {
-  title: "Ensalada ligera de fideos con manzana",
-  description:
-    "Una ensalada fresca, rápida y saciante que mezcla la suavidad de los fideos con el toque dulce y crujiente de la manzana.",
-  ingredients: [
-    "200 g de fideos (mejor si son integrales)",
-    "2 manazanas medianas",
-    "1 cucharadita de aceite de oliva (opcional)",
-    "Jugo de medio limón",
-    "Una pizca de sal y pimienta",
-  ],
-  preparation: [
-    "Cocina los fideos en agua con una pizca de sal hasta que estén al dente. Escurre y deja enfriar.",
-    "Corta la manzana en cubos pequeños.",
-    "Mezcla los fideos con la manzana.",
-    "Adereza con jugo de limón, un chorrito de aceite de oliva (opcional), sal y pimienta.",
-    "Sirve frío como plato principal ligero o como acompañamiento.",
-  ],
-  benefits: [
-    "La manzana aporta fibra y ayuda a controlar el apetito.",
-    "Los fideos, si se consumen en porción moderada, brindan energía sin exceso de calorías.",
-  ],
-};
+
 
 const SuggestedRecipeModal: React.FC<SuggestedRecipeModalProps> = ({
   onClose,

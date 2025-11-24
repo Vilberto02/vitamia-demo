@@ -15,6 +15,8 @@ export function SidebarItem({
     <button
       type="button"
       onClick={onClick}
+      aria-current={isActive ? "page" : undefined}
+      aria-label={`Navegar a ${name}`}
       className={`w-full flex items-center min-h-12 p-2 border-l-3 rounded-xs rounded-bl-xs text-[var(--bg-carbon-oscuro)] cursor-pointer ${
         isActive
           ? "border-[var(--bg-turquesa)] text-[var(--bg-turquesa)]"

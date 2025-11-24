@@ -1,4 +1,4 @@
-import type { Info, Plan, PlanProfile, RegisterFields } from "@/types/index";
+import type { Info, MotivationalMessage, Plan, PlanProfile, RegisterFields } from "@/types/index";
 import type { LogroType, RecetaType, Recipe } from "@/types";
 
 export const labels: string[] = ["Completado", "En progreso", "No iniciado"];
@@ -237,3 +237,54 @@ export const misDatos: RegisterFields = {
   email: "juan.perez@unmsm.edu.pe",
   password: "1234",
 }
+
+export const mensajesMotivacion: MotivationalMessage[] = [
+  {
+    id: "1",
+    message: "No busques ser perfecto, busca ser constante",
+  },
+  {
+    id: "2",
+    message: "El progreso lento sigue siendo progreso",
+  },
+  {
+    id: "3",
+    message: "Descansa si lo necesitas, pero no te rindas",
+  },
+  {
+    id: "4",
+    message: "Tu esfuerzo de hoy es tu éxito de mañana",
+  },
+  {
+    id: "5",
+    message: "La motivación te inicia, el hábito te mantiene",
+  },
+  {
+    id: "6",
+    message: "La disciplina es recordar lo que quieres",
+  }
+]
+
+export const suggestedRecipe = {
+  title: "Ensalada ligera de fideos con manzana",
+  description:
+    "Una ensalada fresca, rápida y saciante que mezcla la suavidad de los fideos con el toque dulce y crujiente de la manzana.",
+  ingredients: [
+    "200 g de fideos (mejor si son integrales)",
+    "2 manazanas medianas",
+    "1 cucharadita de aceite de oliva (opcional)",
+    "Jugo de medio limón",
+    "Una pizca de sal y pimienta",
+  ],
+  preparation: [
+    "Cocina los fideos en agua con una pizca de sal hasta que estén al dente. Escurre y deja enfriar.",
+    "Corta la manzana en cubos pequeños.",
+    "Mezcla los fideos con la manzana.",
+    "Adereza con jugo de limón, un chorrito de aceite de oliva (opcional), sal y pimienta.",
+    "Sirve frío como plato principal ligero o como acompañamiento.",
+  ],
+  benefits: [
+    "La manzana aporta fibra y ayuda a controlar el apetito.",
+    "Los fideos, si se consumen en porción moderada, brindan energía sin exceso de calorías.",
+  ],
+};

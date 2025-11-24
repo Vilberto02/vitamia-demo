@@ -5,13 +5,14 @@ import { ContainerLogro } from "../containers/ContainerLogro";
 export function OverviewSection() {
 
   return (
-    <section className="flex flex-col gap-6 h-full relative">
-      <h1 className="font-bold text-2xl text-[var(--modeThird)] select-none">
+    <section className="flex flex-col gap-6 h-full relative" aria-labelledby="overview-title">
+      <h1 id="overview-title" className="font-bold text-2xl text-[var(--modeThird)] select-none">
         General
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Tarjeta de calorías */}
-        <div
+        <article
+          aria-label="Métrica de calorías totales"
           className="p-4 rounded-lg shadow flex flex-col gap-4 justify-center"
           style={{
             background:
@@ -23,10 +24,11 @@ export function OverviewSection() {
           </h2>
           <p className="text-5xl font-bold select-none">1224</p>
           <p className="text-sm text-gray-700 select-none">Kcal</p>
-        </div>
+        </article>
 
         {/* Tarjeta de agua consumida */}
-        <div
+        <article
+          aria-label="Métrica de agua consumida"
           className="p-4 rounded-lg shadow flex flex-col gap-4 justify-center"
           style={{
             background:
@@ -36,10 +38,11 @@ export function OverviewSection() {
           <h2 className="text-lg font-medium text-gray-700">Agua consumida</h2>
           <p className="text-5xl font-bold select-none">12</p>
           <p className="text-sm text-gray-700  select-none">Vasos</p>
-        </div>
+        </article>
 
         {/* Tarjeta de peso */}
-        <div
+        <article
+          aria-label="Métrica de peso actual"
           className="p-4 rounded-lg shadow flex flex-col gap-4 justify-center"
           style={{
             background:
@@ -49,10 +52,11 @@ export function OverviewSection() {
           <h2 className="text-lg font-medium text-gray-700">Peso</h2>
           <p className="text-5xl font-bold select-none">96</p>
           <p className="text-sm text-gray-700 select-none">Kg</p>
-        </div>
+        </article>
 
         {/* Tarjeta de IMC */}
-        <div
+        <article
+          aria-label="Métrica de índice de masa corporal"
           className="p-4 rounded-lg shadow flex flex-col gap-4 "
           style={{
             background:
@@ -61,7 +65,7 @@ export function OverviewSection() {
         >
           <h2 className="text-lg font-medium text-gray-700">IMC</h2>
           <p className="text-5xl font-bold select-none">25</p>
-        </div>
+        </article>
       </div>
       {/* Contenedor */}
       <div className="flex flex-col xl:flex-row gap-6 pb-8 xl:pb-0">

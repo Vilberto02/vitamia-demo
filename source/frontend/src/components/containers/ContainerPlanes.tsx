@@ -24,7 +24,7 @@ export function ContainerPlanes() {
 
   return (
     <>
-      <Card>
+      <Card className="flex flex-col">
         <CardHeader>
           <CardTitle>Lista de planes</CardTitle>
           <CardDescription>

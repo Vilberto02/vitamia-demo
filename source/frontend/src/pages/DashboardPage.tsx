@@ -32,7 +32,7 @@ export const DashboardPage = () => {
   };
 
   return (
-    <div className="flex gap-3 w-screen h-screen overflow-hidden">
+    <div className="flex gap-3 w-screen h-screen overflow-hidden" role="application" aria-label="Panel de control Vitamia">
       <SideBar
         items={sidebarItems}
         activeItem={activeItem}
@@ -48,7 +48,10 @@ export const DashboardPage = () => {
           setActiveItem={setActiveItem}
           toggleSidebar={toggleSidebar}
         ></Navbar>
-        <main className="flex-1 p-10 bg-[#FAFFF6]/60 rounded-xl overflow-x-hidden overflow-y-auto">
+        <main 
+          className="flex-1 p-8 bg-[#FAFFF6]/60 rounded-xl overflow-x-hidden overflow-y-auto"
+          aria-label={`Sección de ${sidebarItems.find(item => item.id === activeItem)?.name || 'contenido'}`}
+        >
           {sections[activeItem]}
         </main>
       </div>

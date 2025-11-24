@@ -10,14 +10,14 @@ export function RecipeSection() {
 
   return (
     <>
-      <section className="flex flex-col gap-6 h-full">
-        <h1 className="font-bold text-2xl text-[var(--modeThird)] select-none">
+      <section className="flex flex-col gap-6 h-full" aria-labelledby="recipes-title">
+        <h1 id="recipes-title" className="font-bold text-2xl text-[var(--modeThird)] select-none">
           Recetas
         </h1>
-        <div className="flex gap-6 w-full h-full">
+        <div className="flex flex-col md:flex-row  gap-6 w-full h-full">
           <ContainerDiaConsumo></ContainerDiaConsumo>
 
-          <Card className="w-full max-w-1/3 flex flex-col h-full">
+          <Card className="w-full md:max-w-1/3 flex flex-col h-full">
             <CardHeader>
               <CardTitle>Personalizar comida</CardTitle>
               <CardDescription>
@@ -29,7 +29,10 @@ export function RecipeSection() {
               <CardAlimentoDiario name="Alimentos disponibles"></CardAlimentoDiario>
             </CardContent>
             <CardFooter className="mt-auto">
-              <Button className="w-full bg-turquesa text-white rounded-lg py-5 text-base hover:bg-turquesa/90 cursor-pointer">
+              <Button 
+                className="w-full bg-turquesa text-white rounded-lg py-5 text-base hover:bg-turquesa/90 cursor-pointer"
+                aria-label="Generar receta con alimentos disponibles"
+              >
                 Consultar <Zap fill="#FFF"></Zap>
               </Button>
             </CardFooter>

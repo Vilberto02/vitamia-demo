@@ -19,19 +19,27 @@ export function SideBar({
   const navigate = useNavigate();
   return (
     <aside
+      aria-label="Navegación principal"
+      aria-hidden={!isOpen}
       className={`h-screen bg-[#FAFFF6]/60 w-64 flex flex-col items-center py-6 justify-between fixed top-0 left-0 z-40 
         transition-transform duration-300 ease-in-out ${
           isOpen ? "transform translate-x-0" : "transform -translate-x-full"
         }`}
     >
       <div className="flex items-center flex-col gap-4 w-full px-4">
-        <img
-          src={Vitamia}
-          alt="Logo de Vitamia"
-          className="w-36 py-3 cursor-pointer"
+        <button
+          type="button"
           onClick={() => setActiveItem("general")}
-        />
-        <nav className="flex-grow space-y-2 w-full">
+          aria-label="Ir a inicio"
+          className="w-36 py-3 cursor-pointer border-none bg-transparent"
+        >
+          <img
+            src={Vitamia}
+            alt="Logo de Vitamia"
+            className="w-full"
+          />
+        </button>
+        <nav aria-label="Menú de navegación principal" className="flex-grow space-y-2 w-full">
           {items.map((item) => (
             <SidebarItem
               key={item.id}
@@ -44,11 +52,13 @@ export function SideBar({
         </nav>
       </div>
       <button
+        type="button"
         onClick={() => {
           console.log("Cerrando sesión...");
           alert("Sesión cerrada.");
           navigate("/");
         }}
+        aria-label="Cerrar sesión"
         className="cursor-pointer hover:text-red-700 w-full"
       >
         Cerrar sesión

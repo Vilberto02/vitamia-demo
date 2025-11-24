@@ -74,7 +74,7 @@ export function LandingPage() {
               Disponible para estudiantes universitarios
             </div>
 
-            <h1 className="text-6xl md:text-8xl font-bold tracking-tight mb-6 text-balance bg-clip-text text-transparent bg-gradient-to-b from-naranja to-white/50">
+            <h1 className="text-4xl md:text-8xl font-bold tracking-tight mb-6 text-balance bg-clip-text text-transparent bg-gradient-to-b from-naranja to-white/50">
               Tu nutrición, nuestro compromiso.
             </h1>
 
@@ -207,7 +207,7 @@ export function LandingPage() {
 
       <footer className="border-t border-border py-12 bg-background">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between gap-8 mb-12">
+          <div className="flex flex-wrap justify-between gap-8 mb-12">
             <div className="col-span-2 md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
                 <span className="font-bold text-lg">Vitamia</span>
@@ -217,7 +217,7 @@ export function LandingPage() {
               </p>
             </div>
 
-            <div className="flex gap-12">
+            <div className="flex justify-between md:justify-start w-full md:w-auto gap-12">
               <div>
                 <h4 className="font-bold mb-4">Producto</h4>
                 <ul className="space-y-2 text-sm text-muted-foreground">

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-
+import Swal from "sweetalert2";
 
 export const LoginPage = () => {
   const {
@@ -22,10 +22,19 @@ export const LoginPage = () => {
   const onSubmit: SubmitHandler<LoginFields> = async (data) => {
     try {
       console.log("Datos enviados", data);
-      alert(`Datos enviados...\n -> ${data}`);
+      Swal.fire({
+        icon: "success",
+        title: "Inicio de sesión exitoso.",
+        text: "Ya puedes acceder a la plataforma.",
+      });
       setRedirect(true);
     } catch (error) {
       console.log("Error al enviar los datos.", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error al iniciar sesión.",
+        text: "Por favor, inténtalo de nuevo.",
+      });
     }
 
     reset();
@@ -34,16 +43,17 @@ export const LoginPage = () => {
   if (redirect) return <Navigate to={"/home"}></Navigate>
 
   return (
-    <div className="relative w-screen h-screen flex justify-center items-center px-12 sm:px-16 overflow-hidden bg-background-page">
+    <main className="relative w-screen h-screen flex justify-center items-center px-12 sm:px-16 overflow-hidden bg-background-page" role="main">
       <div className="flex rounded-xl shadow-2xl bg-white">
         <form
           action=""
+          aria-labelledby="login-title"
           className="flex-1 flex flex-col items-center justify-center sm:gap-12 lg:gap-8 my-2 p-12 md:px-12 md:py-14"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-col gap-6 w-full max-w-[24rem]">
             <div className="flex flex-col justify-center items-center gap-4">
-              <h1 className="font-bold text-4xl text-carbon-oscuro">
+              <h1 id="login-title" className="font-bold text-4xl text-carbon-oscuro">
                 Bienvenido
               </h1>
               <p className="text-gris-oscuro text-center text-sm md:text-md">
@@ -78,7 +88,7 @@ export const LoginPage = () => {
                   })}
                 />
                 {errors.email && (
-                  <span className="text-sm text-red-700 ml-2">
+                  <span className="text-sm text-red-700 ml-2" role="alert">
                     {errors.email.message}
                   </span>
                 )}
@@ -104,7 +114,7 @@ export const LoginPage = () => {
                   })}
                 />
                 {errors.password && (
-                  <span className="text-sm text-red-700 ml-2">
+                  <span className="text-sm text-red-700 ml-2" role="alert">
                     {errors.password.message}
                   </span>
                 )}
@@ -131,8 +141,8 @@ export const LoginPage = () => {
       <img
         src={NameVitamia}
         alt="Nombre de Vitamia"
-        className="absolute -bottom-15 left-1/2 -translate-x-1/2 z-0 pointer-events-none"
+        className="absolute -bottom-15 left-1/2 -translate-x-1/2 z-0 pointer-events-none invisible md:visible"
       />
-    </div>
+    </main>
   );
 };

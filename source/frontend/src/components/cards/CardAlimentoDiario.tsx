@@ -31,6 +31,7 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 
 type Alimento = {
@@ -142,6 +143,13 @@ export function CardAlimentoDiario({ name }: CardAlimentoDiarioType) {
     setAlimentos([...alimentos, nuevoAlimento]);
 
     // Limpiar formulario y cerrar modal
+    Swal.fire({
+      title: 'Alimento agregado',
+      text: 'El alimento se agregó correctamente.',
+      icon: 'success',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#0D484E',
+    });
     setNuevoNombre("");
     setNuevaCantidad("");
     setNuevaUnidad({id: "", name: ""});

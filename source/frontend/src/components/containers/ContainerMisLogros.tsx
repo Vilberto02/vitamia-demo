@@ -14,7 +14,7 @@ export function ContainerMisLogros() {
     <Card>
       <CardHeader>
         <CardTitle>Mis logros</CardTitle>
-        <CardDescription>Aquí podrías visualizar tus logros completados.</CardDescription>
+        <CardDescription className="line-clamp-1">Aquí podrías visualizar tus logros completados.</CardDescription>
       </CardHeader>
       <CardContent className="min-h-48">
         <ScrollArea className="">

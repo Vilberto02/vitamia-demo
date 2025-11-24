@@ -38,13 +38,13 @@ export function DoughnutChart({ labels, values, colors }: DoughnutChartProps) {
 
   return (
     <div className="relative w-full px-8">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center gap-6">
         <ScrollArea>
           <div className="space-y-2">
             {labels.map((label, index) => (
               <div
                 key={index}
-                className="flex items-center justify-between gap-14"
+                className="flex items-center justify-between gap-6 xl:gap-14"
               >
                 <div className="flex items-center gap-4">
                   <span

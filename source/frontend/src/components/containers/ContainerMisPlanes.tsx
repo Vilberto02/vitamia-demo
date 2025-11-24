@@ -17,7 +17,7 @@ export function ContainerMisPlanes() {
         <CardDescription>Planes asociados a tu perfil.</CardDescription>
       </CardHeader>
       <CardContent>
-        <ScrollArea>
+        <ScrollArea className="h-40">
           <div className="flex flex-col gap-3 pr-3">
             {
             misPlanes.map((plan) => (

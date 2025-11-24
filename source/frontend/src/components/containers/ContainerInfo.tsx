@@ -1,3 +1,4 @@
+import { Library } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -18,11 +19,13 @@ export function ContainerInfo() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-96">
+        <ScrollArea className="h-52 md:h-96">
           <div className="flex flex-col gap-3 pr-3">
             {listaInformacion.map((info) => (
               <div key={info.id} className="flex items-center gap-3">
-                <div className="w-14 aspect-square rounded-full bg-turquesa flex-shrink-0"></div>
+                <div className="w-14 aspect-square rounded-full bg-turquesa flex-shrink-0 flex justify-center items-center">
+                  <Library className="text-white" size={28}></Library>
+                </div>
                 <div className="flex-1">
                   <h4 className="font-semibold text-carbon-oscuro mb-1">
                     {info.title}

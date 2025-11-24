@@ -6,19 +6,24 @@ import type { RegisterFields } from "@/types";
 import { misDatos } from "@/mocks/mocks";
 
 export function FormProfile({ onCancel }: { onCancel: () => void }) {
-  const { register, handleSubmit, formState: {errors}, reset } = useForm<RegisterFields>({
-      mode: "onSubmit",
-      defaultValues: {
-        name: misDatos.name,
-        lastname: misDatos.lastname,
-        email: misDatos.email,
-        goal: misDatos.goal,
-        height: misDatos.height,
-        weight: misDatos.weight,
-        dateBirth: misDatos.dateBirth,
-        password: misDatos.password,
-      },
-    });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<RegisterFields>({
+    mode: "onSubmit",
+    defaultValues: {
+      name: misDatos.name,
+      lastname: misDatos.lastname,
+      email: misDatos.email,
+      goal: misDatos.goal,
+      height: misDatos.height,
+      weight: misDatos.weight,
+      dateBirth: misDatos.dateBirth,
+      password: misDatos.password,
+    },
+  });
 
   const onSubmit: SubmitHandler<RegisterFields> = async (data) => {
     console.log(data);
@@ -28,7 +33,7 @@ export function FormProfile({ onCancel }: { onCancel: () => void }) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col xl:flex-row gap-6 w-full pr-3"
+      className="flex flex-col px-1 xl:flex-row gap-6 w-full pr-3"
     >
       {/* Primera sección */}
       <div className="flex flex-col gap-6 flex-1">
@@ -193,8 +198,18 @@ export function FormProfile({ onCancel }: { onCancel: () => void }) {
           )}
         </div>
         <div className="flex  gap-3">
-          <Button type="submit" className="bg-turquesa hover:bg-turquesa/90 cursor-pointer">Guardar Cambios</Button>
-          <Button type="button" variant="ghost" className="cursor-pointer" onClick={onCancel}>
+          <Button
+            type="submit"
+            className="bg-turquesa hover:bg-turquesa/90 cursor-pointer"
+          >
+            Guardar Cambios
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            className="cursor-pointer"
+            onClick={onCancel}
+          >
             Cancelar
           </Button>
         </div>

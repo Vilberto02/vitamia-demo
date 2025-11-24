@@ -1,7 +1,7 @@
 import type { SideBarItemType } from "@/types";
 import { SidebarItem } from "./SideBarItem";
 import { useNavigate } from "react-router-dom";
-import Vitamia from "@/assets/vitamia-logo.svg"
+import Vitamia from "@/assets/vitamia-logo.svg";
 import Swal from "sweetalert2";
 
 type SidebarProps = {
@@ -34,13 +34,12 @@ export function SideBar({
           aria-label="Ir a inicio"
           className="w-36 py-3 cursor-pointer border-none bg-transparent"
         >
-          <img
-            src={Vitamia}
-            alt="Logo de Vitamia"
-            className="w-full"
-          />
+          <img src={Vitamia} alt="Logo de Vitamia" className="w-full" />
         </button>
-        <nav aria-label="Menú de navegación principal" className="flex-grow space-y-2 w-full">
+        <nav
+          aria-label="Menú de navegación principal"
+          className="flex-grow space-y-2 w-full"
+        >
           {items.map((item) => (
             <SidebarItem
               key={item.id}
@@ -60,6 +59,7 @@ export function SideBar({
             icon: "success",
             title: "Sesión cerrada.",
             text: "Hasta pronto.",
+            confirmButtonColor: "#177e89",
           });
           navigate("/");
         }}

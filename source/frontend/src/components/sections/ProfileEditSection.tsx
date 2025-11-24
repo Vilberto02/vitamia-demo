@@ -20,7 +20,7 @@ export const ProfileEditSection = ({ onBack }: { onBack: () => void }) => {
         </h1>
       </div>
 
-      <div className="bg-white p-8 rounded-2xl shadow-sm border border-stone-100 h-full overflow-y-hidden">
+      <div className="bg-white p-4 md:p-8 rounded-2xl shadow-sm border border-stone-100 h-full overflow-y-hidden">
         <ScrollArea className="h-full">
           <FormProfile onCancel={onBack} />
         </ScrollArea>

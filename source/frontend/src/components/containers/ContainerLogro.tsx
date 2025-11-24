@@ -1,9 +1,15 @@
 import { logros } from "@/mocks/mocks";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 import { ScrollArea } from "../ui/scroll-area";
 import { CardLogro } from "../cards/CardLogro";
 
-export function ContainerLogro(){
+export function ContainerLogro() {
   return (
     <>
       <Card>
@@ -21,6 +27,7 @@ export function ContainerLogro(){
                   key={logro.id}
                   title={logro.title}
                   description={logro.description}
+                  isCompleted={false}
                 ></CardLogro>
               ))}
             </div>

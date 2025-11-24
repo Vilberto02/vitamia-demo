@@ -5,9 +5,8 @@ import { PlanSection } from "../components/sections/PlanSection";
 import { SideBar } from "../components/sidebar/SideBar";
 import { Navbar } from "../components/Navbar";
 import { ProfilePage } from "../components/sections/ProfileSection";
-import { ChartNoAxesColumn, UserRound, Grid2X2, Salad} from "lucide-react";
+import { ChartNoAxesColumn, UserRound, Grid2X2, Salad } from "lucide-react";
 import type { SideBarItemType } from "@/types";
-
 
 const sidebarItems: SideBarItemType[] = [
   { id: "general", name: "General", Icon: ChartNoAxesColumn },
@@ -32,7 +31,11 @@ export const DashboardPage = () => {
   };
 
   return (
-    <div className="flex gap-3 w-screen h-screen overflow-hidden" role="application" aria-label="Panel de control Vitamia">
+    <div
+      className="flex gap-3 w-screen h-screen overflow-hidden"
+      role="application"
+      aria-label="Panel de control Vitamia"
+    >
       <SideBar
         items={sidebarItems}
         activeItem={activeItem}
@@ -48,9 +51,12 @@ export const DashboardPage = () => {
           setActiveItem={setActiveItem}
           toggleSidebar={toggleSidebar}
         ></Navbar>
-        <main 
-          className="flex-1 p-8 bg-[#FAFFF6]/60 rounded-xl overflow-x-hidden overflow-y-auto"
-          aria-label={`Sección de ${sidebarItems.find(item => item.id === activeItem)?.name || 'contenido'}`}
+        <main
+          className="flex-1 p-5 md:p-6 bg-[#FAFFF6]/60 rounded-xl overflow-x-hidden overflow-y-auto"
+          aria-label={`Sección de ${
+            sidebarItems.find((item) => item.id === activeItem)?.name ||
+            "contenido"
+          }`}
         >
           {sections[activeItem]}
         </main>

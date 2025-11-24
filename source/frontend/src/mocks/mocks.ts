@@ -1,5 +1,12 @@
-import type { Info, MotivationalMessage, Plan, PlanProfile, RegisterFields } from "@/types/index";
+import type {
+  Alimento,
+  Info,
+  MotivationalMessage,
+  Plan,
+  RegisterFields,
+} from "@/types/index";
 import type { LogroType, RecetaType, Recipe } from "@/types";
+import { getUnidadById } from "@/lib/utils";
 
 export const labels: string[] = ["Completado", "En progreso", "No iniciado"];
 
@@ -47,7 +54,6 @@ export const recetasDesayuno: RecetaType[] = [
       "Una opción rápida y deliciosa que combina proteínas, fibra y antioxidantes. El yogur griego es cremoso y se complementa perfectamente con la granola crujiente y los frutos rojos.",
   },
 ];
-
 
 export const sampleRecipes: Recipe[] = [
   {
@@ -137,6 +143,7 @@ export const listaDePlanes: Plan[] = [
     tags: ["Bajar de peso"],
     benefits: ["Mejora la salud cardiovascular y reduce el colesterol."],
     recipes: ["receta 01", "receta 02"],
+    isUserPlan: false,
   },
   {
     id: 2,
@@ -146,6 +153,7 @@ export const listaDePlanes: Plan[] = [
     tags: ["Mediterránea"],
     benefits: ["Reduce el riesgo de enfermedades cardíacas."],
     recipes: ["recetas 01", "recetas 02"],
+    isUserPlan: true,
   },
   {
     id: 3,
@@ -155,6 +163,7 @@ export const listaDePlanes: Plan[] = [
     tags: ["Masa muscular"],
     benefits: ["Optimiza el crecimiento muscular."],
     recipes: ["receta 01", "receta 02"],
+    isUserPlan: true,
   },
   {
     id: 4,
@@ -163,11 +172,10 @@ export const listaDePlanes: Plan[] = [
       "Esta dieta se basa en consumir jugos naturales y frescos, principalmente de frutas y verduras, para eliminar toxinas y mejorar la digestión.",
     tags: ["Bajar de peso", "Masa muscular"],
     benefits: ["Beneficio 01 202"],
-    recipes: ["receta 01", "receta 02"]
+    recipes: ["receta 01", "receta 02"],
+    isUserPlan: true,
   },
 ];
-
-
 
 export const listaInformacion: Info[] = [
   {
@@ -190,22 +198,6 @@ export const listaInformacion: Info[] = [
     id: "4",
     title: "Liberación de estrés.",
     description: "Realiza ejercicio para liberar la carga mental y emocional.",
-  },
-];
-
-
-export const misPlanes: PlanProfile[] = [
-  {
-    id: 1,
-    title: "Dieta DASH (Dietary Approaches to Stop Hypertension)",
-  },
-  {
-    id: 2,
-    title: "Dieta Mediterránea",
-  },
-  {
-    id: 3,
-    title: "Dietas para Aumentar Masa Muscular",
   },
 ];
 
@@ -236,7 +228,7 @@ export const misDatos: RegisterFields = {
   goal: "Bajar de peso",
   email: "juan.perez@unmsm.edu.pe",
   password: "1234",
-}
+};
 
 export const mensajesMotivacion: MotivationalMessage[] = [
   {
@@ -262,8 +254,8 @@ export const mensajesMotivacion: MotivationalMessage[] = [
   {
     id: "6",
     message: "La disciplina es recordar lo que quieres",
-  }
-]
+  },
+];
 
 export const suggestedRecipe = {
   title: "Ensalada ligera de fideos con manzana",
@@ -287,4 +279,37 @@ export const suggestedRecipe = {
     "La manzana aporta fibra y ayuda a controlar el apetito.",
     "Los fideos, si se consumen en porción moderada, brindan energía sin exceso de calorías.",
   ],
+};
+
+export const alimentosIniciales: Record<string, Alimento[]> = {
+  Desayuno: [
+    {
+      id: 1,
+      name: "Manzana",
+      cantidad: 4,
+      unidad: getUnidadById("unidad"),
+    },
+    {
+      id: 2,
+      name: "Atún",
+      cantidad: 1,
+      unidad: getUnidadById("lata"),
+    },
+  ],
+  Almuerzo: [
+    {
+      id: 3,
+      name: "Manzana",
+      cantidad: 5,
+      unidad: getUnidadById("unidad"),
+    },
+  ],
+  Cena: [],
+  Snack: [],
+};
+
+export const user: { name: string; lastname: string; email: string } = {
+  name: "Juan",
+  lastname: "Perez Morales",
+  email: "juan.perez@unmsm.edu.pe",
 };

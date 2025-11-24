@@ -16,10 +16,9 @@ export function ContainerPlanes() {
   const [selectedPlan, setSelectedPlan] = useState<Plan>();
   const [isOpen, setOpen] = useState(false);
 
-
   const handleSelectPlan = (plan: Plan) => {
-      setSelectedPlan(plan);
-      setOpen(true);
+    setSelectedPlan(plan);
+    setOpen(true);
   };
 
   return (
@@ -51,6 +50,7 @@ export function ContainerPlanes() {
         isOpen={isOpen}
         setOpen={setOpen}
         selectedPlan={selectedPlan}
+        isUserPlan={false}
       ></PlanDetailSheet>
     </>
   );

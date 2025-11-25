@@ -88,10 +88,37 @@ export interface DoughnutChartProps {
 
 export type Alimento = {
   id: number;
+  foodId?: number;
   name: string;
   cantidad: number;
   unidad: unidadMedida;
 };
+
+export type NutrienteDetalle = {
+  valor: number; 
+  unidad: string;
+};
+
+export type AlimentoInfo = {
+  id: number;
+  name: string;
+  calorias: string;
+  
+  macronutrientes: {
+    carbohidratos: NutrienteDetalle;
+    proteinas: NutrienteDetalle;
+    grasas: NutrienteDetalle;
+  };
+  
+  micronutrientes: {
+    id: string | number;
+    name: string;
+    value: string;
+  }[];
+
+  beneficios: string;
+};
+
 
 export type unidadMedida = {
   id: string;

@@ -285,12 +285,14 @@ export const alimentosIniciales: Record<string, Alimento[]> = {
   Desayuno: [
     {
       id: 1,
+      foodId: 1,
       name: "Manzana",
       cantidad: 4,
       unidad: getUnidadById("unidad"),
     },
     {
       id: 2,
+      foodId: 2,
       name: "Atún",
       cantidad: 1,
       unidad: getUnidadById("lata"),
@@ -299,7 +301,8 @@ export const alimentosIniciales: Record<string, Alimento[]> = {
   Almuerzo: [
     {
       id: 3,
-      name: "Manzana",
+      foodId: 3,
+      name: "Palta",
       cantidad: 5,
       unidad: getUnidadById("unidad"),
     },
@@ -313,3 +316,5 @@ export const user: { name: string; lastname: string; email: string } = {
   lastname: "Perez Morales",
   email: "juan.perez@unmsm.edu.pe",
 };
+
+

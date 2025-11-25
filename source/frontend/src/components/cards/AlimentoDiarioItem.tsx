@@ -20,6 +20,7 @@ type AlimentoItemProps = {
   isEditing: boolean;
   onDelete: () => void;
   setActualizarUnidad: React.Dispatch<React.SetStateAction<unidadMedida>>;
+  onClick: () => void;
 };
 
 export function AlimentoDiarioItem({
@@ -29,6 +30,7 @@ export function AlimentoDiarioItem({
   isEditing,
   onDelete,
   setActualizarUnidad,
+  onClick,
 }: AlimentoItemProps) {
   const [unidadLocal, setUnidadLocal] = useState<unidadMedida>(unidad);
 
@@ -38,7 +40,10 @@ export function AlimentoDiarioItem({
   }, [unidad]);
 
   return (
-    <div className="flex flex-col items-start xl:flex-row xl:items-center gap-2 p-2 border rounded-lg animate-in fade-in-0 slide-in-from-top-2 duration-300">
+    <div
+      className="flex flex-col items-start xl:flex-row xl:items-center gap-2 p-2 border rounded-lg animate-in fade-in-0 slide-in-from-top-2 duration-300 cursor-pointer"
+      onClick={onClick}
+    >
       <div className="flex items-center gap-2 flex-1">
         <div className="p-2 bg-gray-100 rounded-full">
           <HandPlatter className="h-5 w-5 text-gray-700" />
@@ -46,7 +51,10 @@ export function AlimentoDiarioItem({
         <span className="font-medium select-none">{name}</span>
       </div>
 
-      <div className="flex gap-2 w-full xl:w-64">
+      <div
+        className="flex gap-2 w-full xl:w-64"
+        onClick={(e) => e.stopPropagation()}
+      >
         <Input
           type="number"
           defaultValue={cantidad}
@@ -81,7 +89,10 @@ export function AlimentoDiarioItem({
         <Button
           variant="destructive"
           size="icon"
-          onClick={onDelete}
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete();
+          }}
           className=" cursor-pointer w-full xl:w-12"
         >
           <p className="block xl:hidden">Eliminar</p>

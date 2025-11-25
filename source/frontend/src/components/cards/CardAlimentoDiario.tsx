@@ -36,9 +36,10 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { ScrollArea } from "../ui/scroll-area";
 import { alimentosIniciales } from "@/mocks/mocks";
-import type { Alimento, unidadMedida } from "@/types";
+import type { Alimento, AlimentoInfo, unidadMedida } from "@/types";
 import { getUnidadById } from "@/lib/utils";
-import { unidadesMedida } from "@/lib/constants";
+import { alimentoInfo, unidadesMedida } from "@/lib/constants";
+import { FoodDetailSheet } from "../sheets/FoodDetailSheet";
 
 type CardAlimentoDiarioType = {
   name: string;
@@ -55,6 +56,10 @@ export function CardAlimentoDiario({ name }: CardAlimentoDiarioType) {
   const [nuevaUnidad, setNuevaUnidad] = useState<unidadMedida>(
     getUnidadById("Gramos")
   );
+  const [openFoodSheet, setOpenFoodSheet] = useState(false);
+  const [selectedFoodInfo, setSelectedFoodInfo] = useState<
+    AlimentoInfo | undefined
+  >();
 
   // Vaciar alimentos
   const handleVaciarAlimentos = () => {
@@ -103,6 +108,18 @@ export function CardAlimentoDiario({ name }: CardAlimentoDiarioType) {
     if (alimentos.length === 0) {
       toast.error("No hay alimentos registrados.");
       return;
+    }
+  };
+
+  // Manejar clic en un alimento para mostrar detalles
+  const handleFoodClick = (foodId?: number) => {
+    if (!foodId) return;
+
+    const info = alimentoInfo.find((a) => a.id === foodId);
+
+    if (info) {
+      setSelectedFoodInfo(info);
+      setOpenFoodSheet(true);
     }
   };
 
@@ -166,6 +183,7 @@ export function CardAlimentoDiario({ name }: CardAlimentoDiarioType) {
                   isEditing={isEditing}
                   onDelete={() => handleEliminarAlimento(alimento.id)}
                   setActualizarUnidad={setNuevaUnidad}
+                  onClick={() => handleFoodClick(alimento.foodId)}
                 />
               ))}
             </div>
@@ -244,6 +262,13 @@ export function CardAlimentoDiario({ name }: CardAlimentoDiarioType) {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* FoodDetailSheet para mostrar información del alimento */}
+      <FoodDetailSheet
+        isOpen={openFoodSheet}
+        setOpen={setOpenFoodSheet}
+        selectedFood={selectedFoodInfo}
+      />
     </div>
   );
 }

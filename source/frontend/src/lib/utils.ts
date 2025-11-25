@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { unidadesMedida } from "./constants";
+import { alimentoInfo } from "@/lib/constants";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -21,3 +22,7 @@ export function getTagColorClass(tag: string) {
 
 export const getUnidadById = (id: string) =>
   unidadesMedida.find((u) => u.id === id)!;
+
+export const getNutritionalInfoById = (catalogId: number) => {
+  return alimentoInfo.find((info) => info.id === catalogId);
+};

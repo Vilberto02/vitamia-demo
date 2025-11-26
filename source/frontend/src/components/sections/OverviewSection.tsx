@@ -1,8 +1,10 @@
+import { useAuth } from "@/hooks/useAuth";
 import { ContainerAlimento } from "../containers/ContainerAlimento";
 import { ContainerConsumo } from "../containers/ContainerConsumo";
 import { ContainerLogro } from "../containers/ContainerLogro";
 
 export function OverviewSection() {
+  const {user} = useAuth();
   return (
     <section
       className="flex flex-col gap-6 h-full relative"
@@ -55,7 +57,7 @@ export function OverviewSection() {
           }}
         >
           <h2 className="text-lg font-medium text-gray-700">Peso</h2>
-          <p className="text-5xl font-bold select-none">96</p>
+          <p className="text-5xl font-bold select-none">{user?.peso}</p>
           <p className="text-sm text-gray-700 select-none">Kg</p>
         </article>
 
@@ -69,7 +71,7 @@ export function OverviewSection() {
           }}
         >
           <h2 className="text-lg font-medium text-gray-700">IMC</h2>
-          <p className="text-5xl font-bold select-none">25</p>
+          <p className="text-5xl font-bold select-none">{user?.imc}</p>
         </article>
       </div>
       {/* Contenedor */}

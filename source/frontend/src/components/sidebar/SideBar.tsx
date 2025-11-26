@@ -3,6 +3,7 @@ import { SidebarItem } from "./SideBarItem";
 import { useNavigate } from "react-router-dom";
 import Vitamia from "@/assets/vitamia-logo.svg";
 import Swal from "sweetalert2";
+import { useAuth } from "@/hooks/useAuth";
 
 type SidebarProps = {
   items: SideBarItemType[];
@@ -18,6 +19,7 @@ export function SideBar({
   isOpen,
 }: SidebarProps) {
   const navigate = useNavigate();
+  const { logout } = useAuth();
   return (
     <aside
       aria-label="Navegación principal"
@@ -54,13 +56,13 @@ export function SideBar({
       <button
         type="button"
         onClick={() => {
-          console.log("Cerrando sesión...");
           Swal.fire({
             icon: "success",
             title: "Sesión cerrada.",
             text: "Hasta pronto.",
             confirmButtonColor: "#177e89",
           });
+          logout();
           navigate("/");
         }}
         aria-label="Cerrar sesión"

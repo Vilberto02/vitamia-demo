@@ -2,30 +2,31 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import type { RegisterFields } from "@/types";
-import { misDatos } from "@/mocks/mocks";
+import type { RegisterRequest } from "@/types";
+import { useAuth } from "@/hooks/useAuth";
 
 export function FormProfile({ onCancel }: { onCancel: () => void }) {
+  const {user} = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<RegisterFields>({
+  } = useForm<RegisterRequest>({
     mode: "onSubmit",
     defaultValues: {
-      name: misDatos.name,
-      lastname: misDatos.lastname,
-      email: misDatos.email,
-      goal: misDatos.goal,
-      height: misDatos.height,
-      weight: misDatos.weight,
-      dateBirth: misDatos.dateBirth,
-      password: misDatos.password,
+      nombre: user?.nombre,
+      apellido: user?.apellido,
+      correo: user?.correo,
+      fecha_nacimiento: user?.fecha_nacimiento,
+      peso: user?.peso,
+      altura: user?.altura,
+      meta: user?.meta
     },
   });
 
-  const onSubmit: SubmitHandler<RegisterFields> = async (data) => {
+
+  const onSubmit: SubmitHandler<RegisterRequest> = async (data) => {
     console.log(data);
     reset();
   };
@@ -43,16 +44,16 @@ export function FormProfile({ onCancel }: { onCancel: () => void }) {
             type="text"
             placeholder="Ej: Carlos Alberto"
             id="name"
-            {...register("name", {
+            {...register("nombre", {
               required: {
                 value: true,
                 message: "El nombre es requerido.",
               },
             })}
           />
-          {errors.name && (
+          {errors.nombre && (
             <span className="text-sm text-red-700 ml-2">
-              {errors.name.message}
+              {errors.nombre.message}
             </span>
           )}
         </div>
@@ -63,16 +64,16 @@ export function FormProfile({ onCancel }: { onCancel: () => void }) {
             placeholder="Ej: Vargas Llosa"
             id="lastname"
             required
-            {...register("lastname", {
+            {...register("apellido", {
               required: {
                 value: true,
                 message: "El apellido es requerido.",
               },
             })}
           />
-          {errors.lastname && (
+          {errors.apellido && (
             <span className="text-sm text-red-700 ml-2">
-              {errors.lastname.message}
+              {errors.apellido.message}
             </span>
           )}
         </div>
@@ -81,16 +82,16 @@ export function FormProfile({ onCancel }: { onCancel: () => void }) {
           <Input
             type="date"
             id="dateBirth"
-            {...register("dateBirth", {
+            {...register("fecha_nacimiento", {
               required: {
                 value: true,
                 message: "La fecha de nacimiento es requerida.",
               },
             })}
           />
-          {errors.dateBirth && (
+          {errors.fecha_nacimiento && (
             <span className="text-sm text-red-700 ml-2">
-              {errors.dateBirth.message}
+              {errors.fecha_nacimiento.message}
             </span>
           )}
         </div>
@@ -100,16 +101,16 @@ export function FormProfile({ onCancel }: { onCancel: () => void }) {
             type="number"
             placeholder="Ej: 70.5"
             id="peso"
-            {...register("weight", {
+            {...register("peso", {
               required: {
                 value: true,
                 message: "El peso es requerido.",
               },
             })}
           />
-          {errors.weight && (
+          {errors.peso && (
             <span className="text-sm text-red-700 ml-2">
-              {errors.weight.message}
+              {errors.peso.message}
             </span>
           )}
         </div>
@@ -119,16 +120,16 @@ export function FormProfile({ onCancel }: { onCancel: () => void }) {
             type="number"
             placeholder="Ej: 175"
             id="altura"
-            {...register("height", {
+            {...register("altura", {
               required: {
                 value: true,
                 message: "La altura es requerida.",
               },
             })}
           />
-          {errors.height && (
+          {errors.altura && (
             <span className="text-sm text-red-700 ml-2">
-              {errors.height.message}
+              {errors.altura.message}
             </span>
           )}
         </div>
@@ -141,16 +142,16 @@ export function FormProfile({ onCancel }: { onCancel: () => void }) {
             type="text"
             placeholder="Ej: Perder peso"
             id="goal"
-            {...register("goal", {
+            {...register("meta", {
               required: {
                 value: true,
                 message: "La meta es requerida.",
               },
             })}
           />
-          {errors.goal && (
+          {errors.meta && (
             <span className="text-sm text-red-700 ml-2">
-              {errors.goal.message}
+              {errors.meta.message}
             </span>
           )}
         </div>
@@ -161,7 +162,7 @@ export function FormProfile({ onCancel }: { onCancel: () => void }) {
             placeholder="carlos@example.com"
             id="email"
             required
-            {...register("email", {
+            {...register("correo", {
               required: {
                 value: true,
                 message: "El correo eletrónico es requerido.",
@@ -172,28 +173,9 @@ export function FormProfile({ onCancel }: { onCancel: () => void }) {
               },
             })}
           />
-          {errors.email && (
+          {errors.correo && (
             <span className="text-sm text-red-700 ml-2">
-              {errors.email.message}
-            </span>
-          )}
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="password">Contraseña</Label>
-          <Input
-            type="password"
-            placeholder="********"
-            id="password"
-            {...register("password", {
-              required: {
-                value: true,
-                message: "La constraseña es requerida.",
-              },
-            })}
-          />
-          {errors.password && (
-            <span className="text-sm text-red-700 ml-2">
-              {errors.password.message}
+              {errors.correo.message}
             </span>
           )}
         </div>

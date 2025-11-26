@@ -1,6 +1,6 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
 import { Button } from "../ui/button";
-import type { Plan } from "@/types";
+import type { PlanCompleto } from "@/types";
 import { Plus, Route } from "lucide-react";
 import { ScrollArea } from "../ui/scroll-area";
 import Swal from "sweetalert2";
@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 interface PlanDetailSheetProps {
   isOpen: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedPlan?: Plan;
+  selectedPlan?: PlanCompleto;
   isUserPlan?: boolean;
 }
 
@@ -39,7 +39,7 @@ export function PlanDetailSheet({
                   <div className="w-24 aspect-square rounded-full shrink-0 bg-verde-isla flex justify-center items-center">
                     <Route className="text-white" size={40}></Route>
                   </div>
-                  <p className="font-medium">{selectedPlan.title}</p>
+                  <p className="font-medium">{selectedPlan.nombre}</p>
                   <p className="font-normal text-gris-oscuro text-sm">
                     Este plan puede realizarse de forma indefinida.
                   </p>
@@ -51,26 +51,28 @@ export function PlanDetailSheet({
               <div className="mt-4 space-y-2">
                 <p className="font-medium">Descripción</p>
                 <p className="text-gris-oscuro text-sm">
-                  {selectedPlan.description}
+                  {selectedPlan.descripcion}
                 </p>
               </div>
 
               <div className="mt-4 space-y-2">
                 <p className="font-medium">Beneficios</p>
                 <p className="text-gris-oscuro text-sm">
-                  {selectedPlan.benefits}
+                  {selectedPlan.beneficios}
                 </p>
               </div>
 
+              {/*
               <div className="mt-4 space-y-2">
                 <p className="font-medium">Ingredientes</p>
                 <ul className="text-gris-oscuro text-sm list-disc pl-5">
-                  {selectedPlan.recipes?.map((item, idx) => (
+                  {selectedPlan.recetas.map((item, idx) => (
                     <li key={idx}>{item}</li>
                   ))}
                 </ul>
               </div>
-
+              */}
+              {/*
               <div className="mt-4 space-y-2">
                 <p className="font-medium">Etiquetas</p>
                 <ul className="text-gris-oscuro text-sm list-disc pl-5">
@@ -79,6 +81,7 @@ export function PlanDetailSheet({
                   ))}
                 </ul>
               </div>
+              */}
             </ScrollArea>
 
             {!isUserPlan && (

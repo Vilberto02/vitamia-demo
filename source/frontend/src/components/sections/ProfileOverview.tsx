@@ -5,9 +5,10 @@ import { ContainerProgresoPeso } from "../containers/ContainerProgresoPeso";
 import { ContainerPreferencias } from "../containers/ContainerPreferencias";
 import { ContainerMisLogros } from "../containers/ContainerMisLogros";
 import { ContainerMisPlanes } from "../containers/ContainerMisPlanes";
-import { user } from "@/mocks/mocks";
+import { useAuth } from "@/hooks/useAuth";
 
 export function ProfileOverview({ onEdit }: { onEdit: () => void }) {
+  const {user} = useAuth();
   return (
     <div className="flex flex-col gap-5 h-full animate-in fade-in slide-in-from-left-4 duration-500 pb-8 xl:pb-0 xl:mb-0 overflow-y-hidden px-2">
       <h1 className="font-bold text-2xl text-carbon-oscuro select-none">
@@ -19,14 +20,14 @@ export function ProfileOverview({ onEdit }: { onEdit: () => void }) {
           <div className="flex gap-4 self-start items-center">
             <div className="bg-verde-isla rounded-full w-12 h-12 aspect-square flex items-center justify-center">
               <p className="text-white text-xl font-medium">
-                {user.name.charAt(0).toUpperCase()}
+                {user?.nombre.charAt(0).toUpperCase()}
               </p>
             </div>
             <div>
               <p className="text-carbon-oscuro font-semibold text-base">
-                {user.name}, {user.lastname}
+                {user?.nombre}, {user?.apellido}
               </p>
-              <p className="text-gris-oscuro text-sm">{user.email}</p>
+              <p className="text-gris-oscuro text-sm">{user?.correo}</p>
             </div>
           </div>
           <Button

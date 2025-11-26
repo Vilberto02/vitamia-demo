@@ -8,11 +8,14 @@ import { useState } from "react";
 import type { RegisterFields } from "@/types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Swal from "sweetalert2";
+import { useAuth } from "@/hooks/useAuth";
+import axios from "axios";
 
 export function Register() {
   const [redirect, setRedirect] = useState<boolean>(false);
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 3;
+  const { register: registerUser } = useAuth();
 
   const {
     register,
@@ -26,19 +29,44 @@ export function Register() {
 
   const onSubmit: SubmitHandler<RegisterFields> = async (data) => {
     try {
-      console.log("Datos enviados", data);
+      // Mapear los datos del formulario al formato del backend
+      await registerUser({
+        nombre: data.name,
+        apellido: data.lastname,
+        correo: data.email,
+        contrasena: data.password,
+        fecha_nacimiento: data.dateBirth,
+        meta: data.goal,
+        peso: parseFloat(data.weight),
+        altura: parseFloat(data.height) / 100, // Convertir de cm a metros
+      });
+
       Swal.fire({
         icon: "success",
         title: "Registro exitoso.",
         text: "Ya puedes iniciar sesión en la plataforma.",
       });
       setRedirect(true);
-    } catch (error) {
-      console.log("Error al enviar los datos.", error);
+    } catch (error: unknown) {
+      console.error("Error al registrar:", error);
+
+      // Manejar diferentes tipos de errores
+      let errorMessage = "Por favor, inténtalo de nuevo.";
+
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 409) {
+          errorMessage = "El correo ya está registrado.";
+        } else if (error.response?.status === 400) {
+          errorMessage = error.response.data?.error || "Datos inválidos.";
+        } else if (error.response?.status === 500) {
+          errorMessage = "Error en el servidor. Intenta más tarde.";
+        }
+      }
+
       Swal.fire({
         icon: "error",
         title: "Error al registrar tus datos.",
-        text: "Por favor, inténtalo de nuevo.",
+        text: errorMessage,
       });
     }
     reset();
@@ -75,18 +103,19 @@ export function Register() {
         alt="Icono de Uvas"
         className="w-24 absolute top-0 right-0"
       />
-      
+
       <div className="flex justify-between items-start">
         <div>
           <h1 className="font-bold text-4xl text-[var(--bg-carbon-oscuro)]">
             Bienvenido
           </h1>
           <p className="text-base text-[var(--bg-gris-oscuro)] mt-2">
-            Paso {currentStep} de {totalSteps}: {
-              currentStep === 1 ? "Credenciales de acceso" :
-              currentStep === 2 ? "Información personal" :
-              "Datos físicos y objetivo"
-            }
+            Paso {currentStep} de {totalSteps}:{" "}
+            {currentStep === 1
+              ? "Credenciales de acceso"
+              : currentStep === 2
+              ? "Información personal"
+              : "Datos físicos y objetivo"}
           </p>
         </div>
       </div>
@@ -97,9 +126,7 @@ export function Register() {
           <div
             key={step}
             className={`h-2 flex-1 rounded-full transition-all ${
-              step <= currentStep
-                ? "bg-turquesa"
-                : "bg-gray-200"
+              step <= currentStep ? "bg-turquesa" : "bg-gray-200"
             }`}
           ></div>
         ))}
@@ -152,7 +179,8 @@ export function Register() {
                       },
                       minLength: {
                         value: 6,
-                        message: "La contraseña debe tener al menos 6 caracteres.",
+                        message:
+                          "La contraseña debe tener al menos 6 caracteres.",
                       },
                     })}
                   />
@@ -350,7 +378,10 @@ export function Register() {
 
       <p className="text-center text-sm mt-4">
         ¿Ya tienes una cuenta?{" "}
-        <Link to="/login" className="text-[var(--bg-turquesa)] underline hover:text-[var(--bg-turquesa)]/80">
+        <Link
+          to="/login"
+          className="text-[var(--bg-turquesa)] underline hover:text-[var(--bg-turquesa)]/80"
+        >
           Inicia sesión aquí.
         </Link>
       </p>

@@ -1,10 +1,28 @@
-import Logo from "@/assets/name-bg-vitamia.svg"
-import { Link } from "react-router";
-import DashboardPreview from "@/assets/dashboard-svg.svg"
-import { ArrowRight, ChartNoAxesGantt, ChartPie, ConciergeBell, Salad } from "lucide-react";
+import Logo from "@/assets/name-bg-vitamia.svg";
+import { Link, useNavigate } from "react-router";
+import DashboardPreview from "@/assets/dashboard-svg.svg";
+import {
+  ArrowRight,
+  ChartNoAxesGantt,
+  ChartPie,
+  ConciergeBell,
+  Salad,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
 
 export function LandingPage() {
+  const { isAuthenticated } = useAuth();
+
+  const navigate = useNavigate();
+
+  function handleStart() {
+    if (isAuthenticated) {
+      navigate("/home");
+    } else {
+      navigate("/login");
+    }
+  }
 
   return (
     <div className="">
@@ -84,13 +102,13 @@ export function LandingPage() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                to="/home"
-                className="h-12 px-8 rounded-full bg-turquesa text-white font-medium hover:bg-turquesa/90 transition-all flex items-center justify-center gap-2 group"
+              <Button
+                onClick={handleStart}
+                className="h-12 px-8 rounded-full bg-turquesa text-white font-medium hover:bg-turquesa/90 transition-all flex items-center justify-center gap-2 group cursor-pointer"
               >
                 Comenzar ahora
                 <ArrowRight></ArrowRight>
-              </Link>
+              </Button>
             </div>
 
             <div className="mt-20 relative mx-auto max-w-5xl">

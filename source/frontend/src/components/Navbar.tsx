@@ -1,4 +1,4 @@
-import { user } from "@/mocks/mocks";
+import { useAuth } from "@/hooks/useAuth";
 import { CircleUserRound, Menu } from "lucide-react";
 
 export function Navbar({
@@ -8,6 +8,7 @@ export function Navbar({
   setActiveItem: (id: string) => void;
   toggleSidebar: () => void;
 }) {
+  const {user} = useAuth();
   return (
     <header className="bg-[#FAFFF6]/60 flex justify-between items-center py-2 px-2 md:px-8 text-carbon-oscuro rounded-xl">
       <button
@@ -27,9 +28,9 @@ export function Navbar({
         <CircleUserRound width={32} height={32}></CircleUserRound>
         <div>
           <p className="select-none font-medium text-base text-left">
-            {user.name}, {user.lastname}
+            {user?.nombre}, {user?.apellido}
           </p>
-          <p className="font-normal text-xs text-gris-oscuro">{user.email}</p>
+          <p className="font-normal text-xs text-gris-oscuro">{user?.correo}</p>
         </div>
       </button>
     </header>

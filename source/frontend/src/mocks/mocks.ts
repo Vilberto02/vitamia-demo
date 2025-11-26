@@ -1,9 +1,11 @@
 import type {
   Alimento,
-  Info,
+  InformacionNutricional,
   MotivationalMessage,
-  Plan,
+  PlanCompleto,
+  PlanUsuario,
   RegisterFields,
+  User,
 } from "@/types/index";
 import type { LogroType, RecetaType, Recipe } from "@/types";
 import { getUnidadById } from "@/lib/utils";
@@ -134,70 +136,110 @@ export const sampleRecipes: Recipe[] = [
   },
 ];
 
-export const listaDePlanes: Plan[] = [
+export const listaDePlanes: PlanCompleto[] = [
   {
     id: 1,
-    title: "Dieta DASH (Dietary Approaches to Stop Hypertension)",
-    description:
+    nombre: "Dieta DASH (Dietary Approaches to Stop Hypertension)",
+    descripcion:
       "Desarrollada para prevenir y controlar la hipertensión, esta dieta se enfoca en reducir la sal y aumentar el consumo de potasio, magnesio y calcio.",
-    tags: ["Bajar de peso"],
-    benefits: ["Mejora la salud cardiovascular y reduce el colesterol."],
-    recipes: ["receta 01", "receta 02"],
-    isUserPlan: false,
+    informacion: "Ideal para bajar de peso.",
+    beneficios: "Mejora la salud cardiovascular y reduce el colesterol.",
   },
   {
     id: 2,
-    title: "Dieta Mediterránea",
-    description:
+    nombre: "Dieta Mediterránea",
+    descripcion:
       "Basada en los hábitos alimenticios tradicionales de países como Grecia e Italia. Se enfoca en alimentos frescos, aceite de oliva, pescados y legumbres.",
-    tags: ["Mediterránea"],
-    benefits: ["Reduce el riesgo de enfermedades cardíacas."],
-    recipes: ["recetas 01", "recetas 02"],
-    isUserPlan: true,
+    informacion: "Ideal para bajar de peso.",
+    beneficios: "Reduce el riesgo de enfermedades cardíacas.",
   },
   {
     id: 3,
-    title: "Dietas para Aumentar Masa Muscular",
-    description:
+    nombre: "Dietas para Aumentar Masa Muscular",
+    descripcion:
       "Esta dieta se enfoca en consumir más calorías de las que el cuerpo quema, principalmente a través de proteínas de alta calidad, carbohidratos y grasas saludables.",
-    tags: ["Masa muscular"],
-    benefits: ["Optimiza el crecimiento muscular."],
-    recipes: ["receta 01", "receta 02"],
-    isUserPlan: true,
+    informacion: "Ideal para aumentar masa muscular.",
+    beneficios: "Optimiza el crecimiento muscular.",
   },
   {
     id: 4,
-    title: "Dietas Detox",
-    description:
+    nombre: "Dietas Detox",
+    descripcion:
       "Esta dieta se basa en consumir jugos naturales y frescos, principalmente de frutas y verduras, para eliminar toxinas y mejorar la digestión.",
-    tags: ["Bajar de peso", "Masa muscular"],
-    benefits: ["Beneficio 01 202"],
-    recipes: ["receta 01", "receta 02"],
-    isUserPlan: true,
+    informacion:
+      "Ideal para bajar de peso.",
+    beneficios: "Mejora la digestión de alimentos.",
   },
 ];
 
-export const listaInformacion: Info[] = [
+export const miListadoPlanes: PlanUsuario[] = [
   {
-    id: "1",
-    title: "Hidratación adecuada.",
-    description: "Mejora la digestión y la salud de la piel.",
+    id: 1,
+    fecha: "2002-05-15T00:00:00.000Z",
+    plan: {
+      id: 2,
+      nombre: "Dieta Mediterránea",
+      descripcion:
+        "Basada en los hábitos alimenticios tradicionales de países como Grecia e Italia. Se enfoca en alimentos frescos, aceite de oliva, pescados y legumbres.",
+      informacion: "Ideal para bajar de peso.",
+      beneficios: "Reduce el riesgo de enfermedades cardíacas.",
+    },
   },
   {
-    id: "2",
-    title: "Descanso y sueño.",
-    description: "Ayuda a la recuperación del cuerpo y el bienestar mental.",
+    id: 2,
+    fecha: "2002-05-15T00:00:00.000Z",
+    plan: {
+      id: 1,
+      nombre: "Dieta DASH (Dietary Approaches to Stop Hypertension)",
+      descripcion:
+        "Desarrollada para prevenir y controlar la hipertensión, esta dieta se enfoca en reducir la sal y aumentar el consumo de potasio, magnesio y calcio.",
+      informacion: "Ideal para bajar de peso.",
+      beneficios: "Mejora la salud cardiovascular y reduce el colesterol.",
+    },
   },
   {
-    id: "3",
-    title: "Control del estrés.",
-    description:
+    id: 3,
+    fecha: "2002-05-15T00:00:00.000Z",
+    plan: {
+      id: 3,
+      nombre: "Dietas para Aumentar Masa Muscular",
+      descripcion:
+        "Esta dieta se enfoca en consumir más calorías de las que el cuerpo quema, principalmente a través de proteínas de alta calidad, carbohidratos y grasas saludables.",
+      informacion: "Ideal para aumentar masa muscular.",
+      beneficios: "Optimiza el crecimiento muscular.",
+    },
+  },
+];
+
+export const listaInformacion: InformacionNutricional[] = [
+  {
+    id: 1,
+    titulo: "Hidratación adecuada.",
+    descripcion: "Mejora la digestión y la salud de la piel.",
+    beneficio: "Mejora la digestión y la salud de la piel.",
+    imagen: "hidratacion.jpg",
+  },
+  {
+    id: 2,
+    titulo: "Descanso y sueño.",
+    descripcion: "Ayuda a la recuperación del cuerpo y el bienestar mental.",
+    beneficio: "Ayuda a la recuperación del cuerpo y el bienestar mental.",
+    imagen: "descanso.jpg",
+  },
+  {
+    id: 3,
+    titulo: "Control del estrés.",
+    descripcion:
       "Previene enfermedades crónicas y ayuda al bienestar emocional.",
+    beneficio: "Previene enfermedades crónicas y ayuda al bienestar emocional.",
+    imagen: "estres.jpg",
   },
   {
-    id: "4",
-    title: "Liberación de estrés.",
-    description: "Realiza ejercicio para liberar la carga mental y emocional.",
+    id: 4,
+    titulo: "Liberación de estrés.",
+    descripcion: "Realiza ejercicio para liberar la carga mental y emocional.",
+    beneficio: "Realiza ejercicio para liberar la carga mental y emocional.",
+    imagen: "estres.jpg"
   },
 ];
 
@@ -311,10 +353,15 @@ export const alimentosIniciales: Record<string, Alimento[]> = {
   Snack: [],
 };
 
-export const user: { name: string; lastname: string; email: string } = {
-  name: "Juan",
-  lastname: "Perez Morales",
-  email: "juan.perez@unmsm.edu.pe",
+export const usuario: User = {
+  id: 1,
+  nombre: "Juan",
+  apellido: "Perez Morales",
+  correo: "juan.perez@unmsm.edu.pe",
+  fecha_nacimiento: "2002-05-15T00:00:00.000Z",
+  meta: "Bajar de peso",
+  peso: 84,
+  altura: 175,
+  imc: 23.52,
+  imagen: "juan.jpg"
 };
-
-

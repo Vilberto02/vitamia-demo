@@ -7,16 +7,16 @@ import {
 } from "../ui/card";
 import { ScrollArea } from "../ui/scroll-area";
 import { CardPlan } from "../cards/CardPlan";
-import { listaDePlanes } from "@/mocks/mocks";
 import { PlanDetailSheet } from "../sheets/PlanDetailSheet";
 import { useState } from "react";
-import type { Plan } from "@/types";
+import type { PlanCompleto } from "@/types";
+import { listaDePlanes } from "@/mocks/mocks";
 
 export function ContainerPlanes() {
-  const [selectedPlan, setSelectedPlan] = useState<Plan>();
+  const [selectedPlan, setSelectedPlan] = useState<PlanCompleto>();
   const [isOpen, setOpen] = useState(false);
 
-  const handleSelectPlan = (plan: Plan) => {
+  const handleSelectPlan = (plan: PlanCompleto) => {
     setSelectedPlan(plan);
     setOpen(true);
   };

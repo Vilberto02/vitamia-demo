@@ -25,16 +25,16 @@ async function seed() {
     // Insertar alimentos
     await prisma.alimento.createMany({
       data: [
-        { nombre: 'Manzana', unidad: 'unidad', id_tipo_comida: desayuno.id },
-        { nombre: 'Banana', unidad: 'unidad', id_tipo_comida: desayuno.id },
-        { nombre: 'Yogurt', unidad: 'unidad', id_tipo_comida: desayuno.id },
-        { nombre: 'Arroz', unidad: 'gramos', id_tipo_comida: almuerzo.id },
-        { nombre: 'Pollo', unidad: 'gramos', id_tipo_comida: almuerzo.id },
-        { nombre: 'Ensalada', unidad: 'porción', id_tipo_comida: almuerzo.id },
-        { nombre: 'Pasta', unidad: 'gramos', id_tipo_comida: cena.id },
-        { nombre: 'Pescado', unidad: 'gramos', id_tipo_comida: cena.id },
-        { nombre: 'Frutos secos', unidad: 'gramos', id_tipo_comida: snack.id },
-        { nombre: 'Galletas integrales', unidad: 'unidad', id_tipo_comida: snack.id },
+        { nombre: 'Manzana', unidad: 'unidad', calorias: 52, id_tipo_comida: desayuno.id },
+        { nombre: 'Banana', unidad: 'unidad', calorias: 89, id_tipo_comida: desayuno.id },
+        { nombre: 'Yogurt', unidad: 'unidad', calorias: 59, id_tipo_comida: desayuno.id },
+        { nombre: 'Arroz', unidad: 'gramos', calorias: 1.3, id_tipo_comida: almuerzo.id },
+        { nombre: 'Pollo', unidad: 'gramos', calorias: 1.65, id_tipo_comida: almuerzo.id },
+        { nombre: 'Ensalada', unidad: 'porción', calorias: 33, id_tipo_comida: almuerzo.id },
+        { nombre: 'Pasta', unidad: 'gramos', calorias: 1.31, id_tipo_comida: cena.id },
+        { nombre: 'Pescado', unidad: 'gramos', calorias: 2.06, id_tipo_comida: cena.id },
+        { nombre: 'Frutos secos', unidad: 'gramos', calorias: 6.07, id_tipo_comida: snack.id },
+        { nombre: 'Galletas integrales', unidad: 'unidad', calorias: 45, id_tipo_comida: snack.id },
       ],
       skipDuplicates: true,
     });

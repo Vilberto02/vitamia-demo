@@ -5,14 +5,14 @@ const AlimentoControlador = {
     try {
       const alimentos = await AlimentoModelo.obtenerTodos();
       
-      // Agrupar por tipo de comida
+      // Agrupar por categoría
       const agrupados = {};
       alimentos.forEach(alimento => {
-        const tipoNombre = alimento.tipo_comida?.nombre || 'sin_tipo';
-        if (!agrupados[tipoNombre]) {
-          agrupados[tipoNombre] = [];
+        const categoria = alimento.categoria || 'sin_categoria';
+        if (!agrupados[categoria]) {
+          agrupados[categoria] = [];
         }
-        agrupados[tipoNombre].push(alimento);
+        agrupados[categoria].push(alimento);
       });
       
       res.json(agrupados);
@@ -31,20 +31,7 @@ const AlimentoControlador = {
       console.error('Error al obtener alimentos por nombre:', err);
       res.status(500).json({ error: 'Error al obtener alimentos por nombre' });
     }
-  },
-
-  async obtenerPorTipoComida(req, res) {
-    try {
-      const { tipo } = req.params;
-      const alimentos = await AlimentoModelo.obtenerPorTipoComida(tipo);
-      res.json(alimentos);
-    } catch (err) {
-      console.error('Error al obtener alimentos por tipo de comida:', err);
-      res.status(500).json({ error: 'Error al obtener alimentos por tipo de comida' });
-    }
   }
 };
-
-module.exports = AlimentoControlador;
 
 module.exports = AlimentoControlador;

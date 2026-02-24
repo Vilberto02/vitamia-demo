@@ -3,8 +3,17 @@ const router = express.Router();
 const UsuarioControlador = require('../controllers/UsuarioControlador');
 const verificarToken = require('../middlewares/autenticacion');
 
-// Todas las rutas requieren autenticación
+/**
+ * Rutas de Usuarios
+ * Todas las rutas requieren autenticación JWT
+ */
+
+// Aplicar middleware de autenticación a todas las rutas
 router.use(verificarToken);
+
+// Obtener información general del usuario autenticado
+// IMPORTANTE: Rutas específicas deben ir antes de /:nombre para evitar conflictos
+router.get('/general', UsuarioControlador.obtenerInformacionGeneral);
 
 // Obtener todos los usuarios
 router.get('/', UsuarioControlador.obtenerUsuarios);

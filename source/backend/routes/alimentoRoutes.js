@@ -6,11 +6,8 @@ const verificarToken = require('../middlewares/autenticacion');
 // Todas las rutas requieren autenticación
 router.use(verificarToken);
 
-// Obtener todos los alimentos (agrupados por tipo de comida)
+// Obtener todos los alimentos (agrupados por categoría)
 router.get('/', AlimentoControlador.obtenerTodos);
-
-// Obtener alimentos por tipo de comida (desayuno, almuerzo, cena, snack)
-router.get('/tipo/:tipo', AlimentoControlador.obtenerPorTipoComida);
 
 // Obtener alimentos por nombre
 router.get('/nombre/:nombre', AlimentoControlador.obtenerPorNombre);

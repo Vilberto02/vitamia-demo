@@ -6,14 +6,17 @@ const verificarToken = require('../middlewares/autenticacion');
 // Todas las rutas requieren autenticación
 router.use(verificarToken);
 
-// Obtener todos los consumos
-router.get('/', ConsumoControlador.obtenerConsumos);
+// Obtener consumos del usuario autenticado (agrupados por tipo de comida)
+router.get('/', ConsumoControlador.obtenerPorUsuario);
 
-// Obtener consumos del usuario autenticado (agrupados por fecha y tipo de comida)
-router.get('/mis-consumos', ConsumoControlador.obtenerPorUsuario);
+// Obtener todos los consumos (función admin)
+router.get('/todos', ConsumoControlador.obtenerTodos);
 
-// Obtener consumos del usuario autenticado en fecha específica
+// Obtener consumos del usuario autenticado en una fecha específica
 router.get('/fecha/:fecha', ConsumoControlador.obtenerPorUsuarioYFecha);
+
+// Obtener promedio de calorías por mes del usuario autenticado
+router.get('/calorias', ConsumoControlador.obtenerCalorias);
 
 // Agregar consumo
 router.post('/', ConsumoControlador.agregarConsumo);

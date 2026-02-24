@@ -51,10 +51,9 @@ model Alimento {
   id              Int         @id @default(autoincrement())
   nombre          String      @db.VarChar(100)
   unidad          String      @db.VarChar(50)
-  id_tipo_comida  Int
+  calorias        Float       @default(0)
+  categoria       String      @db.VarChar(50)
   consumos        Consumo[]
-  
-  tipo_comida     TipoComida  @relation(fields: [id_tipo_comida], references: [id])
 
   @@map("alimentos")
 }
@@ -64,7 +63,8 @@ model Consumo {
   id_alimento      Int
   id_usuario       Int
   id_tipo_comida   Int
-  cantidad         Int
+  cantidad         Float
+  unidad           String?     @db.VarChar(50)
   fecha            DateTime    @db.Date
   
   alimento         Alimento    @relation(fields: [id_alimento], references: [id])
@@ -78,7 +78,6 @@ model TipoComida {
   id                 Int                 @id @default(autoincrement())
   nombre             String              @unique @db.VarChar(50)
   recetas            Receta[]
-  alimentos          Alimento[]
   consumos           Consumo[]
   recetas_consumidas RecetaConsumida[]
   plan_recetas       PlanReceta[]

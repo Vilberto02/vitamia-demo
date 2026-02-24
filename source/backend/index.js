@@ -28,7 +28,7 @@ app.use('/api/informacion', informacionRoutes);
 app.use('/api/recetas-consumidas', recetaConsumidaRoutes);
 app.use('/api/planes', planRoutes);
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Backend corriendo en el puerto ${PORT}`);

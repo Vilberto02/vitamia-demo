@@ -7,9 +7,8 @@ import { Link, Navigate } from "react-router";
 import { useState } from "react";
 import type { RegisterFields } from "@/types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import Swal from "sweetalert2";
 import { useAuth } from "@/hooks/useAuth";
-import axios from "axios";
+import toast from "react-hot-toast";
 
 export function Register() {
   const [redirect, setRedirect] = useState<boolean>(false);
@@ -37,37 +36,15 @@ export function Register() {
         contrasena: data.password,
         fecha_nacimiento: data.dateBirth,
         meta: data.goal,
-        peso: parseFloat(data.weight),
-        altura: parseFloat(data.height) / 100, // Convertir de cm a metros
+        peso: Number.parseFloat(data.weight),
+        altura: Number.parseFloat(data.height) / 100, // Convertir de cm a metros
       });
-
-      Swal.fire({
-        icon: "success",
-        title: "Registro exitoso.",
-        text: "Ya puedes iniciar sesión en la plataforma.",
-      });
+      toast.success("Se registró tu cuenta exitosamente.");
       setRedirect(true);
     } catch (error: unknown) {
       console.error("Error al registrar:", error);
 
-      // Manejar diferentes tipos de errores
-      let errorMessage = "Por favor, inténtalo de nuevo.";
-
-      if (axios.isAxiosError(error)) {
-        if (error.response?.status === 409) {
-          errorMessage = "El correo ya está registrado.";
-        } else if (error.response?.status === 400) {
-          errorMessage = error.response.data?.error || "Datos inválidos.";
-        } else if (error.response?.status === 500) {
-          errorMessage = "Error en el servidor. Intenta más tarde.";
-        }
-      }
-
-      Swal.fire({
-        icon: "error",
-        title: "Error al registrar tus datos.",
-        text: errorMessage,
-      });
+      toast.error("Error al registrar tu cuenta.");
     }
     reset();
   };
@@ -94,6 +71,12 @@ export function Register() {
     }
   };
 
+  const STEP_LABELS: Record<number, string> = {
+    1: "Credenciales de acceso",
+    2: "Información personal",
+    3: "Datos físicos y objetivo",
+  };
+
   if (redirect) return <Navigate to="/login"></Navigate>;
 
   return (
@@ -110,12 +93,7 @@ export function Register() {
             Bienvenido
           </h1>
           <p className="text-base text-[var(--bg-gris-oscuro)] mt-2">
-            Paso {currentStep} de {totalSteps}:{" "}
-            {currentStep === 1
-              ? "Credenciales de acceso"
-              : currentStep === 2
-              ? "Información personal"
-              : "Datos físicos y objetivo"}
+            Paso {currentStep} de {totalSteps}: {STEP_LABELS[currentStep]}
           </p>
         </div>
       </div>

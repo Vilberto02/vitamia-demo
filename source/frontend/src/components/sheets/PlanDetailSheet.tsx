@@ -17,7 +17,7 @@ export function PlanDetailSheet({
   setOpen,
   selectedPlan,
   isUserPlan,
-}: PlanDetailSheetProps) {
+}: Readonly<PlanDetailSheetProps>) {
   const handleAddPlan = () => {
     Swal.fire({
       title: "Plan agregado con éxito",

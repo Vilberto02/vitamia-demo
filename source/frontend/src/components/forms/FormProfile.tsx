@@ -5,8 +5,8 @@ import { Input } from "../ui/input";
 import type { RegisterRequest } from "@/types";
 import { useAuth } from "@/hooks/useAuth";
 
-export function FormProfile({ onCancel }: { onCancel: () => void }) {
-  const {user} = useAuth();
+export function FormProfile({ onCancel }: Readonly<{ onCancel: () => void }>) {
+  const { user } = useAuth();
   const {
     register,
     handleSubmit,
@@ -21,10 +21,9 @@ export function FormProfile({ onCancel }: { onCancel: () => void }) {
       fecha_nacimiento: user?.fecha_nacimiento,
       peso: user?.peso,
       altura: user?.altura,
-      meta: user?.meta
+      meta: user?.meta,
     },
   });
-
 
   const onSubmit: SubmitHandler<RegisterRequest> = async (data) => {
     console.log(data);

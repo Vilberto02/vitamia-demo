@@ -14,7 +14,7 @@ export function RecipeDetailSheet({
   isOpen,
   setIsOpen,
   selectedRecipe,
-}: RecipeDetailSheetProps) {
+}: Readonly<RecipeDetailSheetProps>) {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetContent className="p-9">
@@ -52,8 +52,8 @@ export function RecipeDetailSheet({
               <div className="mt-4 space-y-2">
                 <p className="font-medium">Ingredientes</p>
                 <ul className="text-gris-oscuro text-sm list-disc pl-5">
-                  {selectedRecipe.ingredients?.map((item, idx) => (
-                    <li key={idx}>{item}</li>
+                  {selectedRecipe.ingredients?.map((item) => (
+                    <li key={item}>{item}</li>
                   ))}
                 </ul>
               </div>
@@ -61,8 +61,8 @@ export function RecipeDetailSheet({
               <div className="mt-4 space-y-2">
                 <p className="font-medium">Preparación</p>
                 <ol className="text-gris-oscuro text-sm list-decimal pl-5">
-                  {selectedRecipe.preparation?.map((item, idx) => (
-                    <li key={idx}>{item}</li>
+                  {selectedRecipe.preparation?.map((item) => (
+                    <li key={item}>{item}</li>
                   ))}
                 </ol>
               </div>

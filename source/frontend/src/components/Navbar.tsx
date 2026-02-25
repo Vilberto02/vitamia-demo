@@ -4,11 +4,11 @@ import { CircleUserRound, Menu } from "lucide-react";
 export function Navbar({
   setActiveItem,
   toggleSidebar,
-}: {
+}: Readonly<{
   setActiveItem: (id: string) => void;
   toggleSidebar: () => void;
-}) {
-  const {user} = useAuth();
+}>) {
+  const { user } = useAuth();
   return (
     <header className="bg-[#FAFFF6]/60 flex justify-between items-center py-2 px-2 md:px-8 text-carbon-oscuro rounded-xl">
       <button

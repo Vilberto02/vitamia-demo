@@ -166,8 +166,7 @@ export const listaDePlanes: PlanCompleto[] = [
     nombre: "Dietas Detox",
     descripcion:
       "Esta dieta se basa en consumir jugos naturales y frescos, principalmente de frutas y verduras, para eliminar toxinas y mejorar la digestión.",
-    informacion:
-      "Ideal para bajar de peso.",
+    informacion: "Ideal para bajar de peso.",
     beneficios: "Mejora la digestión de alimentos.",
   },
 ];
@@ -239,7 +238,7 @@ export const listaInformacion: InformacionNutricional[] = [
     titulo: "Liberación de estrés.",
     descripcion: "Realiza ejercicio para liberar la carga mental y emocional.",
     beneficio: "Realiza ejercicio para liberar la carga mental y emocional.",
-    imagen: "estres.jpg"
+    imagen: "estres.jpg",
   },
 ];
 
@@ -268,8 +267,8 @@ export const misDatos: RegisterFields = {
   weight: "70.5",
   height: "175",
   goal: "Bajar de peso",
-  email: "juan.perez@unmsm.edu.pe",
-  password: "1234",
+  email: "[EMAIL_ADDRESS]",
+  password: import.meta.env.VITE_MOCK_PASSWORD,
 };
 
 export const mensajesMotivacion: MotivationalMessage[] = [
@@ -363,5 +362,5 @@ export const usuario: User = {
   peso: 84,
   altura: 175,
   imc: 23.52,
-  imagen: "juan.jpg"
+  imagen: "juan.jpg",
 };

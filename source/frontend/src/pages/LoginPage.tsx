@@ -6,10 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import Swal from "sweetalert2";
 import { useAuth } from "@/hooks/useAuth";
-import axios from "axios";
 import { ChevronLeft } from "lucide-react";
+import toast, { Toaster } from "react-hot-toast";
 
 export const LoginPage = () => {
   const {
@@ -29,33 +28,14 @@ export const LoginPage = () => {
       // Llamar al servicio de autenticación
       await login(data.email, data.password);
 
-      Swal.fire({
-        icon: "success",
-        title: "Inicio de sesión exitoso.",
-        text: "Ya puedes acceder a la plataforma.",
-      });
+      console.log("Inicio de sesion exitoso");
+
+      toast.success("Inicio de sesión exitoso.");
       setRedirect(true);
-    } catch (error: unknown) {
+    } catch (error) {
       console.error("Error al iniciar sesión:", error);
 
-      // Manejar diferentes tipos de errores
-      let errorMessage = "Por favor, inténtalo de nuevo.";
-
-      if (axios.isAxiosError(error)) {
-        if (error.response?.status === 401) {
-          errorMessage = "Correo o contraseña incorrectos.";
-        } else if (error.response?.status === 400) {
-          errorMessage = error.response.data?.error || "Datos inválidos.";
-        } else if (error.response?.status === 500) {
-          errorMessage = "Error en el servidor. Intenta más tarde.";
-        }
-      }
-
-      Swal.fire({
-        icon: "error",
-        title: "Error al iniciar sesión.",
-        text: errorMessage,
-      });
+      toast.error("Error al iniciar sesión.");
     }
 
     reset();
@@ -64,115 +44,118 @@ export const LoginPage = () => {
   if (redirect) return <Navigate to={"/home"}></Navigate>;
 
   return (
-    <main
-      className="relative w-screen h-screen flex justify-center items-center px-12 sm:px-16 overflow-hidden bg-background-page"
-      role="main"
-    >
-      <div className="flex rounded-xl shadow-2xl bg-white">
-        <form
-          action=""
-          aria-labelledby="login-title"
-          className="flex-1 flex flex-col items-center justify-center sm:gap-12 lg:gap-8 my-2 p-12 md:px-12 md:py-14"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <Button
-            variant={"ghost"}
-            onClick={() => navigate("/")}
-            className="text-sm self-start cursor-pointer"
+    <>
+      <Toaster></Toaster>
+      <main
+        className="relative w-screen h-screen flex justify-center items-center px-12 sm:px-16 overflow-hidden bg-background-page"
+        role="main"
+      >
+        <div className="flex rounded-xl shadow-2xl bg-white">
+          <form
+            action=""
+            aria-labelledby="login-title"
+            className="flex-1 flex flex-col items-center justify-center sm:gap-12 lg:gap-8 my-2 p-12 md:px-12 md:py-14"
+            onSubmit={handleSubmit(onSubmit)}
           >
-            <ChevronLeft></ChevronLeft>
-          </Button>
-          <div className="flex flex-col gap-6 w-full max-w-[24rem]">
-            <div className="flex flex-col justify-center items-center gap-4">
-              <h1
-                id="login-title"
-                className="font-bold text-4xl text-carbon-oscuro"
-              >
-                Bienvenido
-              </h1>
-              <p className="text-gris-oscuro text-center text-sm md:text-md">
-                Registra su correo eletrónico y contraseña para acceder a la
-                plataforma
+            <Button
+              variant={"ghost"}
+              onClick={() => navigate("/")}
+              className="text-sm self-start cursor-pointer"
+            >
+              <ChevronLeft></ChevronLeft>
+            </Button>
+            <div className="flex flex-col gap-6 w-full max-w-[24rem]">
+              <div className="flex flex-col justify-center items-center gap-4">
+                <h1
+                  id="login-title"
+                  className="font-bold text-4xl text-carbon-oscuro"
+                >
+                  Bienvenido
+                </h1>
+                <p className="text-gris-oscuro text-center text-sm md:text-md">
+                  Registra su correo eletrónico y contraseña para acceder a la
+                  plataforma
+                </p>
+              </div>
+
+              {/* Contenedor de los campos de entrada */}
+              <div className="flex flex-col gap-6 w-full">
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-carbon-oscuro">
+                    Correo electrónico
+                  </Label>
+                  <Input
+                    type="email"
+                    id="email"
+                    className="rounded-sm py-2 px-3 w-full"
+                    placeholder="tu@gmail.com"
+                    {...register("email", {
+                      required: {
+                        value: true,
+                        message: "Correo electrónico requerido.",
+                      },
+                      pattern: {
+                        value: /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/,
+                        message: "Correo inválido.",
+                      },
+                    })}
+                  />
+                  {errors.email && (
+                    <span className="text-sm text-red-700 ml-2" role="alert">
+                      {errors.email.message}
+                    </span>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="password" className="text-carbon-oscuro">
+                    Contraseña
+                  </Label>
+                  {/* border border-[var(--bg-gris-oscuro)]/50 focus:outline-[var(--bg-gris-oscuro)]/50 */}
+                  <Input
+                    type="password"
+                    id="password"
+                    className="rounded-sm py-2 px-3  w-full"
+                    placeholder="********"
+                    {...register("password", {
+                      required: {
+                        value: true,
+                        message: "Contraseña requerida.",
+                      },
+                    })}
+                  />
+                  {errors.password && (
+                    <span className="text-sm text-red-700 ml-2" role="alert">
+                      {errors.password.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+            <Button
+              type="submit"
+              className="w-full bg-naranja text-white rounded-sm cursor-pointer max-w-[24rem] py-5 xl:mt-0 mt-4"
+            >
+              Continuar
+            </Button>
+            <div className="flex flex-col gap-4 xl:mt-0 mt-4 items-center">
+              <p className="text-center text-sm">
+                ¿No tienes una cuenta?{" "}
+                <Link
+                  to="/register"
+                  className="text-[var(--bg-turquesa)] underline"
+                >
+                  Crea una cuenta aquí.
+                </Link>
               </p>
             </div>
-
-            {/* Contenedor de los campos de entrada */}
-            <div className="flex flex-col gap-6 w-full">
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-carbon-oscuro">
-                  Correo electrónico
-                </Label>
-                <Input
-                  type="email"
-                  id="email"
-                  className="rounded-sm py-2 px-3 w-full"
-                  placeholder="tu@gmail.com"
-                  {...register("email", {
-                    required: {
-                      value: true,
-                      message: "Correo electrónico requerido.",
-                    },
-                    pattern: {
-                      value: /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/,
-                      message: "Correo inválido.",
-                    },
-                  })}
-                />
-                {errors.email && (
-                  <span className="text-sm text-red-700 ml-2" role="alert">
-                    {errors.email.message}
-                  </span>
-                )}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-carbon-oscuro">
-                  Contraseña
-                </Label>
-                {/* border border-[var(--bg-gris-oscuro)]/50 focus:outline-[var(--bg-gris-oscuro)]/50 */}
-                <Input
-                  type="password"
-                  id="password"
-                  className="rounded-sm py-2 px-3  w-full"
-                  placeholder="********"
-                  {...register("password", {
-                    required: {
-                      value: true,
-                      message: "Contraseña requerida.",
-                    },
-                  })}
-                />
-                {errors.password && (
-                  <span className="text-sm text-red-700 ml-2" role="alert">
-                    {errors.password.message}
-                  </span>
-                )}
-              </div>
-            </div>
-          </div>
-          <Button
-            type="submit"
-            className="w-full bg-naranja text-white rounded-sm cursor-pointer max-w-[24rem] py-5 xl:mt-0 mt-4"
-          >
-            Continuar
-          </Button>
-          <div className="flex flex-col gap-4 xl:mt-0 mt-4 items-center">
-            <p className="text-center text-sm">
-              ¿No tienes una cuenta?{" "}
-              <Link
-                to="/register"
-                className="text-[var(--bg-turquesa)] underline"
-              >
-                Crea una cuenta aquí.
-              </Link>
-            </p>
-          </div>
-        </form>
-      </div>
-      <img
-        src={NameVitamia}
-        alt="Nombre de Vitamia"
-        className="absolute -bottom-15 left-1/2 -translate-x-1/2 z-0 pointer-events-none invisible md:visible"
-      />
-    </main>
+          </form>
+        </div>
+        <img
+          src={NameVitamia}
+          alt="Nombre de Vitamia"
+          className="absolute -bottom-15 left-1/2 -translate-x-1/2 z-0 pointer-events-none invisible md:visible"
+        />
+      </main>
+    </>
   );
 };

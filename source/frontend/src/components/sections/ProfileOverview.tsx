@@ -7,8 +7,8 @@ import { ContainerMisLogros } from "../containers/ContainerMisLogros";
 import { ContainerMisPlanes } from "../containers/ContainerMisPlanes";
 import { useAuth } from "@/hooks/useAuth";
 
-export function ProfileOverview({ onEdit }: { onEdit: () => void }) {
-  const {user} = useAuth();
+export function ProfileOverview({ onEdit }: Readonly<{ onEdit: () => void }>) {
+  const { user } = useAuth();
   return (
     <div className="flex flex-col gap-5 h-full animate-in fade-in slide-in-from-left-4 duration-500 pb-8 xl:pb-0 xl:mb-0 overflow-y-hidden px-2">
       <h1 className="font-bold text-2xl text-carbon-oscuro select-none">

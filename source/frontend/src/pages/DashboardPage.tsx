@@ -7,6 +7,7 @@ import { Navbar } from "../components/Navbar";
 import { ProfilePage } from "../components/sections/ProfileSection";
 import { ChartNoAxesColumn, UserRound, Grid2X2, Salad } from "lucide-react";
 import type { SideBarItemType } from "@/types";
+import { Toaster } from "react-hot-toast";
 
 const sidebarItems: SideBarItemType[] = [
   { id: "general", name: "General", Icon: ChartNoAxesColumn },
@@ -24,43 +25,46 @@ const sections: Record<string, React.ReactNode> = {
 
 export const DashboardPage = () => {
   const [activeItem, setActiveItem] = useState("general");
-  const [isSidebarOpen, setIsSiderOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {
-    setIsSiderOpen(!isSidebarOpen);
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
   return (
-    <div
-      className="flex gap-3 w-screen h-screen overflow-hidden"
-      role="application"
-      aria-label="Panel de control Vitamia"
-    >
-      <SideBar
-        items={sidebarItems}
-        activeItem={activeItem}
-        setActiveItem={setActiveItem}
-        isOpen={isSidebarOpen}
-      ></SideBar>
+    <>
+      <Toaster></Toaster>
       <div
-        className={`flex flex-col gap-3 w-full ${
-          isSidebarOpen ? "ml-[264px]" : "ml-0"
-        }`}
+        className="flex gap-3 w-screen h-screen overflow-hidden"
+        role="application"
+        aria-label="Panel de control Vitamia"
       >
-        <Navbar
+        <SideBar
+          items={sidebarItems}
+          activeItem={activeItem}
           setActiveItem={setActiveItem}
-          toggleSidebar={toggleSidebar}
-        ></Navbar>
-        <main
-          className="flex-1 p-5 md:p-6 bg-[#FAFFF6]/60 rounded-xl overflow-x-hidden overflow-y-auto"
-          aria-label={`Sección de ${
-            sidebarItems.find((item) => item.id === activeItem)?.name ||
-            "contenido"
+          isOpen={isSidebarOpen}
+        ></SideBar>
+        <div
+          className={`flex flex-col gap-3 w-full ${
+            isSidebarOpen ? "ml-[264px]" : "ml-0"
           }`}
         >
-          {sections[activeItem]}
-        </main>
+          <Navbar
+            setActiveItem={setActiveItem}
+            toggleSidebar={toggleSidebar}
+          ></Navbar>
+          <main
+            className="flex-1 p-5 md:p-6 bg-[#FAFFF6]/60 rounded-xl overflow-x-hidden overflow-y-auto"
+            aria-label={`Sección de ${
+              sidebarItems.find((item) => item.id === activeItem)?.name ||
+              "contenido"
+            }`}
+          >
+            {sections[activeItem]}
+          </main>
+        </div>
       </div>
-    </div>
+    </>
   );
 };

@@ -57,7 +57,9 @@ export function ContainerDiaConsumo() {
               <ScrollArea className="h-[648px]">
                 <div className="flex flex-col gap-3 pr-3">
                   {[...sampleRecipes]
-                    .sort((a, b) => parseInt(b.id) - parseInt(a.id)) // Orden por título
+                    .sort(
+                      (a, b) => Number.parseInt(b.id) - Number.parseInt(a.id),
+                    ) // Orden por título
                     .map((recipe) => (
                       <CardRecipe
                         key={recipe.id}

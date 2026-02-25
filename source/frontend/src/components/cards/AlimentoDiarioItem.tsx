@@ -31,7 +31,7 @@ export function AlimentoDiarioItem({
   onDelete,
   setActualizarUnidad,
   onClick,
-}: AlimentoItemProps) {
+}: Readonly<AlimentoItemProps>) {
   const [unidadLocal, setUnidadLocal] = useState<unidadMedida>(unidad);
 
   // sincroniza cuando cambia la prop inicial
@@ -40,7 +40,7 @@ export function AlimentoDiarioItem({
   }, [unidad]);
 
   return (
-    <div
+    <button
       className="flex flex-col items-start xl:flex-row xl:items-center gap-2 p-2 border rounded-lg animate-in fade-in-0 slide-in-from-top-2 duration-300 cursor-pointer"
       onClick={onClick}
     >
@@ -51,7 +51,7 @@ export function AlimentoDiarioItem({
         <span className="font-medium select-none">{name}</span>
       </div>
 
-      <div
+      <button
         className="flex gap-2 w-full xl:w-64"
         onClick={(e) => e.stopPropagation()}
       >
@@ -82,7 +82,7 @@ export function AlimentoDiarioItem({
             ))}
           </SelectContent>
         </Select>
-      </div>
+      </button>
 
       {/* Botón de Eliminar (Solo aparece en modo edición) */}
       {isEditing && (
@@ -99,6 +99,6 @@ export function AlimentoDiarioItem({
           <X className="h-4 w-4" />
         </Button>
       )}
-    </div>
+    </button>
   );
 }

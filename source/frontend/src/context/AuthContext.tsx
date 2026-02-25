@@ -3,6 +3,7 @@ import React, {
   useState,
   useEffect,
   type ReactNode,
+  useMemo,
 } from "react";
 import { authService } from "@/api/authService";
 import type { User, AuthResponse } from "@/types";
@@ -30,7 +31,7 @@ interface AuthContextType {
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext<AuthContextType | undefined>(
-  undefined
+  undefined,
 );
 
 interface AuthProviderProps {
@@ -83,7 +84,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const response: AuthResponse = await authService.login(
         correo,
-        contrasena
+        contrasena,
       );
 
       // Guardar token
@@ -135,6 +136,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setToken(null);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const value: AuthContextType = {
     user,
     token,
@@ -146,5 +148,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     checkAuth,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  const memoizedValue = useMemo(() => value, [value]);
+
+  return (
+    <AuthContext.Provider value={memoizedValue}>
+      {children}
+    </AuthContext.Provider>
+  );
 };

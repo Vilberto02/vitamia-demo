@@ -1,18 +1,22 @@
 
+import { Toaster } from "react-hot-toast";
 import { Register } from "../components/Register";
 import NameVitamia from "@/assets/name-bg-vitamia.svg";
 
 export function RegisterPage() {
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-background-page p-4 overflow-y-hidden">
-      <div className="max-w-sm sm:max-w-lg xl:max-w-xl z-10">
-        <Register />
+    <>
+      <Toaster></Toaster>
+      <div className="relative min-h-screen flex items-center justify-center bg-background-page p-4 overflow-y-hidden">
+        <div className="max-w-sm sm:max-w-lg xl:max-w-xl z-10">
+          <Register />
+        </div>
+        <img
+          src={NameVitamia}
+          alt="Nombre de Vitamia"
+          className="absolute -bottom-15 left-1/2 -translate-x-1/2 z-0 pointer-events-none invisible md:visible"
+        />
       </div>
-      <img
-        src={NameVitamia}
-        alt="Nombre de Vitamia"
-        className="absolute -bottom-15 left-1/2 -translate-x-1/2 z-0 pointer-events-none invisible md:visible"
-      />
-    </div>
+    </>
   );
 }

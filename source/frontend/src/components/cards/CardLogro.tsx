@@ -6,7 +6,11 @@ interface CardLogroProps {
   isCompleted?: boolean;
 }
 
-export function CardLogro({ title, description, isCompleted }: CardLogroProps) {
+export function CardLogro({
+  title,
+  description,
+  isCompleted,
+}: Readonly<CardLogroProps>) {
   return (
     <div className="flex justify-between items-center">
       <div>

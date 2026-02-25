@@ -31,14 +31,14 @@ export function ContainerMisPlanes() {
           <ScrollArea className="h-40">
             <div className="flex flex-col gap-3 pr-3">
               {miListadoPlanes.map((plan) => (
-                <div
+                <button
                   key={plan.id}
                   className="flex items-center justify-between gap-4 cursor-pointer border border-verde-te/40 p-2 rounded-md bg-verde-te/10 hover:bg-verde-te/40"
                   onClick={() => handleSelectPlan(plan.plan)}
                 >
                   <p className="line-clamp-1 text-sm">{plan.plan.nombre}</p>
                   <MoveUpRight className="w-5 h-5 shrink-0 text-naranja"></MoveUpRight>
-                </div>
+                </button>
               ))}
             </div>
           </ScrollArea>

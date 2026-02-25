@@ -45,16 +45,16 @@ type CardAlimentoDiarioType = {
   name: string;
 };
 
-export function CardAlimentoDiario({ name }: CardAlimentoDiarioType) {
+export function CardAlimentoDiario({ name }: Readonly<CardAlimentoDiarioType>) {
   const [alimentos, setAlimentos] = useState<Alimento[]>(
-    alimentosIniciales[name] || []
+    alimentosIniciales[name] || [],
   );
   const [isEditing, setIsEditing] = useState(false);
   const [open, setOpen] = useState(false);
   const [nuevoNombre, setNuevoNombre] = useState("");
   const [nuevaCantidad, setNuevaCantidad] = useState("");
   const [nuevaUnidad, setNuevaUnidad] = useState<unidadMedida>(
-    getUnidadById("Gramos")
+    getUnidadById("Gramos"),
   );
   const [openFoodSheet, setOpenFoodSheet] = useState(false);
   const [selectedFoodInfo, setSelectedFoodInfo] = useState<
@@ -84,7 +84,7 @@ export function CardAlimentoDiario({ name }: CardAlimentoDiarioType) {
     const nuevoAlimento: Alimento = {
       id: Date.now(), // ID único simple usando la fecha
       name: nuevoNombre,
-      cantidad: parseInt(nuevaCantidad, 10),
+      cantidad: Number.parseInt(nuevaCantidad, 10),
       unidad: nuevaUnidad,
     };
 
@@ -107,7 +107,6 @@ export function CardAlimentoDiario({ name }: CardAlimentoDiarioType) {
   const verificarAlimentos = () => {
     if (alimentos.length === 0) {
       toast.error("No hay alimentos registrados.");
-      return;
     }
   };
 

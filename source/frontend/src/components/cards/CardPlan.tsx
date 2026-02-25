@@ -1,4 +1,3 @@
-//import { getTagColorClass } from "@/lib/utils";
 import type { PlanCompleto } from "@/types";
 import { Route } from "lucide-react";
 
@@ -7,9 +6,9 @@ type CardPlanProps = {
   onClick: () => void;
 };
 
-export function CardPlan({ plan, onClick }: CardPlanProps) {
+export function CardPlan({ plan, onClick }: Readonly<CardPlanProps>) {
   return (
-    <div
+    <button
       className="flex gap-6 items-start border-2 border-stone-50 px-2 py-4 md:py2 rounded-2xl hover:bg-stone-50/50 cursor-pointer"
       onClick={onClick}
     >
@@ -23,23 +22,7 @@ export function CardPlan({ plan, onClick }: CardPlanProps) {
         <p className="text-gris-oscuro text-base line-clamp-2">
           {plan.descripcion}
         </p>
-        {/*
-        <div className="flex flex-wrap gap-1 sm:gap-2">
-          {plan.tags.map((tag) => {
-            const tagColorClass = getTagColorClass(tag);
-
-            return (
-              <p
-                key={tag}
-                className={`min-w-36 mt-2 text-center text-sm py-1 px-4 border font-medium rounded-xl ${tagColorClass}`}
-              >
-                {tag}
-              </p>
-            );
-          })}
-        </div>
-        */}
       </div>
-    </div>
+    </button>
   );
 }

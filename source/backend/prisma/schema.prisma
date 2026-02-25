@@ -43,6 +43,7 @@ model Usuario {
   consumos           Consumo[]
   recetas_consumidas RecetaConsumida[]
   planes             PlanUsuario[]
+  logros             LogroUsuario[]
 
   @@map("usuarios")
 }
@@ -145,4 +146,30 @@ model PlanUsuario {
   usuario    Usuario  @relation(fields: [id_usuario], references: [id])
 
   @@map("plan_usuario")
+}
+
+model Logro {
+  id               Int              @id @default(autoincrement())
+  subtitulo        String           @db.VarChar(100)
+  descripcion      String           @db.VarChar(255)
+  tipo             String           @db.VarChar(50) // racha, cantidad, categoria
+  criterio         String           @db.VarChar(100) // ej: "frutas:5", "verduras:7", "calorias:2000"
+  icono            String?          @db.VarChar(50)
+  logros_usuarios  LogroUsuario[]
+
+  @@map("logros")
+}
+
+model LogroUsuario {
+  id               Int      @id @default(autoincrement())
+  id_usuario       Int
+  id_logro         Int
+  fecha_obtencion  DateTime @default(now())
+  progreso_actual  Int      @default(0) // Para mostrar progreso hacia el logro
+  
+  usuario          Usuario  @relation(fields: [id_usuario], references: [id])
+  logro            Logro    @relation(fields: [id_logro], references: [id])
+
+  @@unique([id_usuario, id_logro])
+  @@map("logro_usuario")
 }

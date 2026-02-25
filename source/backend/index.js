@@ -11,6 +11,7 @@ const autenticacionRoutes = require('./routes/autenticacionRoutes');
 const informacionRoutes = require('./routes/informacionRoutes');
 const recetaConsumidaRoutes = require('./routes/recetaConsumidaRoutes');
 const planRoutes = require('./routes/planRoutes');
+const logroRoutes = require('./routes/logroRoutes');
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use('/api/auth', autenticacionRoutes);
 app.use('/api/informacion', informacionRoutes);
 app.use('/api/recetas-consumidas', recetaConsumidaRoutes);
 app.use('/api/planes', planRoutes);
+app.use('/api/logros', logroRoutes);
 
 const PORT = process.env.PORT || 3000;
 

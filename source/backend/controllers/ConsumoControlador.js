@@ -1,4 +1,5 @@
 const ConsumoModelo = require('../models/ConsumoModelo');
+const LogroControlador = require('./LogroControlador');
 
 const ConsumoControlador = {
   /**
@@ -240,6 +241,9 @@ const ConsumoControlador = {
       // Calcular calorías totales del consumo
       const caloriasConsumo = Math.round(cantidad * consumo.alimento.calorias * 100) / 100;
 
+      // Verificar logros después de agregar el consumo
+      const logros = await LogroControlador.verificarLogros(idUsuario);
+
       // Estructurar la respuesta
       const respuesta = {
         mensaje: 'Consumo registrado exitosamente',
@@ -257,6 +261,10 @@ const ConsumoControlador = {
           descripcion: `${consumo.cantidad} ${consumo.unidad} de ${consumo.alimento.nombre}`,
           tipo: consumo.tipo_comida.nombre,
           calorias: caloriasConsumo
+        },
+        logros: {
+          nuevos_desbloqueados: logros.nuevos,
+          total_nuevos: logros.nuevos.length
         }
       };
 

@@ -29,32 +29,34 @@ model Receta {
 }
 
 model Usuario {
-  id                 Int                 @id @default(autoincrement())
-  nombre             String              @db.VarChar(100)
-  apellido           String              @db.VarChar(100)
-  correo             String              @unique @db.VarChar(100)
-  contrasena         String              @db.VarChar(255)
-  fecha_nacimiento   DateTime            @db.Date
-  meta               String?             @db.VarChar(255)
-  peso               Float
-  altura             Float
-  imc                Float
-  imagen             String?             @db.VarChar(255)
-  consumos           Consumo[]
-  recetas_consumidas RecetaConsumida[]
-  planes             PlanUsuario[]
-  logros             LogroUsuario[]
+  id                    Int                      @id @default(autoincrement())
+  nombre                String                   @db.VarChar(100)
+  apellido              String                   @db.VarChar(100)
+  correo                String                   @unique @db.VarChar(100)
+  contrasena            String                   @db.VarChar(255)
+  fecha_nacimiento      DateTime                 @db.Date
+  meta                  String?                  @db.VarChar(255)
+  peso                  Float
+  altura                Float
+  imc                   Float
+  imagen                String?                  @db.VarChar(255)
+  consumos              Consumo[]
+  recetas_consumidas    RecetaConsumida[]
+  planes                PlanUsuario[]
+  logros                LogroUsuario[]
+  alimentos_disponibles AlimentoDisponible[]
 
   @@map("usuarios")
 }
 
 model Alimento {
-  id              Int         @id @default(autoincrement())
-  nombre          String      @db.VarChar(100)
-  unidad          String      @db.VarChar(50)
-  calorias        Float       @default(0)
-  categoria       String      @db.VarChar(50)
-  consumos        Consumo[]
+  id                     Int                      @id @default(autoincrement())
+  nombre                 String                   @db.VarChar(100)
+  unidad                 String                   @db.VarChar(50)
+  calorias               Float                    @default(0)
+  categoria              String                   @db.VarChar(50)
+  consumos               Consumo[]
+  alimentos_disponibles  AlimentoDisponible[]
 
   @@map("alimentos")
 }
@@ -172,4 +174,19 @@ model LogroUsuario {
 
   @@unique([id_usuario, id_logro])
   @@map("logro_usuario")
+}
+
+model AlimentoDisponible {
+  id          Int      @id @default(autoincrement())
+  id_usuario  Int
+  id_alimento Int
+  cantidad    Float?   // Cantidad disponible (opcional)
+  unidad      String?  @db.VarChar(50)
+  agregado_en DateTime @default(now())
+  
+  usuario     Usuario  @relation(fields: [id_usuario], references: [id])
+  alimento    Alimento @relation(fields: [id_alimento], references: [id])
+
+  @@unique([id_usuario, id_alimento]) // Un usuario no puede tener el mismo alimento duplicado
+  @@map("alimento_disponible")
 }

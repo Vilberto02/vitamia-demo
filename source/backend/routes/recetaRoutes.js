@@ -7,9 +7,11 @@ const verificarToken = require('../middlewares/autenticacion');
 router.use(verificarToken);
 
 // Obtener todas las recetas
-router.get('/', RecetaControlador.obtenerTodas);
+router.get('/', RecetaControlador.obtenerTodas.bind(RecetaControlador));
 
-// Obtener recetas por tipo (desayuno, almuerzo, cena, snack)
-router.get('/tipo/:tipo', RecetaControlador.obtenerPorTipo);
+// Generar recetas con IA basadas en alimentos proporcionados desde el frontend
+// POST body: { alimentos: [{ nombre, categoria, cantidad?, unidad? }] }
+// Requiere mínimo 3 alimentos para generar con OpenAI
+router.post('/tipo/:tipo', RecetaControlador.obtenerPorTipo.bind(RecetaControlador));
 
 module.exports = router;

@@ -16,17 +16,6 @@ const ConsumoControlador = {
     }
   },
 
-  async obtenerPorFecha(req, res) {
-    try {
-      const { fecha } = req.params;
-      const consumos = await ConsumoModelo.obtenerPorFecha(fecha);
-      res.json(consumos);
-    } catch (err) {
-      console.error('Error al obtener consumos por fecha:', err);
-      res.status(500).json({ error: 'Error al obtener consumos por fecha' });
-    }
-  },
-
   /**
    * Obtener consumos del usuario autenticado segmentados por tipo de comida
    * Solo muestra los consumos del día actual

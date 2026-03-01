@@ -19,6 +19,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Debug middleware
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+});
+
 // Rutas
 app.use('/api/recetas', recetaRoutes);
 app.use('/api/usuarios', usuarioRoutes);

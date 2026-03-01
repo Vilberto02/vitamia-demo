@@ -12,7 +12,15 @@ El proyecto consiste en desarrollar una aplicación que permite mejorar los háb
 
 ---
 
-## 📋 Tabla de Contenidos
+## � ¿Primera vez configurando el proyecto?
+
+📖 **Ve a la [Guía de Configuración Completa (SETUP.md)](SETUP.md)** - Paso a paso para configurar desde cero.
+
+🔑 **Necesitas obtener tu API Key de Google Gemini (gratis)** para que funcione la generación de recetas con IA.
+
+---
+
+## �📋 Tabla de Contenidos
 
 - [Características](#características)
 - [Tecnologías](#tecnologías)
@@ -41,6 +49,7 @@ El proyecto consiste en desarrollar una aplicación que permite mejorar los háb
 - 📅 Planes de alimentación personalizados
 - 💡 Información nutricional y consejos
 - 📈 Estadísticas de progreso
+- 🤖 **Generación de recetas personalizadas con IA (Google Gemini - Gratis)**
 
 ---
 
@@ -52,6 +61,7 @@ El proyecto consiste en desarrollar una aplicación que permite mejorar los háb
 - MySQL
 - JWT (jsonwebtoken 9.0.2)
 - bcrypt 6.0.0
+- **Google Gemini API** (generación de recetas con IA - gratuita)
 
 **Frontend:**
 - React + TypeScript
@@ -80,17 +90,54 @@ npm install
 
 ## ⚙️ Configuración
 
-### Variables de Entorno (.env)
+### 1. Clonar el repositorio
 
-Crea un archivo `.env` en `source/backend/`:
-
-```env
-DATABASE_URL="mysql://root:tu_password@localhost:3306/vitamia_db"
-JWT_SECRET="tu_clave_secreta_jwt"
-PORT=3001
+```bash
+git clone <url-del-repo>
+cd vitamia-demo
 ```
 
-### Base de Datos
+### 2. Configurar Variables de Entorno
+
+Copia el archivo de ejemplo y edítalo con tus credenciales:
+
+```bash
+cd source/backend
+cp .env.example .env
+```
+
+Edita `source/backend/.env` con tus valores:
+
+```env
+# Base de datos MySQL
+DATABASE_URL="mysql://root:tu_password@localhost:3306/vitamia_db"
+
+# Clave secreta para JWT
+JWT_SECRET="tu_clave_secreta_jwt_muy_segura"
+
+# Puerto del servidor
+PORT=3000
+
+# 🆕 IMPORTANTE: API Key de Google Gemini (GRATIS)
+GEMINI_API_KEY=tu-api-key-aqui
+```
+
+### 3. Obtener API Key de Google Gemini (GRATIS)
+
+🔑 **Paso a paso para obtener tu API key:**
+
+1. Ve a [Google AI Studio](https://aistudio.google.com/app/apikey)
+2. Inicia sesión con tu cuenta de Google
+3. Haz clic en **"Create API key"**
+4. Selecciona **"Create API key in new project"**
+5. Copia la API key generada (empieza con `AIzaSy...`)
+6. Pégala en tu archivo `.env` en la variable `GEMINI_API_KEY`
+
+✅ **100% Gratuito** - 1,500 requests/día
+
+📄 **Guía completa:** [docs/GEMINI_API_SETUP.md](docs/GEMINI_API_SETUP.md)
+
+### 4. Base de Datos
 
 ```bash
 cd source/backend

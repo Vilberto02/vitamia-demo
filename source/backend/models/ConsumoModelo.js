@@ -13,19 +13,6 @@ const ConsumoModelo = {
       }
     });
   },
-  async obtenerPorFecha(fecha) {
-    return await prisma.consumo.findMany({
-      where: { fecha: new Date(fecha) },
-      include: {
-        alimento: true,
-        usuario: true,
-        tipo_comida: true
-      },
-      orderBy: {
-        fecha: 'desc'
-      }
-    });
-  },
 
   /**
    * Obtener consumos del usuario en una fecha específica, agrupados por tipo de comida

@@ -40,9 +40,17 @@ export function AlimentoDiarioItem({
   }, [unidad]);
 
   return (
-    <button
+    <div
+      role="button"
+      tabIndex={0}
       className="flex flex-col items-start xl:flex-row xl:items-center gap-2 p-2 border rounded-lg animate-in fade-in-0 slide-in-from-top-2 duration-300 cursor-pointer"
       onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick();
+        }
+      }}
     >
       <div className="flex items-center gap-2 flex-1">
         <div className="p-2 bg-gray-100 rounded-full">
@@ -51,7 +59,7 @@ export function AlimentoDiarioItem({
         <span className="font-medium select-none">{name}</span>
       </div>
 
-      <button
+      <div
         className="flex gap-2 w-full xl:w-64"
         onClick={(e) => e.stopPropagation()}
       >
@@ -82,7 +90,7 @@ export function AlimentoDiarioItem({
             ))}
           </SelectContent>
         </Select>
-      </button>
+      </div>
 
       {/* Botón de Eliminar (Solo aparece en modo edición) */}
       {isEditing && (
@@ -99,6 +107,6 @@ export function AlimentoDiarioItem({
           <X className="h-4 w-4" />
         </Button>
       )}
-    </button>
+    </div>
   );
 }

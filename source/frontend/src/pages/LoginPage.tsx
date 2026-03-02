@@ -1,11 +1,11 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { type LoginFields } from "../types/index";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NameVitamia from "@/assets/name-bg-vitamia.svg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+
 import { useAuth } from "@/hooks/useAuth";
 import { ChevronLeft } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
@@ -19,7 +19,7 @@ export const LoginPage = () => {
   } = useForm<LoginFields>({
     mode: "onChange",
   });
-  const [redirect, setRedirect] = useState(false);
+
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ export const LoginPage = () => {
       console.log("Inicio de sesion exitoso");
 
       toast.success("Inicio de sesión exitoso.");
-      setRedirect(true);
+      navigate("/home");
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
 
@@ -40,8 +40,6 @@ export const LoginPage = () => {
 
     reset();
   };
-
-  if (redirect) return <Navigate to={"/home"}></Navigate>;
 
   return (
     <>

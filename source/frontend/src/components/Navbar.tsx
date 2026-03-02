@@ -28,7 +28,7 @@ export function Navbar({
         <CircleUserRound width={32} height={32}></CircleUserRound>
         <div>
           <p className="select-none font-medium text-base text-left">
-            {user?.nombre}, {user?.apellido}
+            {user?.nombre.split(" ")[0]}, {user?.apellido.split(" ")[0]}
           </p>
           <p className="font-normal text-xs text-gris-oscuro">{user?.correo}</p>
         </div>

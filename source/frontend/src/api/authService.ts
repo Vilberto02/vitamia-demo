@@ -1,4 +1,3 @@
-import axios from "axios";
 import { baseURL } from "@/api/api";
 import type {
   AuthResponse,
@@ -7,27 +6,35 @@ import type {
   User,
 } from "@/types/index";
 
-// Instancia de axios
-const authAPI = axios.create({
-  baseURL: `${baseURL}/auth`,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+const AUTH_BASE = `${baseURL}/auth`;
 
-// Interceptor para agregar el token a todas las peticiones
-authAPI.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("vitamia_token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+// Helper para realizar peticiones con fetch (reemplaza axios + interceptor)
+async function authFetch<T>(
+  endpoint: string,
+  options: RequestInit = {},
+): Promise<T> {
+  const token = localStorage.getItem("vitamia_token");
+
+  const headers: HeadersInit = {
+    "Content-Type": "application/json",
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    ...(options.headers as Record<string, string>),
+  };
+
+  const response = await fetch(`${AUTH_BASE}${endpoint}`, {
+    ...options,
+    headers,
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => null);
+    const message =
+      errorBody?.mensaje ?? errorBody?.message ?? response.statusText;
+    throw new Error(message);
   }
-);
+
+  return (await response.json()) as T;
+}
 
 // Servicio de autenticación
 export const authService = {
@@ -35,27 +42,27 @@ export const authService = {
    * Iniciar sesión
    */
   async login(correo: string, contrasena: string): Promise<AuthResponse> {
-    const response = await authAPI.post<AuthResponse>("/login", {
-      correo,
-      contrasena,
-    } as LoginRequest);
-    return response.data;
+    return authFetch<AuthResponse>("/login/", {
+      method: "POST",
+      body: JSON.stringify({ correo, contrasena } as LoginRequest),
+    });
   },
 
   /**
    * Registrar nuevo usuario
    */
   async registro(userData: RegisterRequest): Promise<AuthResponse> {
-    const response = await authAPI.post<AuthResponse>("/registro", userData);
-    return response.data;
+    return authFetch<AuthResponse>("/registro/", {
+      method: "POST",
+      body: JSON.stringify(userData),
+    });
   },
 
   /**
    * Obtener usuario actual
    */
   async getCurrentUser(): Promise<User> {
-    const response = await authAPI.get<User>("/me");
-    return response.data;
+    return authFetch<User>("/me/");
   },
 
   /**

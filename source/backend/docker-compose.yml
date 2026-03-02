@@ -21,7 +21,7 @@ services:
       - "3000:3000"
     environment:
       # Nota: 'db' es el nombre del servicio de arriba
-      - DATABASE_URL=mysql://root:password@mysql.railway.internal:3306/railway
+      - DATABASE_URL=${DATABASE_URL}
       - PORT=3000
       - JWT_SECRET=${JWT_SECRET}
       - GEMINI_API_KEY=${GEMINI_API_KEY}

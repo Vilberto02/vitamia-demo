@@ -1,4 +1,4 @@
-FROM node:18-slim
+FROM node:20-alpine3.17
 
 # Instalamos OpenSSL (vital para Prisma)
 RUN apt-get update -y && apt-get install -y openssl libssl-dev ca-certificates

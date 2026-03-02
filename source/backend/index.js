@@ -1,4 +1,3 @@
-console.log("DATABASE_URL EN RUNTIME:", process.env.DATABASE_URL);
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
@@ -39,6 +38,6 @@ app.use('/api/logros', logroRoutes);
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Backend corriendo en el puerto ${PORT}`);
 });

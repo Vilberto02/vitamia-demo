@@ -6,9 +6,13 @@ type CardRecipeProps = {
   onClick: () => void;
 };
 
-export function CardRecipe({ title, description, onClick }: CardRecipeProps) {
+export function CardRecipe({
+  title,
+  description,
+  onClick,
+}: Readonly<CardRecipeProps>) {
   return (
-    <div
+    <button
       className="flex gap-6 items-start border-2 border-stone-50 px-2 py-3 md:py-2 rounded-2xl hover:bg-stone-50/50 cursor-pointer"
       onClick={onClick}
     >
@@ -21,6 +25,6 @@ export function CardRecipe({ title, description, onClick }: CardRecipeProps) {
         </h4>
         <p className="text-gris-oscuro text-base line-clamp-3">{description}</p>
       </div>
-    </div>
+    </button>
   );
 }

@@ -1,16 +1,16 @@
-import {type LucideIcon} from "lucide-react"
+import { type LucideIcon } from "lucide-react";
 
 export function SidebarItem({
   name,
   Icon,
   isActive,
   onClick,
-}: {
+}: Readonly<{
   name: string;
   Icon: LucideIcon;
   isActive: boolean;
   onClick: () => void;
-}) {
+}>) {
   return (
     <button
       type="button"

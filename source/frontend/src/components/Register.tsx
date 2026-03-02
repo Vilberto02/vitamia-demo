@@ -7,12 +7,14 @@ import { Link, Navigate } from "react-router";
 import { useState } from "react";
 import type { RegisterFields } from "@/types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import Swal from "sweetalert2";
+import { useAuth } from "@/hooks/useAuth";
+import toast from "react-hot-toast";
 
 export function Register() {
   const [redirect, setRedirect] = useState<boolean>(false);
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 3;
+  const { register: registerUser } = useAuth();
 
   const {
     register,
@@ -26,20 +28,23 @@ export function Register() {
 
   const onSubmit: SubmitHandler<RegisterFields> = async (data) => {
     try {
-      console.log("Datos enviados", data);
-      Swal.fire({
-        icon: "success",
-        title: "Registro exitoso.",
-        text: "Ya puedes iniciar sesión en la plataforma.",
+      // Mapear los datos del formulario al formato del backend
+      await registerUser({
+        nombre: data.name,
+        apellido: data.lastname,
+        correo: data.email,
+        contrasena: data.password,
+        fecha_nacimiento: data.dateBirth,
+        meta: data.goal,
+        peso: Number.parseFloat(data.weight),
+        altura: Number.parseFloat(data.height) / 100, // Convertir de cm a metros
       });
+      toast.success("Se registró tu cuenta exitosamente.");
       setRedirect(true);
-    } catch (error) {
-      console.log("Error al enviar los datos.", error);
-      Swal.fire({
-        icon: "error",
-        title: "Error al registrar tus datos.",
-        text: "Por favor, inténtalo de nuevo.",
-      });
+    } catch (error: unknown) {
+      console.error("Error al registrar:", error);
+
+      toast.error("Error al registrar tu cuenta.");
     }
     reset();
   };
@@ -66,6 +71,12 @@ export function Register() {
     }
   };
 
+  const STEP_LABELS: Record<number, string> = {
+    1: "Credenciales de acceso",
+    2: "Información personal",
+    3: "Datos físicos y objetivo",
+  };
+
   if (redirect) return <Navigate to="/login"></Navigate>;
 
   return (
@@ -75,18 +86,14 @@ export function Register() {
         alt="Icono de Uvas"
         className="w-24 absolute top-0 right-0"
       />
-      
+
       <div className="flex justify-between items-start">
         <div>
           <h1 className="font-bold text-4xl text-[var(--bg-carbon-oscuro)]">
             Bienvenido
           </h1>
           <p className="text-base text-[var(--bg-gris-oscuro)] mt-2">
-            Paso {currentStep} de {totalSteps}: {
-              currentStep === 1 ? "Credenciales de acceso" :
-              currentStep === 2 ? "Información personal" :
-              "Datos físicos y objetivo"
-            }
+            Paso {currentStep} de {totalSteps}: {STEP_LABELS[currentStep]}
           </p>
         </div>
       </div>
@@ -97,9 +104,7 @@ export function Register() {
           <div
             key={step}
             className={`h-2 flex-1 rounded-full transition-all ${
-              step <= currentStep
-                ? "bg-turquesa"
-                : "bg-gray-200"
+              step <= currentStep ? "bg-turquesa" : "bg-gray-200"
             }`}
           ></div>
         ))}
@@ -152,7 +157,8 @@ export function Register() {
                       },
                       minLength: {
                         value: 6,
-                        message: "La contraseña debe tener al menos 6 caracteres.",
+                        message:
+                          "La contraseña debe tener al menos 6 caracteres.",
                       },
                     })}
                   />
@@ -350,7 +356,10 @@ export function Register() {
 
       <p className="text-center text-sm mt-4">
         ¿Ya tienes una cuenta?{" "}
-        <Link to="/login" className="text-[var(--bg-turquesa)] underline hover:text-[var(--bg-turquesa)]/80">
+        <Link
+          to="/login"
+          className="text-[var(--bg-turquesa)] underline hover:text-[var(--bg-turquesa)]/80"
+        >
           Inicia sesión aquí.
         </Link>
       </p>

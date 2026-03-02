@@ -5,7 +5,11 @@ import { ScrollArea } from "../ui/scroll-area";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export function DoughnutChart({ labels, values, colors }: DoughnutChartProps) {
+export function DoughnutChart({
+  labels,
+  values,
+  colors,
+}: Readonly<DoughnutChartProps>) {
   // Dataset y opciones ajustadas para replicar el estilo del diseño.
   const total = values.reduce((sum, cur) => sum + cur, 0);
   const data = {
@@ -43,7 +47,7 @@ export function DoughnutChart({ labels, values, colors }: DoughnutChartProps) {
           <div className="space-y-2">
             {labels.map((label, index) => (
               <div
-                key={index}
+                key={label}
                 className="flex items-center justify-between gap-6 xl:gap-14"
               >
                 <div className="flex items-center gap-4">

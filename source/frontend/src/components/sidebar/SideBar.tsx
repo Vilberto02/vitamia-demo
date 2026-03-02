@@ -2,7 +2,8 @@ import type { SideBarItemType } from "@/types";
 import { SidebarItem } from "./SideBarItem";
 import { useNavigate } from "react-router-dom";
 import Vitamia from "@/assets/vitamia-logo.svg";
-import Swal from "sweetalert2";
+import { useAuth } from "@/hooks/useAuth";
+import toast from "react-hot-toast";
 
 type SidebarProps = {
   items: SideBarItemType[];
@@ -16,8 +17,9 @@ export function SideBar({
   activeItem,
   setActiveItem,
   isOpen,
-}: SidebarProps) {
+}: Readonly<SidebarProps>) {
   const navigate = useNavigate();
+  const { logout } = useAuth();
   return (
     <aside
       aria-label="Navegación principal"
@@ -54,14 +56,15 @@ export function SideBar({
       <button
         type="button"
         onClick={() => {
-          console.log("Cerrando sesión...");
-          Swal.fire({
-            icon: "success",
-            title: "Sesión cerrada.",
-            text: "Hasta pronto.",
-            confirmButtonColor: "#177e89",
-          });
-          navigate("/");
+          try {
+            logout();
+            navigate("/");
+            toast.success("Sesión cerrada exitosamente.");
+            console.log("Se cerró la sesión exitosamente.");
+          } catch (error) {
+            console.error("Error al cerrar sesión", error);
+            navigate("/");
+          }
         }}
         aria-label="Cerrar sesión"
         className="cursor-pointer hover:text-red-700 w-full"

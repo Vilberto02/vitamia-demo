@@ -5,12 +5,16 @@ import { ScrollArea } from "../ui/scroll-area";
 import { Badge } from "../Badge";
 
 type FoodDetailSheetProps = {
-  isOpen: boolean,
+  isOpen: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   selectedFood?: AlimentoInfo;
-}
+};
 
-export function FoodDetailSheet({isOpen, setOpen, selectedFood}:FoodDetailSheetProps) {
+export function FoodDetailSheet({
+  isOpen,
+  setOpen,
+  selectedFood,
+}: Readonly<FoodDetailSheetProps>) {
   return (
     <Sheet open={isOpen} onOpenChange={setOpen}>
       <SheetContent className="p-9">
@@ -20,7 +24,10 @@ export function FoodDetailSheet({isOpen, setOpen, selectedFood}:FoodDetailSheetP
               <SheetTitle className="text-center">
                 <div className="flex flex-col gap-2 justify-center items-center">
                   <div className="w-24 aspect-square rounded-full shrink-0 border-2 border-verde-te flex justify-center items-center">
-                    <HandPlatter className="text-verde-isla" size={40}></HandPlatter>
+                    <HandPlatter
+                      className="text-verde-isla"
+                      size={40}
+                    ></HandPlatter>
                   </div>
                   <p className="font-medium">{selectedFood.name}</p>
                   <p className="font-normal text-gris-oscuro text-sm">

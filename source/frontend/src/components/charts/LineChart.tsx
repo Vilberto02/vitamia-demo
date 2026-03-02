@@ -21,19 +21,18 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  Filler
+  Filler,
 );
-
 
 type LineChartProps = {
   labels?: string[];
   dataValues?: number[];
-}
+};
 
 export function LineChart({
   labels = ["Sem 1", "Sem 2", "Sem 3", "Sem 4"],
   dataValues = [0, 0, 0, 0],
-}: LineChartProps) {
+}: Readonly<LineChartProps>) {
   const data: ChartData<"line"> = {
     labels: labels,
     datasets: [

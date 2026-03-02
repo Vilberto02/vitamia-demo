@@ -28,10 +28,10 @@ export function ContainerInfo() {
                 </div>
                 <div className="flex-1">
                   <h4 className="font-semibold text-carbon-oscuro mb-1">
-                    {info.title}
+                    {info.titulo}
                   </h4>
                   <p className="text-sm text-gris-oscuro line-clamp-2">
-                    {info.description}
+                    {info.descripcion}
                   </p>
                 </div>
               </div>

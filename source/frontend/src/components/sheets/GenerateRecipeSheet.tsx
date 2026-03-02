@@ -8,10 +8,10 @@ import { ScrollArea } from "../ui/scroll-area";
 export function GenerarRecetaSheet({
   isOpen,
   setOpen,
-}: {
+}: Readonly<{
   isOpen: boolean;
   setOpen: (open: boolean) => void;
-}) {
+}>) {
   const handleAceptar = () => {
     Swal.fire({
       title: "Receta agregada",
@@ -74,8 +74,8 @@ export function GenerarRecetaSheet({
                   Ingredientes
                 </h3>
                 <ul className="space-y-2 list-disc pl-5">
-                  {suggestedRecipe.ingredients.map((ingredient, index) => (
-                    <li key={index} className="text-sm text-gris-oscuro">
+                  {suggestedRecipe.ingredients.map((ingredient) => (
+                    <li key={ingredient} className="text-sm text-gris-oscuro">
                       {ingredient}
                     </li>
                   ))}
@@ -94,8 +94,8 @@ export function GenerarRecetaSheet({
                   Preparación
                 </h3>
                 <ol className="space-y-2 list-decimal pl-5">
-                  {suggestedRecipe.preparation.map((step, index) => (
-                    <li key={index} className="text-sm text-gris-oscuro">
+                  {suggestedRecipe.preparation.map((step) => (
+                    <li key={step} className="text-sm text-gris-oscuro">
                       {step}
                     </li>
                   ))}
@@ -114,8 +114,8 @@ export function GenerarRecetaSheet({
                     Beneficios
                   </h3>
                   <ul className="space-y-2 list-disc pl-5">
-                    {suggestedRecipe.benefits.map((benefit, index) => (
-                      <li key={index} className="text-sm text-gris-oscuro">
+                    {suggestedRecipe.benefits.map((benefit) => (
+                      <li key={benefit} className="text-sm text-gris-oscuro">
                         {benefit}
                       </li>
                     ))}
@@ -137,11 +137,8 @@ export function GenerarRecetaSheet({
             <p className="text-carbon-oscuro font-semibold xl:col-span-2">
               ¿Desea agregar la receta?
             </p>
-            <div
-              className="flex md:flex-row flex-col w-full gap-3 pr-3"
-              role="group"
-              aria-label="Acciones de receta"
-            >
+            <fieldset className="flex md:flex-row flex-col w-full gap-3 pr-3">
+              <legend className="sr-only">Acciones de receta</legend>
               <Button
                 type="button"
                 onClick={handleRechazar}
@@ -161,7 +158,7 @@ export function GenerarRecetaSheet({
                 <CheckCheck aria-hidden="true"></CheckCheck>
                 Aceptar
               </Button>
-            </div>
+            </fieldset>
           </footer>
         </article>
       </SheetContent>

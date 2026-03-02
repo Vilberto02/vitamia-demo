@@ -4,6 +4,7 @@ import { LoginPage } from "../pages/LoginPage";
 import { RegisterPage } from "../pages/RegisterPage";
 import { NotFoundPage } from "../pages/NotFoundPage";
 import { LandingPage } from "@/pages/LandingPage";
+import { PrivateRouter } from "./PrivateRouter";
 
 const routes = createBrowserRouter([
   {
@@ -16,7 +17,11 @@ const routes = createBrowserRouter([
   },
   {
     path: "/home", // DASHBOARD
-    element: <DashboardPage></DashboardPage>,
+    element: (
+      <PrivateRouter>
+        <DashboardPage></DashboardPage>
+      </PrivateRouter>
+    ),
   },
   {
     path: "/",

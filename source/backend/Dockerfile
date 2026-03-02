@@ -9,6 +9,8 @@ RUN npm install
 
 COPY . .
 
+RUN npx prisma generate
+
 EXPOSE 3000
 
-CMD npx prisma generate && npx prisma db push && node index.js
+CMD npx prisma db push && node index.js

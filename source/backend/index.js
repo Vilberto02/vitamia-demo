@@ -36,6 +36,11 @@ app.use('/api/recetas-consumidas', recetaConsumidaRoutes);
 app.use('/api/planes', planRoutes);
 app.use('/api/logros', logroRoutes);
 
+
+app.get("/", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, "0.0.0.0", () => {

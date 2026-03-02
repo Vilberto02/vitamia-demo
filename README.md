@@ -1,14 +1,7 @@
 # Vitamia
 
-Es un proyecto desarrollado por estudiantes de la FISI de la UNMSM para el curso de Experiencia de Usuario y Usabilidad.
+Es un proyecto desarrollado por estudiantes de la FISI de la UNMSM como parte de un curso de la carrera.
 El proyecto consiste en desarrollar una aplicación que permite mejorar los hábitos alimenticios de los estudiantes universitarios.
-
-**Estudiantes:**
-
-- Coronado Cortez, Jeferson
-- Pardave Jara, Asthri
-- Patricio Julca, Vilberto
-- Velarde Huancahuari, Bryan
 
 ---
 

@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+ 
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: vitamia_db
+      MYSQL_ROOT_PASSWORD: root_password_seguro
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+ 
+  backend:
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      # Nota: 'db' es el nombre del servicio de arriba
+      - DATABASE_URL=mysql://root:root_password_seguro@db:3306/vitamia_db
+      - PORT=3000
+      - JWT_SECRET=${JWT_SECRET}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:

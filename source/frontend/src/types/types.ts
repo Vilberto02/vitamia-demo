@@ -205,6 +205,32 @@ export type RecetasPorTipo = {
   snack: RecetaCompleta[];
 };
 
+// Recipe AI Generation Types
+export type AlimentoRequest = {
+  nombre: string;
+  categoria: string;
+  cantidad?: number;
+  unidad?: string;
+};
+
+export type RecetaIA = {
+  titulo: string;
+  descripcion: string;
+  tiempo_preparacion: string;
+  ingredientes: string[];
+  procedimiento: string[];
+  beneficios: string;
+  calorias_aproximadas: number;
+};
+
+export type GenerarRecetasResponse = {
+  origen: string;
+  tipo_comida: string;
+  alimentos_usados: string[];
+  recetas: RecetaIA[];
+  mensaje: string;
+};
+
 // Nutritional Information Types
 export type InformacionNutricional = {
   id: number;

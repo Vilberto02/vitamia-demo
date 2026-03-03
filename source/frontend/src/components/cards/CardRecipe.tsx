@@ -20,10 +20,12 @@ export function CardRecipe({
         <Utensils className="text-white" size={56}></Utensils>
       </div>
       <div className="flex flex-col gap-2">
-        <h4 className="text-xl font-semibold text-carbon-oscuro line-clamp-0 sm:line-clamp-2">
+        <h4 className="text-left text-xl font-semibold text-carbon-oscuro line-clamp-0 sm:line-clamp-2">
           {title}
         </h4>
-        <p className="text-gris-oscuro text-base line-clamp-3">{description}</p>
+        <p className="text-left text-gris-oscuro text-base line-clamp-3">
+          {description}
+        </p>
       </div>
     </button>
   );

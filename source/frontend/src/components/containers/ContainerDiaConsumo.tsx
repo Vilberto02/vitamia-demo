@@ -7,7 +7,15 @@ import { useState } from "react";
 import type { Recipe } from "@/types";
 import { RecipeDetailSheet } from "../sheets/RecipeDetailSheet";
 
-export function ContainerDiaConsumo() {
+type ContainerDiaConsumoProps = {
+  activeTab: string;
+  onTabChange: (tab: string) => void;
+};
+
+export function ContainerDiaConsumo({
+  activeTab,
+  onTabChange,
+}: Readonly<ContainerDiaConsumoProps>) {
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const [open, setOpen] = useState(false);
 
@@ -18,7 +26,7 @@ export function ContainerDiaConsumo() {
 
   return (
     <div className="flex w-full h-full flex-col gap-6">
-      <Tabs defaultValue="desayuno" className="">
+      <Tabs value={activeTab} onValueChange={onTabChange} className="">
         <TabsList>
           <TabsTrigger value="desayuno" className="select-none">
             Desayuno
@@ -29,7 +37,7 @@ export function ContainerDiaConsumo() {
           <TabsTrigger value="cena" className="select-none">
             Cena
           </TabsTrigger>
-          <TabsTrigger value="snacks" className="select-none">
+          <TabsTrigger value="snack" className="select-none">
             Snacks
           </TabsTrigger>
         </TabsList>
@@ -93,7 +101,7 @@ export function ContainerDiaConsumo() {
             </CardContent>
           </Card>
         </TabsContent>
-        <TabsContent value="snacks">
+        <TabsContent value="snack">
           <Card className="">
             <CardContent className="">
               <ScrollArea className="h-[648px]">

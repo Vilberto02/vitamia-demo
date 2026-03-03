@@ -16,10 +16,10 @@ export function CardPlan({ plan, onClick }: Readonly<CardPlanProps>) {
         <Route className="text-white" size={56}></Route>
       </div>
       <div className="flex flex-col gap-2">
-        <h4 className="text-xl font-semibold text-carbon-oscuro line-clamp-1 sm:line-clamp-2">
+        <h4 className="text-left text-xl font-semibold text-carbon-oscuro line-clamp-1 sm:line-clamp-2">
           {plan.nombre}
         </h4>
-        <p className="text-gris-oscuro text-base line-clamp-2">
+        <p className="text-left text-gris-oscuro text-base line-clamp-2">
           {plan.descripcion}
         </p>
       </div>

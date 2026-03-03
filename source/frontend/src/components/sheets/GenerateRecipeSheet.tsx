@@ -1,9 +1,9 @@
 import Swal from "sweetalert2";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent } from "../ui/sheet";
-import { suggestedRecipe } from "@/mocks/mocks";
-import { CheckCheck, X } from "lucide-react";
+import { CheckCheck, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { ScrollArea } from "../ui/scroll-area";
+import { useRecipe } from "@/hooks/useRecipe";
 
 export function GenerarRecetaSheet({
   isOpen,
@@ -12,6 +12,23 @@ export function GenerarRecetaSheet({
   isOpen: boolean;
   setOpen: (open: boolean) => void;
 }>) {
+  const { generadas, recetaSeleccionada, seleccionarReceta, limpiarGeneradas } =
+    useRecipe();
+
+  const recetas = generadas?.recetas ?? [];
+  const currentIndex = recetaSeleccionada
+    ? recetas.indexOf(recetaSeleccionada)
+    : 0;
+
+  const handleNavegar = (direction: "prev" | "next") => {
+    if (recetas.length === 0) return;
+    const newIndex =
+      direction === "prev"
+        ? (currentIndex - 1 + recetas.length) % recetas.length
+        : (currentIndex + 1) % recetas.length;
+    seleccionarReceta(recetas[newIndex]);
+  };
+
   const handleAceptar = () => {
     Swal.fire({
       title: "Receta agregada",
@@ -20,6 +37,7 @@ export function GenerarRecetaSheet({
       confirmButtonText: "Aceptar",
       confirmButtonColor: "#0D484E",
     });
+    limpiarGeneradas();
     setOpen(false);
   };
 
@@ -31,11 +49,25 @@ export function GenerarRecetaSheet({
       confirmButtonText: "Aceptar",
       confirmButtonColor: "#0D484E",
     });
+    limpiarGeneradas();
     setOpen(false);
   };
 
+  const handleClose = (open: boolean) => {
+    if (!open) {
+      limpiarGeneradas();
+    }
+    setOpen(open);
+  };
+
+  if (!recetaSeleccionada) return null;
+
   return (
-    <Sheet aria-label="Receta generada" open={isOpen} onOpenChange={setOpen}>
+    <Sheet
+      aria-label="Receta generada"
+      open={isOpen}
+      onOpenChange={handleClose}
+    >
       <SheetContent className="p-6 sm:p-9 overflow-y-auto" side="bottom">
         {/* Contenido de la receta */}
         <article className="space-y-6 mb-6" aria-labelledby="recipe-title">
@@ -46,18 +78,45 @@ export function GenerarRecetaSheet({
                 id="recipe-title"
                 className="text-xl font-bold text-carbon-oscuro mb-2 line-clamp-2"
               >
-                {suggestedRecipe.title}
+                {recetaSeleccionada.titulo}
               </h2>
-              <p className="text-sm text-gris-oscuro line-clamp-2">
-                {suggestedRecipe.description}
+              <p className="text-sm text-gris-oscuro line-clamp-3">
+                {recetaSeleccionada.descripcion}
               </p>
             </div>
-            <p
-              className="text-verde-isla text-sm pr-2 select-none text-right md:text-left "
-              aria-label="Tipo de receta"
-            >
-              Receta propuesta
-            </p>
+            <div className="flex flex-col items-end gap-1">
+              <p
+                className="text-verde-isla text-sm pr-2 select-none text-right md:text-left"
+                aria-label="Tipo de receta"
+              >
+                Receta de {generadas?.tipo_comida ?? "comida"}
+              </p>
+              {recetas.length > 1 && (
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7 cursor-pointer"
+                    onClick={() => handleNavegar("prev")}
+                    aria-label="Receta anterior"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <span className="text-xs text-gris-oscuro select-none">
+                    {currentIndex + 1}/{recetas.length}
+                  </span>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7 cursor-pointer"
+                    onClick={() => handleNavegar("next")}
+                    aria-label="Receta siguiente"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
+            </div>
           </header>
 
           <ScrollArea className="h-72" aria-label="Detalles de la receta">
@@ -74,7 +133,7 @@ export function GenerarRecetaSheet({
                   Ingredientes
                 </h3>
                 <ul className="space-y-2 list-disc pl-5">
-                  {suggestedRecipe.ingredients.map((ingredient) => (
+                  {recetaSeleccionada.ingredientes.map((ingredient) => (
                     <li key={ingredient} className="text-sm text-gris-oscuro">
                       {ingredient}
                     </li>
@@ -94,7 +153,7 @@ export function GenerarRecetaSheet({
                   Preparación
                 </h3>
                 <ol className="space-y-2 list-decimal pl-5">
-                  {suggestedRecipe.preparation.map((step) => (
+                  {recetaSeleccionada.procedimiento.map((step) => (
                     <li key={step} className="text-sm text-gris-oscuro">
                       {step}
                     </li>
@@ -111,14 +170,19 @@ export function GenerarRecetaSheet({
                     id="benefits-title"
                     className="text-lg font-semibold text-carbon-oscuro mb-3 select-none"
                   >
-                    Beneficios
+                    Información
                   </h3>
                   <ul className="space-y-2 list-disc pl-5">
-                    {suggestedRecipe.benefits.map((benefit) => (
-                      <li key={benefit} className="text-sm text-gris-oscuro">
-                        {benefit}
-                      </li>
-                    ))}
+                    <li className="text-sm text-gris-oscuro">
+                      {recetaSeleccionada.beneficios}
+                    </li>
+                    <li className="text-sm text-gris-oscuro">
+                      Tiempo: {recetaSeleccionada.tiempo_preparacion}
+                    </li>
+                    <li className="text-sm text-gris-oscuro">
+                      Calorías aprox: {recetaSeleccionada.calorias_aproximadas}{" "}
+                      kcal
+                    </li>
                   </ul>
                 </section>
 

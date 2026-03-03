@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -43,9 +43,13 @@ import { FoodDetailSheet } from "../sheets/FoodDetailSheet";
 
 type CardAlimentoDiarioType = {
   name: string;
+  onAlimentosChange?: (alimentos: Alimento[]) => void;
 };
 
-export function CardAlimentoDiario({ name }: Readonly<CardAlimentoDiarioType>) {
+export function CardAlimentoDiario({
+  name,
+  onAlimentosChange,
+}: Readonly<CardAlimentoDiarioType>) {
   const [alimentos, setAlimentos] = useState<Alimento[]>(
     alimentosIniciales[name] || [],
   );
@@ -60,6 +64,11 @@ export function CardAlimentoDiario({ name }: Readonly<CardAlimentoDiarioType>) {
   const [selectedFoodInfo, setSelectedFoodInfo] = useState<
     AlimentoInfo | undefined
   >();
+
+  // Notificar al padre cada vez que cambian los alimentos
+  useEffect(() => {
+    onAlimentosChange?.(alimentos);
+  }, [alimentos, onAlimentosChange]);
 
   // Vaciar alimentos
   const handleVaciarAlimentos = () => {

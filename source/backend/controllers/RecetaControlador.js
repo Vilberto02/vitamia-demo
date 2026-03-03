@@ -57,7 +57,7 @@ const RecetaControlador = {
       }
 
       // Generar recetas con OpenAI
-      console.log(`🍳 Generando recetas para ${tipo} con ${alimentos.length} alimentos`);
+      console.log(`Generando recetas para ${tipo} con ${alimentos.length} alimentos`);
       const prompt = this.construirPrompt(alimentos, tipo);
       const recetasGPT = await this.consultarGPT(prompt);
       
@@ -133,7 +133,7 @@ Responde ÚNICAMENTE con el JSON, sin texto adicional.`;
       const { GoogleGenerativeAI } = require('@google/generative-ai');
       const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-      console.log('📡 Enviando request a Google Gemini...');
+      console.log('Enviando request a Google Gemini...');
 
       const model = genAI.getGenerativeModel({
         model: "models/gemini-2.5-flash-lite" // Modelo lite con mayor cuota gratuita
@@ -146,8 +146,8 @@ Responde ÚNICAMENTE con el JSON, sin texto adicional.`;
       const response = await result.response;
       const text = response.text();
 
-      console.log('✅ Respuesta recibida de Gemini');
-      console.log('📄 Respuesta:', text);
+      console.log('[OK] Respuesta recibida de Gemini');
+      console.log('Respuesta:', text);
 
       // Limpiar la respuesta por si viene con markdown
       let jsonText = text.trim();
@@ -168,7 +168,7 @@ Responde ÚNICAMENTE con el JSON, sin texto adicional.`;
       return datosParseados.recetas;
 
     } catch (error) {
-      console.error('❌ Error al llamar a Google Gemini API:', error);
+      console.error('[ERROR] Error al llamar a Google Gemini API:', error);
       
       // Manejo de errores específicos
       if (error.message && error.message.includes('API_KEY_INVALID')) {

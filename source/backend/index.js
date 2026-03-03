@@ -3,6 +3,9 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
+// Importar seedRunner
+const runAllSeeders = require('./seedRunner');
+
 // Importar rutas
 const recetaRoutes = require('./routes/recetaRoutes');
 const usuarioRoutes = require('./routes/usuarioRoutes');
@@ -40,6 +43,23 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Backend corriendo en el puerto ${PORT}`);
-});
+// Función para iniciar el servidor con seeders
+async function startServer() {
+  try {
+    // Ejecutar seeders antes de iniciar el servidor
+    console.log('\nEjecutando seeders...\n');
+    await runAllSeeders();
+    
+    // Iniciar el servidor después de los seeders
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Backend corriendo en el puerto ${PORT}`);
+      console.log(`API disponible en http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error('Error al iniciar el servidor:', error);
+    process.exit(1);
+  }
+}
+
+// Iniciar el servidor
+startServer();

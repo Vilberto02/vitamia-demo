@@ -58,6 +58,7 @@ model Alimento {
   consumos               Consumo[]
   alimentos_disponibles  AlimentoDisponible[]
 
+  @@unique([nombre, categoria])
   @@map("alimentos")
 }
 
@@ -114,7 +115,7 @@ model Informacion {
 
 model Plan {
   id            Int           @id @default(autoincrement())
-  nombre        String        @db.VarChar(100)
+  nombre        String        @unique @db.VarChar(100)
   informacion   String        @db.VarChar(255)
   descripcion   String        @db.Text
   beneficios    String        @db.Text
@@ -152,7 +153,7 @@ model PlanUsuario {
 
 model Logro {
   id               Int              @id @default(autoincrement())
-  subtitulo        String           @db.VarChar(100)
+  subtitulo        String           @unique @db.VarChar(100)
   descripcion      String           @db.VarChar(255)
   tipo             String           @db.VarChar(50) // racha, cantidad, categoria
   criterio         String           @db.VarChar(100) // ej: "frutas:5", "verduras:7", "calorias:2000"

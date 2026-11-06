@@ -9,6 +9,15 @@
   --color-turquesa: #0d484e;
   --color-gris-oscuro: #696969;
   --color-background-page: #fafff6;
+
+  --color-vt-ink: #123F40;
+  --color-vt-deep: #092D2A;
+  --color-vt-muted: #63716A;
+  --color-vt-bg: #FAFAF6;
+  --color-vt-sage: #E8EDE2;
+  --color-vt-orange: #FF6E06;
+  --color-vt-peach: #FFD1A3;
+  --color-vt-line: rgba(18, 63, 64, 0.12);
 }
 
 /* Ocultar flechas en Chrome, Safari, Edge, Opera */
@@ -41,6 +50,15 @@ input[type="number"] {
   --bg-button-add: #cfe0c3;
 
   --color-background-page: #fafff6;
+
+  --color-vt-ink: #123F40;
+  --color-vt-deep: #092D2A;
+  --color-vt-muted: #63716A;
+  --color-vt-bg: #FAFAF6;
+  --color-vt-sage: #E8EDE2;
+  --color-vt-orange: #FF6E06;
+  --color-vt-peach: #FFD1A3;
+  --color-vt-line: rgba(18, 63, 64, 0.12);
 
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -156,4 +174,12 @@ input[type="number"] {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Align landing sections while allowing more room on wide screens. */
+@utility landing-container {
+  width: 100%;
+  max-width: 96rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 3.125vw, 3rem);
 }
